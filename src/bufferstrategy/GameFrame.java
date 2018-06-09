@@ -1,5 +1,5 @@
 /*** In The Name of Allah ***/
-package game.template.bufferstrategy;
+package bufferstrategy;
 
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
@@ -17,7 +17,7 @@ import javax.swing.JFrame;
  * @author Seyed Mohammad Ghaffarian
  */
 public class GameFrame extends JFrame {
-	
+
 	public static final int GAME_HEIGHT = 720;                  // 720p game resolution
 	public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
 	
