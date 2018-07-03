@@ -10,9 +10,9 @@ import javax.swing.JFrame;
  * 
  * @author Seyed Mohammad Ghaffarian
  */
-public class Main {
+public class Start {
 	
-    public static void main(String[] args) {
+    public Start(String startStats) {
 		// Initialize the global thread-pool
 		ThreadPool.init();
 		// Show the game menu ...
@@ -23,7 +23,7 @@ public class Main {
 			public void run() {
 				GameFrame frame = new GameFrame("Game Title");
 				frame.setLocationRelativeTo(null); // put frame at center of screen
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
 				frame.initBufferStrategy();
 				// Create and execute the game-loop

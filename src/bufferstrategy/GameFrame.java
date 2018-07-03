@@ -68,6 +68,7 @@ public class GameFrame extends JFrame {
 	 * Rendering all game elements based on the game state.
 	 */
 	private void doRendering(Graphics2D g2d, GameState state) {
+
 		//
 		// Draw all game elements according 
 		//  to the game 'state' using 'g2d' ...
