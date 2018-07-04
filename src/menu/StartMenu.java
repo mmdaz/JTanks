@@ -36,7 +36,7 @@ public class StartMenu extends JFrame{
 
         mainPanel = new JPanel(null);
         setContentPane(mainPanel);
-        mainPanel.setBackground(Color.decode("#32363F"));
+        mainPanel.setBackground(Color.BLACK);
 
         continueButton = new JButton("Continue old game:)");
         continueButton.setFont(new Font("Arial",Font.BOLD,25));
