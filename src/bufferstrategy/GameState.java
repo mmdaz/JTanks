@@ -14,6 +14,7 @@ public class GameState {
 	public int locX, locY, diam;
 	public boolean gameOver;
     public int mouseX, mouseY;
+    public double angle;
 
 	private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
 	private boolean mousePress;
@@ -23,7 +24,7 @@ public class GameState {
 	public GameState() {
 		locX = 100;
 		locY = 100;
-		diam = 32;
+		diam = 40;
 		gameOver = false;
 		//
 		keyUP = false;
@@ -56,6 +57,8 @@ public class GameState {
 		locX = Math.min(locX, GameFrame.GAME_WIDTH - diam);
 		locY = Math.max(locY, 0);
 		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam);
+
+		angle = Math.atan2(mouseY - (locY + diam/2) , mouseX - (locX + diam/2));
 	}
 
 

@@ -1,6 +1,7 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
+import battleObject.UserTank;
 import bufferstrategy.GameState;
 import sun.text.normalizer.Utility;
 
@@ -28,7 +29,7 @@ public class GameFrame extends JFrame {
 	public static final int GAME_HEIGHT = 720;                  // 720p game resolution
 	public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
 
-	//uncomment all /*...*/ in the class for using Tank icon instead of a simple circle
+	//uncomment all /*...*/ in the class for using UserTank icon instead of a simple circle
 	/*private BufferedImage image;*/
 
 	private long lastRender;
@@ -116,12 +117,8 @@ public class GameFrame extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// Draw ball
-		g2d.setColor(Color.BLACK);
-        BufferedImage ownTank = ImageIO.read(new File("Resources/Images/Icon.png"));
 
-        g2d.drawImage(ownTank,state.locX,state.locY,null);
-
+		UserTank tank = new UserTank(state, g2d);
 
 
 		// Print FPS info
@@ -147,10 +144,10 @@ public class GameFrame extends JFrame {
 //		lastRender = currentRender;
 		// Print user guide
 		String userGuide
-				= "Use the MOUSE or ARROW KEYS to move the BALL. "
+				= "Use ARROW KEYS to move the Tank. "
 				+ "Press ESCAPE to end the game.";
 		g2d.setFont(g2d.getFont().deriveFont(18.0f));
-		g2d.drawString(userGuide, 10, GAME_HEIGHT - 10);
+//		g2d.drawString(userGuide, 10, GAME_HEIGHT - 10);
 		// Draw GAME OVER
 		if (state.gameOver) {
 			String str = "GAME OVER";
