@@ -104,11 +104,8 @@ public class GameFrame extends JFrame {
 		// Draw background
 		try {
 			BufferedImage background = ImageIO.read(new File("Resources/Images/Area.png"));
-			for (int i = 0 ; i < 1280; i+= 83) {
-				for (int j = 0 ; j < 720 ; j += 91 ) {
-					g2d.drawImage(background,null,i,j);
-				}
-			}
+			g2d.drawImage(background , null , 0 , 0 );
+
 //			g2d.drawImage(background,null,0,0);
 //			g2d.drawImage(background , null , 83 , 0);
 		} catch (IOException e) {
