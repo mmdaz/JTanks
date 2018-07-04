@@ -4,17 +4,14 @@ package bufferstrategy;
 import bufferstrategy.GameState;
 import sun.text.normalizer.Utility;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  * The window on which the rendering is performed.
@@ -52,6 +49,12 @@ public class GameFrame extends JFrame {
 		catch(IOException e){
 			System.out.println(e);
 		}*/
+
+
+        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+                new ImageIcon("Resources/Images/pointer.png").getImage(),
+                new Point(0,0),"custom cursor"));
+
 	}
 
 	/**
@@ -80,7 +83,9 @@ public class GameFrame extends JFrame {
 				Graphics2D graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
 				try {
 					doRendering(graphics, state);
-				} finally {
+				} catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
 					// Dispose the graphics
 					graphics.dispose();
 				}
@@ -100,7 +105,7 @@ public class GameFrame extends JFrame {
 	/**
 	 * Rendering all game elements based on the game state.
 	 */
-	private void doRendering(Graphics2D g2d, GameState state) {
+	private void doRendering(Graphics2D g2d, GameState state) throws IOException {
 		// Draw background
 		try {
 			BufferedImage background = ImageIO.read(new File("Resources/Images/Area.png"));
@@ -113,9 +118,10 @@ public class GameFrame extends JFrame {
 		}
 		// Draw ball
 		g2d.setColor(Color.BLACK);
-		g2d.fillOval(state.locX, state.locY, state.diam, state.diam);
+        BufferedImage ownTank = ImageIO.read(new File("Resources/Images/Icon.png"));
 
-		/*		g2d.drawImage(image,state.locX,state.locY,null);*/
+        g2d.drawImage(ownTank,state.locX,state.locY,null);
+
 
 
 		// Print FPS info
@@ -148,7 +154,7 @@ public class GameFrame extends JFrame {
 		// Draw GAME OVER
 		if (state.gameOver) {
 			String str = "GAME OVER";
-			g2d.setColor(Color.WHITE);
+			g2d.setColor(Color.RED);
 			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
 			int strWidth = g2d.getFontMetrics().stringWidth(str);
 			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);

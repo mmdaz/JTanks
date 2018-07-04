@@ -13,10 +13,10 @@ public class GameState {
 
 	public int locX, locY, diam;
 	public boolean gameOver;
+    public int mouseX, mouseY;
 
 	private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
 	private boolean mousePress;
-	private int mouseX, mouseY;
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
 
@@ -43,10 +43,6 @@ public class GameState {
 	 * The method which updates the game state.
 	 */
 	public void update() {
-		if (mousePress) {
-			locY = mouseY - diam / 2;
-			locX = mouseX - diam / 2;
-		}
 		if (keyUP)
 			locY -= 8;
 		if (keyDOWN)
@@ -100,6 +96,20 @@ public class GameState {
 					gameOver = true;
 					break;
 			}
+			switch (e.getKeyCode()) {
+				case KeyEvent.VK_W:
+					keyUP = true;
+					break;
+				case KeyEvent.VK_S:
+					keyDOWN = true;
+					break;
+				case KeyEvent.VK_A:
+					keyLEFT = true;
+					break;
+				case KeyEvent.VK_D:
+					keyRIGHT = true;
+					break;
+			}
 		}
 
 		@Override
@@ -119,6 +129,20 @@ public class GameState {
 					keyRIGHT = false;
 					break;
 			}
+			switch (e.getKeyCode()) {
+				case KeyEvent.VK_W:
+					keyUP = false;
+					break;
+				case KeyEvent.VK_S:
+					keyDOWN = false;
+					break;
+				case KeyEvent.VK_A:
+					keyLEFT = false;
+					break;
+				case KeyEvent.VK_D:
+					keyRIGHT = false;
+					break;
+			}
 		}
 
 	}
@@ -127,6 +151,10 @@ public class GameState {
 	 * The mouse handler.
 	 */
 	class MouseHandler extends MouseAdapter {
-
+        @Override
+        public void mouseMoved(MouseEvent mouseEvent){
+            mouseX = mouseEvent.getX() + diam / 2;
+            mouseY = mouseEvent.getY() + diam / 2 ;
+        }
 	}
 }
