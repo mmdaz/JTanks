@@ -1,11 +1,7 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 /**
  * This class holds the state of the game and all of its elements.
@@ -14,29 +10,59 @@ import java.awt.event.MouseMotionListener;
  * @author Seyed Mohammad Ghaffarian
  */
 public class GameState {
-	
+
+	public int locX, locY, diam;
+	public boolean gameOver;
+
+	private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
+	private boolean mousePress;
+	private int mouseX, mouseY;
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
-	
+
 	public GameState() {
+		locX = 100;
+		locY = 100;
+		diam = 32;
+		gameOver = false;
 		//
-		// Initialize the game state and all elements ...
+		keyUP = false;
+		keyDOWN = false;
+		keyRIGHT = false;
+		keyLEFT = false;
+		//
+		mousePress = false;
+		mouseX = 0;
+		mouseY = 0;
 		//
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
 	}
-	
+
 	/**
 	 * The method which updates the game state.
 	 */
 	public void update() {
-		//
-		// Update the state of all game elements 
-		//  based on user input and elapsed time ...
-		//
+		if (mousePress) {
+			locY = mouseY - diam / 2;
+			locX = mouseX - diam / 2;
+		}
+		if (keyUP)
+			locY -= 8;
+		if (keyDOWN)
+			locY += 8;
+		if (keyLEFT)
+			locX -= 8;
+		if (keyRIGHT)
+			locX += 8;
+
+		locX = Math.max(locX, 0);
+		locX = Math.min(locX, GameFrame.GAME_WIDTH - diam);
+		locY = Math.max(locY, 0);
+		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam);
 	}
-	
-	
+
+
 	public KeyListener getKeyListener() {
 		return keyHandler;
 	}
@@ -52,18 +78,47 @@ public class GameState {
 	/**
 	 * The keyboard handler.
 	 */
-	class KeyHandler implements KeyListener {
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-		}
+	class KeyHandler extends KeyAdapter {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
+			switch (e.getKeyCode())
+			{
+				case KeyEvent.VK_UP:
+					keyUP = true;
+					break;
+				case KeyEvent.VK_DOWN:
+					keyDOWN = true;
+					break;
+				case KeyEvent.VK_LEFT:
+					keyLEFT = true;
+					break;
+				case KeyEvent.VK_RIGHT:
+					keyRIGHT = true;
+					break;
+				case KeyEvent.VK_ESCAPE:
+					gameOver = true;
+					break;
+			}
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
+			switch (e.getKeyCode())
+			{
+				case KeyEvent.VK_UP:
+					keyUP = false;
+					break;
+				case KeyEvent.VK_DOWN:
+					keyDOWN = false;
+					break;
+				case KeyEvent.VK_LEFT:
+					keyLEFT = false;
+					break;
+				case KeyEvent.VK_RIGHT:
+					keyRIGHT = false;
+					break;
+			}
 		}
 
 	}
@@ -71,35 +126,7 @@ public class GameState {
 	/**
 	 * The mouse handler.
 	 */
-	class MouseHandler implements MouseListener, MouseMotionListener {
+	class MouseHandler extends MouseAdapter {
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseDragged(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseMoved(MouseEvent e) {
-		}
 	}
 }
-
