@@ -1,6 +1,8 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
+import java.io.IOException;
+
 /**
  * A very simple structure for the main game loop.
  * THIS IS NOT PERFECT, but works for most situations.

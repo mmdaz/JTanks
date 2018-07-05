@@ -16,6 +16,8 @@ public class GameState {
     public int mouseX, mouseY;
     public double angle;
     public double tankAngle;
+	public int tankCenterX;
+	public int tankCenterY;
 
 	private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
 	private boolean mousePress;
@@ -169,6 +171,9 @@ public class GameState {
 		locY = Math.max(locY, 0);
 		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam);
 
+		tankCenterX = locX + 50;
+		tankCenterY = locY + 50;
+
 		angle = Math.atan2( mouseY - (locY + 50) , mouseX - (locX + 50) );
 
 	}
@@ -271,5 +276,6 @@ public class GameState {
             mouseX = mouseEvent.getX() + diam / 2;
             mouseY = mouseEvent.getY() + diam / 2 ;
         }
+
 	}
 }

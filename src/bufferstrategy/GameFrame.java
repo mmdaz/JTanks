@@ -117,8 +117,9 @@ public class GameFrame extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		//TODO: FIX THIS! THIS WAY EVERY MOMENT A TANK IS GETTING CREATED
 		UserTank tank = new UserTank(state, g2d);
+		addMouseListener(tank.getTankMouseHandler());
 
 
 		// Print FPS info
