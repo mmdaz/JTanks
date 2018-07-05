@@ -6,7 +6,7 @@ import java.awt.event.*;
 /**
  * This class holds the state of the game and all of its elements.
  * This class also handles user inputs, which affect the game state.
- * 
+ *
  * @author Seyed Mohammad Ghaffarian
  */
 public class GameState {
@@ -15,6 +15,7 @@ public class GameState {
 	public boolean gameOver;
     public int mouseX, mouseY;
     public double angle;
+    public double tankAngle;
 
 	private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
 	private boolean mousePress;
@@ -23,7 +24,7 @@ public class GameState {
 
 	public GameState() {
 		locX = 100;
-		locY = 100;
+		locY = 500;
 		diam = 40;
 		gameOver = false;
 		//
@@ -38,27 +39,138 @@ public class GameState {
 		//
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
+		//
+		tankAngle = 0;
+		angle = 1;
+	}
+
+	private boolean almostEqual(double num1 ,double num2) {
+		if(Math.abs(num1 - num2) <= 0.05)
+			return true;
+		if(Math.abs(num2 - num1) <= 0.05)
+			return true;
+		return false;
 	}
 
 	/**
 	 * The method which updates the game state.
 	 */
 	public void update() {
-		if (keyUP)
-			locY -= 8;
-		if (keyDOWN)
-			locY += 8;
-		if (keyLEFT)
-			locX -= 8;
-		if (keyRIGHT)
-			locX += 8;
+
+		if(keyUP && keyRIGHT && tankAngle > -Math.PI/4) {
+			tankAngle -= 0.05;
+			if(almostEqual(tankAngle, -Math.PI / 4))
+				tankAngle = -Math.PI/4;
+		} else if(keyUP && keyRIGHT && tankAngle < -Math.PI/4) {
+			tankAngle += 0.05;
+			if(almostEqual(tankAngle, -Math.PI / 4))
+				tankAngle = -Math.PI/4;
+		}
+
+		else if(keyDOWN && keyLEFT && tankAngle < 3 * Math.PI / 4 && tankAngle >= 0) {
+			tankAngle += 0.05;
+			if (almostEqual(tankAngle, 3 * Math.PI / 4))
+				tankAngle = 3 * Math.PI / 4;
+		} else if(keyDOWN && keyLEFT && tankAngle > -5 * Math.PI / 4 && tankAngle < 0) {
+			tankAngle -= 0.05;
+			if (almostEqual(tankAngle, -5 * Math.PI / 4))
+				tankAngle = -5 * Math.PI / 4;
+		}
+
+		else if (keyDOWN && keyRIGHT && tankAngle <  Math.PI / 4) {
+			tankAngle += 0.05;
+			if(almostEqual(tankAngle, Math.PI/4))
+				tankAngle = Math.PI/4;
+		} else if (keyDOWN && keyRIGHT && tankAngle >  Math.PI / 4 ) {
+			tankAngle -= 0.05;
+			if(almostEqual(tankAngle, Math.PI/4))
+				tankAngle = Math.PI/4;
+		}
+
+
+		else if (keyUP && keyLEFT && tankAngle > -3 * Math.PI / 4 && tankAngle <= 0) {
+			tankAngle -= 0.05;
+			if(almostEqual(-3 * Math.PI/4,tankAngle))
+				tankAngle = -3 * Math.PI / 4;
+		} else if (keyUP && keyLEFT && tankAngle < 5 * Math.PI / 4 && tankAngle > 0) {
+			tankAngle += 0.05;
+			if(almostEqual( 5 * Math.PI/4,tankAngle))
+				tankAngle = 5 * Math.PI / 4;
+		}
+
+		else if (keyRIGHT && tankAngle < 0 && !keyUP && !keyDOWN) {
+			tankAngle += 0.05;
+			if(almostEqual(0,tankAngle))
+				tankAngle = 0;
+		} else if (keyRIGHT && tankAngle > 0 && !keyUP && !keyDOWN) {
+			tankAngle -= 0.05;
+			if(almostEqual(0,tankAngle))
+				tankAngle = 0;
+		}
+
+		else if (keyLEFT && tankAngle < Math.PI && !keyUP && !keyDOWN) {
+			tankAngle += 0.05;
+			if(almostEqual(Math.PI,tankAngle))
+				tankAngle = Math.PI;
+		} else if (keyLEFT && tankAngle > Math.PI && !keyUP && !keyDOWN) {
+			tankAngle -= 0.05;
+			if(almostEqual(Math.PI,tankAngle))
+				tankAngle = Math.PI;
+		}
+
+		else if (keyUP && (tankAngle > -Math.PI/2) && !keyLEFT && !keyRIGHT) {
+			tankAngle -= 0.05;
+			if(almostEqual(-Math.PI/2,tankAngle))
+				tankAngle = -Math.PI/2;
+		}else if (keyUP && (tankAngle < -Math.PI/2) && !keyLEFT && !keyRIGHT) {
+			tankAngle += 0.05;
+			if(almostEqual(-Math.PI/2,tankAngle))
+				tankAngle = -Math.PI/2;
+		} else if (keyUP && (tankAngle != 3 * Math.PI/2 && tankAngle != -Math.PI/2) && !keyLEFT && !keyRIGHT) {
+			tankAngle -= 0.05;
+			if(almostEqual(-Math.PI/2,tankAngle) || almostEqual(tankAngle , 3 * Math.PI/2))
+				tankAngle = -Math.PI/2;
+		}
+
+		else if (keyDOWN && tankAngle < Math.PI/2 && !keyLEFT && !keyRIGHT) {
+			tankAngle += 0.05;
+			if(almostEqual(Math.PI/2,tankAngle))
+				tankAngle = Math.PI/2;
+		} else if (keyDOWN && tankAngle != Math.PI/2 && !keyLEFT && !keyRIGHT) {
+			tankAngle -= 0.05;
+			if(almostEqual(Math.PI/2,tankAngle))
+				tankAngle = Math.PI/2;
+		}
+
+
+		else {
+			if (keyUP) {
+				locY -= 8;
+			}
+			if (keyDOWN) {
+				locY += 8;
+			}
+			if (keyLEFT) {
+				locX -= 8;
+			}
+			if (keyRIGHT) {
+				locX += 8;
+			}
+		}
+
+
+		if(tankAngle >= 2 * Math.PI)
+			tankAngle -= 2 * Math.PI;
+		else if (tankAngle <= -2 *  Math.PI)
+			tankAngle += 2 * Math.PI;
 
 		locX = Math.max(locX, 0);
 		locX = Math.min(locX, GameFrame.GAME_WIDTH - diam);
 		locY = Math.max(locY, 0);
 		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam);
 
-		angle = Math.atan2(mouseY - (locY + diam/2) , mouseX - (locX + diam/2));
+		angle = Math.atan2( mouseY - (locY + 50) , mouseX - (locX + 50) );
+
 	}
 
 

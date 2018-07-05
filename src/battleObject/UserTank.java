@@ -5,6 +5,7 @@ import bufferstrategy.GameState;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,15 +27,28 @@ public class UserTank {
     public UserTank(GameState state, Graphics2D g2d) throws IOException {
         this.state = state;
         this.g2d = g2d;
-        BufferedImage ownTank = ImageIO.read(new File("Resources/Images/tank.png"));
-        g2d.drawImage(ownTank,state.locX,state.locY,null);
 
-        currentGun = ImageIO.read(new File("Resources/Images/tankGun01.png"));
+        BufferedImage ownTank = ImageIO.read(new File("Resources/Images/tank.png"));
 
         AffineTransform at = new AffineTransform();
-        at.setToRotation(state.angle, state.locX + 50, state.locY + 50);
-        g2d.setTransform(at);
+        at.setToTranslation(state.locX + 50, state.locY + 50);
+        at.rotate(state.tankAngle);
+        at.translate(-50, -50);
+        //paint the tank
+        g2d.drawImage(ownTank,at,null);
 
-        g2d.drawImage(currentGun,state.locX + 20,state.locY + 20,null);
+        currentGun = ImageIO.read(new File("Resources/Images/tankGun01.png"));
+        paintCurrentGun(state, g2d);
+
+
+    }
+    //Paint current gun
+    public void paintCurrentGun(GameState state, Graphics2D g2d){
+        AffineTransform at = new AffineTransform();
+        at.setToTranslation(state.locX + 50, state.locY + 50);
+        at.rotate(state.angle);
+        at.translate(-30, -30);
+        g2d.drawImage(currentGun,at,null);
+
     }
 }
