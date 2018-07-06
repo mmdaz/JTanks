@@ -37,7 +37,10 @@ public class GameFrame extends JFrame {
 
 	private BufferStrategy bufferStrategy;
 
-	public GameFrame(String title) {
+	private UserTank tank = new UserTank();
+	private boolean mouseHandlerAdded;
+
+	public GameFrame(String title) throws IOException {
 		super(title);
 		setResizable(false);
 		setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -118,8 +121,14 @@ public class GameFrame extends JFrame {
 			e.printStackTrace();
 		}
 		//TODO: FIX THIS! THIS WAY EVERY MOMENT A TANK IS GETTING CREATED
-		UserTank tank = new UserTank(state, g2d);
-		addMouseListener(tank.getTankMouseHandler());
+		tank.setState(state);
+		tank.setG2d(g2d);
+		if(!mouseHandlerAdded) {
+			addMouseListener(tank.getTankMouseHandler());
+			mouseHandlerAdded = true;
+		}
+		tank.paintTank();
+		tank.paintCurrentGun();
 
 
 		// Print FPS info

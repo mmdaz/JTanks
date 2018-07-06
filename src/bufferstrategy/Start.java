@@ -3,6 +3,7 @@ package bufferstrategy;
 
 
 import java.awt.EventQueue;
+import java.io.IOException;
 import javax.swing.JFrame;
 
 /**
@@ -21,7 +22,12 @@ public class Start {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				GameFrame frame = new GameFrame("Game Title");
+				GameFrame frame = null;
+				try {
+					frame = new GameFrame("Game Title");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				frame.setLocationRelativeTo(null); // put frame at center of screen
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);

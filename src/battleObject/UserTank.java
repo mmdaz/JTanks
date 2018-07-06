@@ -21,49 +21,46 @@ public class UserTank {
     private UserTankGun mainGun;
     private UserTankGun secondGun;
     private UserTankGun currentGun;
-    private BufferedImage currentGunImage;
     private boolean isMainGun;
     private Graphics2D g2d;
     private MouseHandler tankMouseHandler;
-    private AffineTransform at;
+    private AffineTransform gunAT;
 
-
-    public UserTank(GameState state, Graphics2D g2d) throws IOException {
-        this.state = state;
-        this.g2d = g2d;
-
-        BufferedImage ownTank = ImageIO.read(new File("Resources/Images/tank.png"));
-
-        at = new AffineTransform();
-
-        AffineTransform tankAt = new AffineTransform();
-        tankAt.setToTranslation(state.locX + 50, state.locY + 50);
-        tankAt.rotate(state.tankAngle);
-        tankAt.translate(-50, -50);
-        //paint the tank
-        g2d.drawImage(ownTank,tankAt,null);
+    public UserTank() throws IOException {
+        //paintTank();
 
         mainGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun01.png")) , ImageIO.read(new File("Resources/Images/tankGun1.png")));
 
         secondGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun02.png")) , ImageIO.read(new File("Resources/Images/tankGun2.png")));
 
         currentGun = mainGun;
-        currentGunImage = mainGun.currentModImage;
+
         isMainGun = true;
 
-        paintCurrentGun();
+        //paintCurrentGun();
 
         tankMouseHandler = new MouseHandler();
-        }
+    }
 
+
+    public void paintTank() throws IOException {
+        BufferedImage ownTank = ImageIO.read(new File("Resources/Images/tank.png"));
+        AffineTransform tankAt = new AffineTransform();
+        tankAt.setToTranslation(state.locX + 50, state.locY + 50);
+        tankAt.rotate(state.tankAngle);
+        tankAt.translate(-50, -50);
+        //paint the tank
+        g2d.drawImage(ownTank,tankAt,null);
+    }
     /*
      * Paint current gun
      */
-    private void paintCurrentGun() {
-        at.setToTranslation(state.locX + 50, state.locY + 50);
-        at.rotate(state.angle);
-        at.translate(-30, -30);
-        g2d.drawImage(currentGunImage,at,null);
+    public void paintCurrentGun() {
+        gunAT = new AffineTransform();
+        gunAT.setToTranslation(state.locX + 50, state.locY + 50);
+        gunAT.rotate(state.angle);
+        gunAT.translate(-30, -30);
+        g2d.drawImage(currentGun.currentModImage, gunAT,null);
 
     }
 
@@ -74,7 +71,7 @@ public class UserTank {
     private void changeGun(){
         if(isMainGun) {
             currentGun = secondGun;
-            currentGunImage = secondGun.currentModImage;
+            currentGun.currentModImage = secondGun.currentModImage;
             isMainGun = false;
         }
         else {
@@ -99,5 +96,13 @@ public class UserTank {
      */
     public MouseHandler getTankMouseHandler() {
         return tankMouseHandler;
+    }
+
+    public void setState(GameState state){
+        this.state = state;
+    }
+
+    public void setG2d(Graphics2D g2d){
+        this.g2d = g2d;
     }
 }
