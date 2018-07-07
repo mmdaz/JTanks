@@ -29,9 +29,9 @@ public class UserTank {
     public UserTank() throws IOException {
         //paintTank();
 
-        mainGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun01.png")) , ImageIO.read(new File("Resources/Images/tankGun1.png")));
+        mainGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun01.png")) , ImageIO.read(new File("Resources/Images/tankGun1.png")) , ImageIO.read(new File("Resources/Images/HeavyBullet.png")));
 
-        secondGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun02.png")) , ImageIO.read(new File("Resources/Images/tankGun2.png")));
+        secondGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun02.png")) , ImageIO.read(new File("Resources/Images/tankGun2.png")) , ImageIO.read(new File("Resources/Images/LightBullet.png")));
 
         currentGun = mainGun;
 
@@ -85,10 +85,13 @@ public class UserTank {
     class MouseHandler extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent mouseEvent){
-            if(mouseEvent.getButton() == MouseEvent.BUTTON3) {
+            if(mouseEvent.getButton() == MouseEvent.BUTTON3)
                 changeGun();
-            }
         }
+    }
+
+    public void drawBullets(){
+        currentGun.fire(state.mouseX, state.mouseY, state.locX, state.locY, g2d, state.angle);
     }
 
     /**

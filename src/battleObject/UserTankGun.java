@@ -1,5 +1,7 @@
 package battleObject;
 
+import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 /**
@@ -11,23 +13,30 @@ import java.awt.image.BufferedImage;
  */
 
 public class UserTankGun extends Gun{
-    private BufferedImage mod2Image;
-    private int currentMod;
+    private BufferedImage level2Image;
+    private int currentLevel;
 
-    public UserTankGun(BufferedImage mod1Image, BufferedImage mod2Image){
-        super(mod1Image);
-        currentMod = 1;
-        this.mod2Image = mod2Image;
-        currentModImage = mod1Image;
+    public UserTankGun(BufferedImage Level1Image, BufferedImage level2Image,BufferedImage bulletImage){
+        super(Level1Image, bulletImage);
+        currentLevel = 1;
+        this.level2Image = level2Image;
+        currentModImage = Level1Image;
     }
 
     public boolean upgradeWeapon() {
-        if(currentMod >= 2)
+        if(currentLevel >= 2)
             return false;
-        currentMod++;
-        currentModImage = mod2Image;
+        currentLevel++;
+        currentModImage = level2Image;
         return true;
     }
-
+    @Override
+    public void fire(int mouseX, int mouseY, int locationX, int locationY, Graphics2D g2d, double angle){
+        AffineTransform bulletAT = new AffineTransform();
+        bulletAT.setToTranslation(mouseX + 30, mouseY + 30);
+        bulletAT.rotate(angle);
+        bulletAT.translate(-30, -30);
+        g2d.drawImage(bulletImage, bulletAT,null);
+    }
 
 }

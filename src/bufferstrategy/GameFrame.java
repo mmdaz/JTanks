@@ -120,7 +120,7 @@ public class GameFrame extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//TODO: FIX THIS! THIS WAY EVERY MOMENT A TANK IS GETTING CREATED
+
 		tank.setState(state);
 		tank.setG2d(g2d);
 		if(!mouseHandlerAdded) {
@@ -129,6 +129,7 @@ public class GameFrame extends JFrame {
 		}
 		tank.paintTank();
 		tank.paintCurrentGun();
+		tank.drawBullets();
 
 
 		// Print FPS info
