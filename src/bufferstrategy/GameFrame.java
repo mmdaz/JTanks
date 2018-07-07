@@ -1,6 +1,7 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
+import battleObject.Bullet;
 import battleObject.Map;
 import battleObject.UserTank;
 import bufferstrategy.GameState;
@@ -130,8 +131,12 @@ public class GameFrame extends JFrame {
 		}
 		tank.paintTank();
 		tank.paintCurrentGun();
-		tank.drawBullets();
-
+		if(tank.isMainGun)
+			for(Bullet bullet : state.getHeavybullet‌‌s())
+				bullet.paint(g2d);
+		if(!tank.isMainGun)
+			for(Bullet bullet : state.getLightBullet())
+				bullet.paint(g2d);
 
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();

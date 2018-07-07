@@ -1,7 +1,13 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
+import battleObject.Bullet;
+
+import javax.imageio.ImageIO;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * This class holds the state of the game and all of its elements.
@@ -24,6 +30,13 @@ public class GameState {
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
 
+	public boolean rightKeyPressed;
+
+
+
+	private ArrayList<Bullet> heavybullet‌‌s;
+	private ArrayList<Bullet> lightBullet;
+
 	public GameState() {
 		locX = 100;
 		locY = 500;
@@ -44,6 +57,9 @@ public class GameState {
 		//
 		tankAngle = 0;
 		angle = 1;
+		//
+		heavybullet‌‌s = new ArrayList<Bullet>();
+		lightBullet = new ArrayList<Bullet>();
 	}
 
 	private boolean almostEqual(double num1 ,double num2) {
@@ -302,5 +318,42 @@ public class GameState {
             mouseY = mouseEvent.getY() + diam / 2 ;
         }
 
+		@Override
+		public void mouseClicked(MouseEvent mouseEvent) {
+			if(mouseEvent.getButton() == MouseEvent.BUTTON1){
+				try {
+					lightBullet.add(new Bullet(mouseX,mouseY,locX,locY, ImageIO.read(new File("Resources/Images/LightBullet.png"))));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent mouseEvent) {
+			if(mouseEvent.getButton() == MouseEvent.BUTTON1){
+				rightKeyPressed = true;
+				try {
+					heavybullet‌‌s.add(new Bullet(mouseX,mouseY,locX,locY, ImageIO.read(new File("Resources/Images/HeavyBullet.png"))));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent mouseEvent) {
+			if(mouseEvent.getButton() == MouseEvent.BUTTON1){
+				rightKeyPressed = false;
+			}
+		}
+	}
+
+	public ArrayList<Bullet> getHeavybullet‌‌s() {
+		return heavybullet‌‌s;
+	}
+
+	public ArrayList<Bullet> getLightBullet() {
+		return lightBullet;
 	}
 }

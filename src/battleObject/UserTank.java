@@ -21,7 +21,7 @@ public class UserTank {
     private UserTankGun mainGun;
     private UserTankGun secondGun;
     private UserTankGun currentGun;
-    private boolean isMainGun;
+    public boolean isMainGun;
     private Graphics2D g2d;
     private MouseHandler tankMouseHandler;
     private AffineTransform gunAT;
@@ -88,10 +88,7 @@ public class UserTank {
             if(mouseEvent.getButton() == MouseEvent.BUTTON3)
                 changeGun();
         }
-    }
 
-    public void drawBullets(){
-        currentGun.fire(state.mouseX, state.mouseY, state.locX, state.locY, g2d, state.angle);
     }
 
     /**

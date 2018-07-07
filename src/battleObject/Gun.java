@@ -21,5 +21,4 @@ public class Gun {
         this.bulletImage = bulletImage;
     }
 
-    public void fire(int targetX, int targetY, int locationX, int locationY, Graphics2D g2d, double angle){ }
 }
