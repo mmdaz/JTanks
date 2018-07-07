@@ -1,6 +1,7 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
+import battleObject.Map;
 import battleObject.UserTank;
 import bufferstrategy.GameState;
 import sun.text.normalizer.Utility;
@@ -114,9 +115,9 @@ public class GameFrame extends JFrame {
 		try {
 			BufferedImage background = ImageIO.read(new File("Resources/Images/Area.png"));
 			g2d.drawImage(background , null , 0 , 0 );
+			Map map = new Map( state , g2d ) ;
+			map.paintMap();
 
-//			g2d.drawImage(background,null,0,0);
-//			g2d.drawImage(background , null , 83 , 0);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
