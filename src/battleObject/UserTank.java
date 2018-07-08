@@ -26,6 +26,7 @@ public class UserTank {
     private Graphics2D g2d;
     private MouseHandler tankMouseHandler;
     private AffineTransform gunAT;
+    private long lastShootTime;
     public boolean mousePressed;
 
     public UserTank() throws IOException {
@@ -89,8 +90,12 @@ public class UserTank {
         public void mousePressed(MouseEvent mouseEvent){
             if(mouseEvent.getButton() == MouseEvent.BUTTON3)
                 changeGun();
-            if(mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun)
-                currentGun.addBullets(state);
+            if(mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun) {
+                if(System.currentTimeMillis() - lastShootTime > 500) {
+                    currentGun.addBullets(state);
+                    lastShootTime = System.currentTimeMillis();
+                }
+            }
             mousePressed = true;
 
         }
@@ -128,7 +133,10 @@ public class UserTank {
     }
 
     public void fireSecondGun(){
-        if(mousePressed && getCurrentGun() == getSecondGun())
-            getSecondGun().addBullets(state);
+        if(System.currentTimeMillis() - lastShootTime > 200)
+            if(mousePressed && getCurrentGun() == getSecondGun()) {
+                getSecondGun().addBullets(state);
+                lastShootTime = System.currentTimeMillis();
+            }
     }
 }
