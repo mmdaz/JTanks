@@ -1,18 +1,12 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
-import battleObject.Bullet;
-import battleObject.EnemyTank;
-import battleObject.Map;
-import battleObject.UserTank;
+import battleObject.*;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -43,14 +37,18 @@ public class GameFrame extends JFrame {
 
 	private EnemyTank enemyTank;
 
+	private ArrayList<Drawable> drawables;
+
 	public GameFrame(String title) throws IOException {
 		super(title);
 		setResizable(false);
 		setSize(GAME_WIDTH, GAME_HEIGHT);
 		lastRender = -1;
 		fpsHistory = new ArrayList<>(100);
-		enemyTank = new EnemyTank(100,100);
-
+		enemyTank = new EnemyTank(300,300);
+		drawables = new ArrayList<>();
+		drawables.add(tank);
+		drawables.add(enemyTank);
 	/*	try{
 			image = ImageIO.read(new File("Icon.png"));
 		}
@@ -125,16 +123,14 @@ public class GameFrame extends JFrame {
 
 		tank.setState(state);
 		tank.setG2d(g2d);
-		enemyTank.setTaget(state.locX,state.locY);
+		enemyTank.setTarget(state.locX,state.locY);
 		enemyTank.setG2d(g2d);
 		if(!mouseHandlerAdded) {
 			addMouseListener(tank.getTankMouseHandler());
 			mouseHandlerAdded = true;
 		}
-		tank.paintTank();
-		tank.paintCurrentGun();
-		enemyTank.paintTank();
-		enemyTank.paintCurrentGun();
+		for(Drawable drawable : drawables)
+			drawable.render();
 
 		for(Bullet bullet : tank.getMainGun().getBullets())
 			bullet.paint(g2d);
