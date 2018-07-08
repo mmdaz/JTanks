@@ -15,7 +15,6 @@ public class Bullet{
     private int X;
     private int Y;
     private int speed;
-    private int slope;
 
     public Bullet(int mouseX, int mouseY, int locationX, int locationY, BufferedImage bulletImage) {
         this.mouseX = mouseX;

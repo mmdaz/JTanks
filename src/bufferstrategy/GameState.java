@@ -19,9 +19,9 @@ public class GameState {
 
 	public int locX, locY, diam;
 	public boolean gameOver;
-    public int mouseX, mouseY;
-    public double angle;
-    public double tankAngle;
+	public int mouseX, mouseY;
+	public double angle;
+	public double tankAngle;
 	public int tankCenterX;
 	public int tankCenterY;
 
@@ -31,7 +31,6 @@ public class GameState {
 	private MouseHandler mouseHandler;
 
 	public boolean rightKeyPressed;
-
 
 
 	private ArrayList<Bullet> heavybullet‌‌s;
@@ -62,10 +61,10 @@ public class GameState {
 		lightBullet = new ArrayList<Bullet>();
 	}
 
-	private boolean almostEqual(double num1 ,double num2) {
-		if(Math.abs(num1 - num2) <= 0.05)
+	private boolean almostEqual(double num1, double num2) {
+		if (Math.abs(num1 - num2) <= 0.05)
 			return true;
-		if(Math.abs(num2 - num1) <= 0.05)
+		if (Math.abs(num2 - num1) <= 0.05)
 			return true;
 		return false;
 	}
@@ -75,118 +74,100 @@ public class GameState {
 	 */
 	public void update() {
 
-		if(keyUP && keyRIGHT && tankAngle > -Math.PI/4) {
+		if (keyUP && keyRIGHT && tankAngle > -Math.PI / 4) {
 			tankAngle -= 0.05;
-			if(almostEqual(tankAngle, -Math.PI / 4))
-				tankAngle = -Math.PI/4;
+			if (almostEqual(tankAngle, -Math.PI / 4))
+				tankAngle = -Math.PI / 4;
 			locX += 1;
 			locY -= 1;
-		} else if(keyUP && keyRIGHT && tankAngle < -Math.PI/4) {
+		} else if (keyUP && keyRIGHT && tankAngle < -Math.PI / 4) {
 			tankAngle += 0.05;
-			if(almostEqual(tankAngle, -Math.PI / 4))
-				tankAngle = -Math.PI/4;
+			if (almostEqual(tankAngle, -Math.PI / 4))
+				tankAngle = -Math.PI / 4;
 			locX += 1;
 			locY -= 1;
-		}
-
-		else if(keyDOWN && keyLEFT && tankAngle < 3 * Math.PI / 4 && tankAngle >= 0) {
+		} else if (keyDOWN && keyLEFT && tankAngle < 3 * Math.PI / 4 && tankAngle >= 0) {
 			tankAngle += 0.05;
 			if (almostEqual(tankAngle, 3 * Math.PI / 4))
 				tankAngle = 3 * Math.PI / 4;
 			locX -= 1;
 			locY += 1;
-		} else if(keyDOWN && keyLEFT && tankAngle > -5 * Math.PI / 4 && tankAngle < 0) {
+		} else if (keyDOWN && keyLEFT && tankAngle > -5 * Math.PI / 4 && tankAngle < 0) {
 			tankAngle -= 0.05;
 			if (almostEqual(tankAngle, -5 * Math.PI / 4))
 				tankAngle = -5 * Math.PI / 4;
 			locX -= 1;
 			locY += 1;
-		}
-
-		else if (keyDOWN && keyRIGHT && tankAngle <  Math.PI / 4) {
+		} else if (keyDOWN && keyRIGHT && tankAngle < Math.PI / 4) {
 			tankAngle += 0.05;
-			if(almostEqual(tankAngle, Math.PI/4))
-				tankAngle = Math.PI/4;
+			if (almostEqual(tankAngle, Math.PI / 4))
+				tankAngle = Math.PI / 4;
 			locX += 1;
 			locY += 1;
-		} else if (keyDOWN && keyRIGHT && tankAngle >  Math.PI / 4 ) {
+		} else if (keyDOWN && keyRIGHT && tankAngle > Math.PI / 4) {
 			tankAngle -= 0.05;
-			if(almostEqual(tankAngle, Math.PI/4))
-				tankAngle = Math.PI/4;
+			if (almostEqual(tankAngle, Math.PI / 4))
+				tankAngle = Math.PI / 4;
 			locX += 1;
 			locY += 1;
-		}
-
-
-		else if (keyUP && keyLEFT && tankAngle > -3 * Math.PI / 4 && tankAngle <= 0) {
+		} else if (keyUP && keyLEFT && tankAngle > -3 * Math.PI / 4 && tankAngle <= 0) {
 			tankAngle -= 0.05;
-			if(almostEqual(-3 * Math.PI/4,tankAngle))
+			if (almostEqual(-3 * Math.PI / 4, tankAngle))
 				tankAngle = -3 * Math.PI / 4;
 			locX -= 1;
 			locY -= 1;
 		} else if (keyUP && keyLEFT && tankAngle < 5 * Math.PI / 4 && tankAngle > 0) {
 			tankAngle += 0.05;
-			if(almostEqual( 5 * Math.PI/4,tankAngle))
+			if (almostEqual(5 * Math.PI / 4, tankAngle))
 				tankAngle = 5 * Math.PI / 4;
 			locX -= 1;
 			locY -= 1;
-		}
-
-		else if (keyRIGHT && tankAngle < 0 && !keyUP && !keyDOWN) {
+		} else if (keyRIGHT && tankAngle < 0 && !keyUP && !keyDOWN) {
 			tankAngle += 0.05;
-			if(almostEqual(0,tankAngle))
+			if (almostEqual(0, tankAngle))
 				tankAngle = 0;
 			locX += 1;
 		} else if (keyRIGHT && tankAngle > 0 && !keyUP && !keyDOWN) {
 			tankAngle -= 0.05;
-			if(almostEqual(0,tankAngle))
+			if (almostEqual(0, tankAngle))
 				tankAngle = 0;
 			locX += 1;
-		}
-
-		else if (keyLEFT && tankAngle < Math.PI && !keyUP && !keyDOWN) {
+		} else if (keyLEFT && tankAngle < Math.PI && !keyUP && !keyDOWN) {
 			tankAngle += 0.05;
-			if(almostEqual(Math.PI,tankAngle))
+			if (almostEqual(Math.PI, tankAngle))
 				tankAngle = Math.PI;
 			locX -= 1;
 		} else if (keyLEFT && tankAngle > Math.PI && !keyUP && !keyDOWN) {
 			tankAngle -= 0.05;
-			if(almostEqual(Math.PI,tankAngle))
+			if (almostEqual(Math.PI, tankAngle))
 				tankAngle = Math.PI;
 			locX -= 1;
-		}
-
-		else if (keyUP && (tankAngle > -Math.PI/2) && !keyLEFT && !keyRIGHT) {
+		} else if (keyUP && (tankAngle > -Math.PI / 2) && !keyLEFT && !keyRIGHT) {
 			tankAngle -= 0.05;
-			if(almostEqual(-Math.PI/2,tankAngle))
-				tankAngle = -Math.PI/2;
+			if (almostEqual(-Math.PI / 2, tankAngle))
+				tankAngle = -Math.PI / 2;
 			locY -= 1;
-		}else if (keyUP && (tankAngle < -Math.PI/2) && !keyLEFT && !keyRIGHT) {
+		} else if (keyUP && (tankAngle < -Math.PI / 2) && !keyLEFT && !keyRIGHT) {
 			tankAngle += 0.05;
-			if(almostEqual(-Math.PI/2,tankAngle))
-				tankAngle = -Math.PI/2;
+			if (almostEqual(-Math.PI / 2, tankAngle))
+				tankAngle = -Math.PI / 2;
 			locY -= 1;
-		} else if (keyUP && (tankAngle != 3 * Math.PI/2 && tankAngle != -Math.PI/2) && !keyLEFT && !keyRIGHT) {
+		} else if (keyUP && (tankAngle != 3 * Math.PI / 2 && tankAngle != -Math.PI / 2) && !keyLEFT && !keyRIGHT) {
 			tankAngle -= 0.05;
-			if(almostEqual(-Math.PI/2,tankAngle) || almostEqual(tankAngle , 3 * Math.PI/2))
-				tankAngle = -Math.PI/2;
+			if (almostEqual(-Math.PI / 2, tankAngle) || almostEqual(tankAngle, 3 * Math.PI / 2))
+				tankAngle = -Math.PI / 2;
 			locY -= 1;
-		}
-
-		else if (keyDOWN && tankAngle < Math.PI/2 && !keyLEFT && !keyRIGHT) {
+		} else if (keyDOWN && tankAngle < Math.PI / 2 && !keyLEFT && !keyRIGHT) {
 			tankAngle += 0.05;
-			if(almostEqual(Math.PI/2,tankAngle))
-				tankAngle = Math.PI/2;
+			if (almostEqual(Math.PI / 2, tankAngle))
+				tankAngle = Math.PI / 2;
 			locY += 1;
-		} else if (keyDOWN && tankAngle != Math.PI/2 && !keyLEFT && !keyRIGHT) {
+		} else if (keyDOWN && tankAngle != Math.PI / 2 && !keyLEFT && !keyRIGHT) {
 			tankAngle -= 0.05;
-			if(almostEqual(Math.PI/2,tankAngle))
-				tankAngle = Math.PI/2;
+			if (almostEqual(Math.PI / 2, tankAngle))
+				tankAngle = Math.PI / 2;
 			locY += 1;
-		}
-
-
-		else {
+		} else {
 			if (keyUP) {
 				locY -= 8;
 			}
@@ -202,9 +183,9 @@ public class GameState {
 		}
 
 
-		if(tankAngle >= 2 * Math.PI)
+		if (tankAngle >= 2 * Math.PI)
 			tankAngle -= 2 * Math.PI;
-		else if (tankAngle <= -2 *  Math.PI)
+		else if (tankAngle <= -2 * Math.PI)
 			tankAngle += 2 * Math.PI;
 
 		locX = Math.max(locX, 0);
@@ -215,7 +196,7 @@ public class GameState {
 		tankCenterX = locX + 50;
 		tankCenterY = locY + 50;
 
-		angle = Math.atan2( mouseY - (locY + 50) , mouseX - (locX + 50) );
+		angle = Math.atan2(mouseY - (locY + 50), mouseX - (locX + 50));
 
 	}
 
@@ -223,13 +204,14 @@ public class GameState {
 	public KeyListener getKeyListener() {
 		return keyHandler;
 	}
+
 	public MouseListener getMouseListener() {
 		return mouseHandler;
 	}
+
 	public MouseMotionListener getMouseMotionListener() {
 		return mouseHandler;
 	}
-
 
 
 	/**
@@ -239,8 +221,7 @@ public class GameState {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			switch (e.getKeyCode())
-			{
+			switch (e.getKeyCode()) {
 				case KeyEvent.VK_UP:
 					keyUP = true;
 					break;
@@ -275,8 +256,7 @@ public class GameState {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			switch (e.getKeyCode())
-			{
+			switch (e.getKeyCode()) {
 				case KeyEvent.VK_UP:
 					keyUP = false;
 					break;
@@ -312,48 +292,22 @@ public class GameState {
 	 * The mouse handler.
 	 */
 	class MouseHandler extends MouseAdapter {
-        @Override
-        public void mouseMoved(MouseEvent mouseEvent){
-            mouseX = mouseEvent.getX() + diam / 2;
-            mouseY = mouseEvent.getY() + diam / 2 ;
-        }
+		@Override
+		public void mouseMoved(MouseEvent mouseEvent) {
+			mouseX = mouseEvent.getX() + diam / 2;
+			mouseY = mouseEvent.getY() + diam / 2;
+		}
 
 		@Override
 		public void mouseClicked(MouseEvent mouseEvent) {
-			if(mouseEvent.getButton() == MouseEvent.BUTTON1){
-				try {
-					lightBullet.add(new Bullet(mouseX,mouseY,locX,locY, ImageIO.read(new File("Resources/Images/LightBullet.png"))));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
-		@Override
-		public void mousePressed(MouseEvent mouseEvent) {
-			if(mouseEvent.getButton() == MouseEvent.BUTTON1){
-				rightKeyPressed = true;
-				try {
-					heavybullet‌‌s.add(new Bullet(mouseX,mouseY,locX,locY, ImageIO.read(new File("Resources/Images/HeavyBullet.png"))));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+		public ArrayList<Bullet> getHeavybullet‌‌s() {
+			return heavybullet‌‌s;
 		}
 
-		@Override
-		public void mouseReleased(MouseEvent mouseEvent) {
-			if(mouseEvent.getButton() == MouseEvent.BUTTON1){
-				rightKeyPressed = false;
-			}
+		public ArrayList<Bullet> getLightBullet() {
+			return lightBullet;
 		}
-	}
-
-	public ArrayList<Bullet> getHeavybullet‌‌s() {
-		return heavybullet‌‌s;
-	}
-
-	public ArrayList<Bullet> getLightBullet() {
-		return lightBullet;
 	}
 }

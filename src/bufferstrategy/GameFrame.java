@@ -131,12 +131,11 @@ public class GameFrame extends JFrame {
 		}
 		tank.paintTank();
 		tank.paintCurrentGun();
-		if(tank.isMainGun)
-			for(Bullet bullet : state.getHeavybullet‌‌s())
-				bullet.paint(g2d);
-		if(!tank.isMainGun)
-			for(Bullet bullet : state.getLightBullet())
-				bullet.paint(g2d);
+		for(Bullet bullet : tank.getMainGun().getBullets())
+			bullet.paint(g2d);
+		for(Bullet bullet : tank.getSecondGun().getBullets())
+			bullet.paint(g2d);
+
 
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();

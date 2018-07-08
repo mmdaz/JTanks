@@ -17,6 +17,7 @@ public class Gun {
     protected BufferedImage level1Image;
     protected BufferedImage bulletImage;
     public BufferedImage currentModImage;
+    protected ArrayList<Bullet> bullets;
 
     public Gun(BufferedImage level1Image, BufferedImage bulletImage){
         this.level1Image = level1Image;
@@ -24,4 +25,7 @@ public class Gun {
         this.bulletImage = bulletImage;
     }
 
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
 }
