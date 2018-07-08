@@ -4,8 +4,6 @@ package bufferstrategy;
 import battleObject.Bullet;
 import battleObject.Map;
 import battleObject.UserTank;
-import bufferstrategy.GameState;
-import sun.text.normalizer.Utility;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -135,8 +133,7 @@ public class GameFrame extends JFrame {
 			bullet.paint(g2d);
 		for(Bullet bullet : tank.getSecondGun().getBullets())
 			bullet.paint(g2d);
-
-
+		tank.fireSecondGun();
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();
 //		if (lastRender > 0) {

@@ -27,7 +27,7 @@ public class Bullet{
         angle = Math.atan2(mouseY - (locationY + 50), mouseX - (locationX + 50));
 
         speed = 8;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 8; i++) {
             forward();
         }
     }
@@ -35,7 +35,7 @@ public class Bullet{
     public void paint(Graphics2D g2d) {
         forward();
         AffineTransform bulletAT = new AffineTransform();
-        bulletAT.setToTranslation(X + 10, Y + 10);
+        bulletAT.setToTranslation(X , Y);
         bulletAT.rotate(angle);
         g2d.drawImage(bulletImage, bulletAT, null);
     }

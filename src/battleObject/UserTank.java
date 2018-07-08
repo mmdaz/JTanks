@@ -10,6 +10,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
 
 /**
  * This class is used to create user played tank tanks
@@ -25,6 +26,7 @@ public class UserTank {
     private Graphics2D g2d;
     private MouseHandler tankMouseHandler;
     private AffineTransform gunAT;
+    public boolean mousePressed;
 
     public UserTank() throws IOException {
         //paintTank();
@@ -87,10 +89,15 @@ public class UserTank {
         public void mousePressed(MouseEvent mouseEvent){
             if(mouseEvent.getButton() == MouseEvent.BUTTON3)
                 changeGun();
-            if(mouseEvent.getButton() == MouseEvent.BUTTON1)
+            if(mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun)
                 currentGun.addBullets(state);
-        }
+            mousePressed = true;
 
+        }
+        @Override
+        public void mouseReleased(MouseEvent mouseEvent){
+            mousePressed = false;
+        }
     }
 
     /**
@@ -118,5 +125,10 @@ public class UserTank {
 
     public UserTankGun getSecondGun() {
         return secondGun;
+    }
+
+    public void fidreSecondGun(){
+        if(mousePressed && getCurrentGun() == getSecondGun())
+            getSecondGun().addBullets(state);
     }
 }

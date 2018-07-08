@@ -3,10 +3,7 @@ package bufferstrategy;
 
 import battleObject.Bullet;
 
-import javax.imageio.ImageIO;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -26,11 +23,9 @@ public class GameState {
 	public int tankCenterY;
 
 	private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
-	private boolean mousePress;
+
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
-
-	public boolean rightKeyPressed;
 
 
 	private ArrayList<Bullet> heavybullet‌‌s;
@@ -47,7 +42,6 @@ public class GameState {
 		keyRIGHT = false;
 		keyLEFT = false;
 		//
-		mousePress = false;
 		mouseX = 0;
 		mouseY = 0;
 		//
@@ -308,6 +302,20 @@ public class GameState {
 
 		public ArrayList<Bullet> getLightBullet() {
 			return lightBullet;
+		}
+
+		@Override
+		public void mousePressed(MouseEvent mouseEvent){
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent mouseEvent){
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent mouseEvent){
+			mouseX = mouseEvent.getX() + diam / 2;
+			mouseY = mouseEvent.getY() + diam / 2;
 		}
 	}
 }
