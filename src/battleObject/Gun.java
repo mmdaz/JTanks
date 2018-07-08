@@ -6,14 +6,18 @@ package battleObject;
  * @author Mohamad Chaman-Motlagh
  */
 
+import bufferstrategy.GameState;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Gun {
     protected BufferedImage level1Image;
     protected BufferedImage bulletImage;
     public BufferedImage currentModImage;
+    protected ArrayList<Bullet> bullets;
 
     public Gun(BufferedImage level1Image, BufferedImage bulletImage){
         this.level1Image = level1Image;
@@ -21,5 +25,7 @@ public class Gun {
         this.bulletImage = bulletImage;
     }
 
-    public void fire(int targetX, int targetY, int locationX, int locationY, Graphics2D g2d, double angle){ }
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
 }

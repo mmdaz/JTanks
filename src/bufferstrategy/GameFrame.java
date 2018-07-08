@@ -1,10 +1,9 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
+import battleObject.Bullet;
 import battleObject.Map;
 import battleObject.UserTank;
-import bufferstrategy.GameState;
-import sun.text.normalizer.Utility;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -113,8 +112,6 @@ public class GameFrame extends JFrame {
 	private void doRendering(Graphics2D g2d, GameState state) throws IOException {
 		// Draw background
 		try {
-			BufferedImage background = ImageIO.read(new File("Resources/Images/Area.png"));
-			g2d.drawImage(background , null , 0 , 0 );
 			Map map = new Map( state , g2d ) ;
 			map.paintMap();
 
@@ -130,9 +127,11 @@ public class GameFrame extends JFrame {
 		}
 		tank.paintTank();
 		tank.paintCurrentGun();
-		tank.drawBullets();
-
-
+		for(Bullet bullet : tank.getMainGun().getBullets())
+			bullet.paint(g2d);
+		for(Bullet bullet : tank.getSecondGun().getBullets())
+			bullet.paint(g2d);
+		tank.fireSecondGun();
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();
 //		if (lastRender > 0) {

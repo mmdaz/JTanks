@@ -10,6 +10,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
 
 /**
  * This class is used to create user played tank tanks
@@ -25,6 +26,8 @@ public class UserTank {
     private Graphics2D g2d;
     private MouseHandler tankMouseHandler;
     private AffineTransform gunAT;
+    private long lastShootTime;
+    public boolean mousePressed;
 
     public UserTank() throws IOException {
         //paintTank();
@@ -87,11 +90,19 @@ public class UserTank {
         public void mousePressed(MouseEvent mouseEvent){
             if(mouseEvent.getButton() == MouseEvent.BUTTON3)
                 changeGun();
-        }
-    }
+            if(mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun) {
+                if(System.currentTimeMillis() - lastShootTime > 500) {
+                    currentGun.addBullets(state);
+                    lastShootTime = System.currentTimeMillis();
+                }
+            }
+            mousePressed = true;
 
-    public void drawBullets(){
-        currentGun.fire(state.mouseX, state.mouseY, state.locX, state.locY, g2d, state.angle);
+        }
+        @Override
+        public void mouseReleased(MouseEvent mouseEvent){
+            mousePressed = false;
+        }
     }
 
     /**
@@ -107,5 +118,25 @@ public class UserTank {
 
     public void setG2d(Graphics2D g2d){
         this.g2d = g2d;
+    }
+
+    public UserTankGun getCurrentGun() {
+        return currentGun;
+    }
+
+    public UserTankGun getMainGun() {
+        return mainGun;
+    }
+
+    public UserTankGun getSecondGun() {
+        return secondGun;
+    }
+
+    public void fireSecondGun(){
+        if(System.currentTimeMillis() - lastShootTime > 200)
+            if(mousePressed && getCurrentGun() == getSecondGun()) {
+                getSecondGun().addBullets(state);
+                lastShootTime = System.currentTimeMillis();
+            }
     }
 }
