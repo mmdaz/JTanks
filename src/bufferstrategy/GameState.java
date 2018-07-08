@@ -34,7 +34,7 @@ public class GameState {
 
 	public GameState() {
 		locX = 100;
-		locY = 3000;
+		locY = 300;
 		diam = 40;
 		gameOver = false;
 		//
@@ -189,9 +189,9 @@ public class GameState {
 			tankAngle += 2 * Math.PI;
 
 		locX = Math.max(locX, 0);
-		locX = Math.min(locX, GameFrame.GAME_WIDTH - diam);
+		locX = Math.min(locX, GameFrame.GAME_WIDTH  - diam );
 		locY = Math.max(locY, 0);
-		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam);
+		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam );
 
 		tankCenterX = locX + 50;
 		tankCenterY = locY + 50;
