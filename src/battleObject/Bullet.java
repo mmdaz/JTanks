@@ -1,4 +1,10 @@
 package battleObject;
+/**
+ * This class is used for creating and moving bullets
+ *
+ * @author Mohamad Chaman-Motlagh
+ *
+ */
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -6,10 +12,6 @@ import java.awt.image.BufferedImage;
 
 public class Bullet{
 
-    private int mouseX;
-    private int mouseY;
-    private int locationX;
-    private int locationY;
     private double angle;
     private BufferedImage bulletImage;
     private int X;
@@ -17,10 +19,6 @@ public class Bullet{
     private int speed;
 
     public Bullet(int mouseX, int mouseY, int locationX, int locationY, BufferedImage bulletImage) {
-        this.mouseX = mouseX;
-        this.mouseY = mouseY;
-        this.locationX = locationX;
-        this.locationY = locationY;
         this.bulletImage = bulletImage;
         X = locationX + 50;
         Y = locationY + 50;

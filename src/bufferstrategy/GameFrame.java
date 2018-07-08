@@ -2,6 +2,7 @@
 package bufferstrategy;
 
 import battleObject.Bullet;
+import battleObject.EnemyTank;
 import battleObject.Map;
 import battleObject.UserTank;
 
@@ -40,12 +41,15 @@ public class GameFrame extends JFrame {
 	private UserTank tank = new UserTank();
 	private boolean mouseHandlerAdded;
 
+	private EnemyTank enemyTank;
+
 	public GameFrame(String title) throws IOException {
 		super(title);
 		setResizable(false);
 		setSize(GAME_WIDTH, GAME_HEIGHT);
 		lastRender = -1;
 		fpsHistory = new ArrayList<>(100);
+		enemyTank = new EnemyTank(100,100);
 
 	/*	try{
 			image = ImageIO.read(new File("Icon.png"));
@@ -122,12 +126,17 @@ public class GameFrame extends JFrame {
 
 		tank.setState(state);
 		tank.setG2d(g2d);
+		enemyTank.setTaget(state.locX,state.locY);
+		enemyTank.setG2d(g2d);
 		if(!mouseHandlerAdded) {
 			addMouseListener(tank.getTankMouseHandler());
 			mouseHandlerAdded = true;
 		}
 		tank.paintTank();
 		tank.paintCurrentGun();
+		enemyTank.paintTank();
+		enemyTank.paintCurrentGun();
+
 		for(Bullet bullet : tank.getMainGun().getBullets())
 			bullet.paint(g2d);
 		for(Bullet bullet : tank.getSecondGun().getBullets())
