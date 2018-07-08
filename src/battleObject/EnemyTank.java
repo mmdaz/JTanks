@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class EnemyTank {
+public class EnemyTank implements Drawable {
     public EnemyGun gun;
     private Graphics2D g2d;
     private AffineTransform gunAT;
@@ -36,7 +36,7 @@ public class EnemyTank {
         gunAT.setToTranslation(locX + 50, locY + 50);
         double angle = Math.atan2(targetY - (locY + 50), tagetX - (locX + 50));
         gunAT.rotate(angle);
-        gunAT.translate(-30, -30);
+        gunAT.translate(-20, -20);
         g2d.drawImage(gun.getGunImage(), gunAT,null);
 
     }
@@ -46,7 +46,7 @@ public class EnemyTank {
         this.g2d = g2d;
     }
 
-    public void setTaget(int X, int Y){
+    public void setTarget(int X, int Y){
         tagetX = X;
         targetY = Y;
     }
@@ -60,4 +60,9 @@ public class EnemyTank {
         g2d.drawImage(tankBody,null,locX, locY);
     }
 
+    @Override
+    public void render() throws IOException {
+        paintTank();
+        paintCurrentGun();
+    }
 }

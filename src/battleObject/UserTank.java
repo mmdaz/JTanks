@@ -10,14 +10,13 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Time;
 
 /**
  * This class is used to create user played tank tanks
  *
  * @author MohamadCM
  */
-public class UserTank {
+public class UserTank implements Drawable {
     private GameState state;
     private UserTankGun mainGun;
     private UserTankGun secondGun;
@@ -145,5 +144,10 @@ public class UserTank {
                 getSecondGun().addBullets(state);
                 lastShootTime = System.currentTimeMillis();
             }
+    }
+
+    public void render() throws IOException {
+        paintTank();
+        paintCurrentGun();
     }
 }
