@@ -25,7 +25,6 @@ public class UserTankGun extends Gun{
         currentLevel = 1;
         this.level2Image = level2Image;
         currentModImage = Level1Image;
-        bullets = new ArrayList<Bullet>();
         this.bulletImage = bulletImage;
     }
 
@@ -37,8 +36,5 @@ public class UserTankGun extends Gun{
         return true;
     }
 
-    public void addBullets(GameState state) {
-        bullets.add(new Bullet(state.mouseX,state.mouseY,state.locX,state.locY,bulletImage));
-    }
 
 }

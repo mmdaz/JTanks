@@ -23,9 +23,14 @@ public class Gun {
         this.level1Image = level1Image;
         currentModImage = level1Image;
         this.bulletImage = bulletImage;
+        bullets = new ArrayList<Bullet>();
     }
 
     public ArrayList<Bullet> getBullets() {
         return bullets;
+    }
+
+    public void addBullets(int targetX, int targetY, int locX, int locY) {
+        bullets.add(new Bullet(targetX,targetY,locX,locY,bulletImage));
     }
 }
