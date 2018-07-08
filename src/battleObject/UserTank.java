@@ -28,6 +28,8 @@ public class UserTank {
     private AffineTransform gunAT;
     private long lastShootTime;
     public boolean mousePressed;
+    private BufferedImage ownTank;
+
 
     public UserTank() throws IOException {
         //paintTank();
@@ -43,11 +45,16 @@ public class UserTank {
         //paintCurrentGun();
 
         tankMouseHandler = new MouseHandler();
+
+        ownTank = ImageIO.read(new File("Resources/Images/tank.png"));
+
     }
 
-
+    /**
+     * Paint Thank body every moment
+     * @throws IOException
+     */
     public void paintTank() throws IOException {
-        BufferedImage ownTank = ImageIO.read(new File("Resources/Images/tank.png"));
         AffineTransform tankAt = new AffineTransform();
         tankAt.setToTranslation(state.locX + 50, state.locY + 50);
         tankAt.rotate(state.tankAngle);
@@ -55,7 +62,7 @@ public class UserTank {
         //paint the tank
         g2d.drawImage(ownTank,tankAt,null);
     }
-    /*
+    /**
      * Paint current gun
      */
     public void paintCurrentGun() {
