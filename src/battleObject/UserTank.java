@@ -98,7 +98,7 @@ public class UserTank implements Drawable {
                 changeGun();
             if(mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun) {
                 if(System.currentTimeMillis() - lastShootTime > 500) {
-                    currentGun.addBullets(state);
+                    currentGun.addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
                     lastShootTime = System.currentTimeMillis();
                 }
             }
@@ -141,7 +141,7 @@ public class UserTank implements Drawable {
     public void fireSecondGun(){
         if(System.currentTimeMillis() - lastShootTime > 200)
             if(mousePressed && getCurrentGun() == getSecondGun()) {
-                getSecondGun().addBullets(state);
+                getSecondGun().addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
                 lastShootTime = System.currentTimeMillis();
             }
     }

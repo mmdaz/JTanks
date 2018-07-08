@@ -35,7 +35,6 @@ public class GameFrame extends JFrame {
 	private UserTank tank = new UserTank();
 	private boolean mouseHandlerAdded;
 
-	private EnemyTank enemyTank;
 
 	private ArrayList<Drawable> drawables;
 
@@ -45,10 +44,8 @@ public class GameFrame extends JFrame {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
 		lastRender = -1;
 		fpsHistory = new ArrayList<>(100);
-		enemyTank = new EnemyTank(300,300);
 		drawables = new ArrayList<>();
 		drawables.add(tank);
-		drawables.add(enemyTank);
 	/*	try{
 			image = ImageIO.read(new File("Icon.png"));
 		}
@@ -123,8 +120,6 @@ public class GameFrame extends JFrame {
 
 		tank.setState(state);
 		tank.setG2d(g2d);
-		enemyTank.setTarget(state.locX,state.locY);
-		enemyTank.setG2d(g2d);
 		if(!mouseHandlerAdded) {
 			addMouseListener(tank.getTankMouseHandler());
 			mouseHandlerAdded = true;
@@ -136,7 +131,14 @@ public class GameFrame extends JFrame {
 			bullet.paint(g2d);
 		for(Bullet bullet : tank.getSecondGun().getBullets())
 			bullet.paint(g2d);
+/*		for(Bullet bullet : enemyTank.getGun().getBullets())
+			bullet.paint(g2d);
+		enemyTank.fire();*/
+
+
 		tank.fireSecondGun();
+
+
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();
 //		if (lastRender > 0) {

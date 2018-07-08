@@ -17,12 +17,13 @@ public class EnemyTank implements Drawable {
     private AffineTransform gunAT;
     private int locX;
     private int locY;
-    private int tagetX;
+    private int targetX;
     private int targetY;
     private BufferedImage tankBody;
+    private long lastShootTime;
 
     public EnemyTank(int locX, int locY) throws IOException {
-        gun = new EnemyGun(ImageIO.read(new File("Resources/Images/BigEnemyGun.png")));
+        gun = new EnemyGun(ImageIO.read(new File("Resources/Images/BigEnemyGun.png")) , ImageIO.read(new File("Resources/Images/Enemy2Bullet.png")));
         tankBody = ImageIO.read(new File("Resources/Images/BigEnemy.png"));
 
         this.locX = locX;
@@ -34,7 +35,7 @@ public class EnemyTank implements Drawable {
     public void paintCurrentGun() {
         gunAT = new AffineTransform();
         gunAT.setToTranslation(locX + 50, locY + 50);
-        double angle = Math.atan2(targetY - (locY + 50), tagetX - (locX + 50));
+        double angle = Math.atan2(targetY - (locY + 50), targetX - (locX + 50));
         gunAT.rotate(angle);
         gunAT.translate(-20, -20);
         g2d.drawImage(gun.getGunImage(), gunAT,null);
@@ -47,7 +48,7 @@ public class EnemyTank implements Drawable {
     }
 
     public void setTarget(int X, int Y){
-        tagetX = X;
+        targetX = X;
         targetY = Y;
     }
 
@@ -64,5 +65,16 @@ public class EnemyTank implements Drawable {
     public void render() throws IOException {
         paintTank();
         paintCurrentGun();
+    }
+
+    public void fire(){
+        if(System.currentTimeMillis() - lastShootTime > 500) {
+                gun.addBullets(targetX,targetY,locX,locY);
+                lastShootTime = System.currentTimeMillis();
+            }
+    }
+
+    public EnemyGun getGun() {
+        return gun;
     }
 }
