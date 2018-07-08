@@ -127,7 +127,7 @@ public class UserTank {
         return secondGun;
     }
 
-    public void fidreSecondGun(){
+    public void fireSecondGun(){
         if(mousePressed && getCurrentGun() == getSecondGun())
             getSecondGun().addBullets(state);
     }
