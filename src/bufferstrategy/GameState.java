@@ -164,21 +164,21 @@ public class GameState {
 			locY += 1;
 		} else {
 			if (keyUP) {
-				locY -= 8;
-				Map.yOffset += 8 ;
+				locY -= 3;
+				Map.yOffset += 6 ;
 			}
 			if (keyDOWN) {
-				locY += 8;
-				Map.yOffset -= 8 ;
+				locY += 3;
+				Map.yOffset -= 6 ;
 			}
 			if (keyLEFT) {
-				locX -= 8;
-				Map.xOffset += 8 ;
+				locX -= 3;
+				Map.xOffset += 6 ;
 
 			}
 			if (keyRIGHT) {
-				locX += 8;
-				Map.xOffset -= 8 ;
+				locX += 3;
+				Map.xOffset -= 6 ;
 			}
 		}
 
