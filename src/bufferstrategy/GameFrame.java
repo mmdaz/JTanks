@@ -21,8 +21,8 @@ import javax.swing.*;
  */
 public class GameFrame extends JFrame {
 
-	public static final int GAME_HEIGHT = 600;                  // 720p game resolution
-	public static final int GAME_WIDTH = 1200;  // wide aspect ratio
+	public static final int GAME_HEIGHT = 600;                  // 600p game resolution
+	public static final int GAME_WIDTH = 1200;  // 2:1 aspect ratio
 
 	//uncomment all /*...*/ in the class for using UserTank icon instead of a simple circle
 	/*private BufferedImage image;*/
@@ -113,7 +113,6 @@ public class GameFrame extends JFrame {
 		try {
 			Map map = new Map( state , g2d ) ;
 			map.paintMap();
-			System.out.printf("(%d , %d)\n" ,Map.xOffset , Map.yOffset ) ;
 
 		} catch (IOException e) {
 			e.printStackTrace();
