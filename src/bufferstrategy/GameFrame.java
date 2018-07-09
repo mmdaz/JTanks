@@ -21,8 +21,8 @@ import javax.swing.*;
  */
 public class GameFrame extends JFrame {
 
-	public static final int GAME_HEIGHT = 720;                  // 720p game resolution
-	public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
+	public static final int GAME_HEIGHT = 600;                  // 600p game resolution
+	public static final int GAME_WIDTH = 1200;  // 2:1 aspect ratio
 
 	//uncomment all /*...*/ in the class for using UserTank icon instead of a simple circle
 	/*private BufferedImage image;*/
