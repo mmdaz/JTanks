@@ -3,12 +3,14 @@ package battleObject;
 import bufferstrategy.GameState;
 
 import javax.imageio.ImageIO;
+import javax.print.Doc;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.annotation.Documented;
 
 /**
  * This class create and design map of the game .
@@ -61,11 +63,13 @@ public class Map {
 //                System.out.printf("(%d , %d)\n" , i * 100 + xOffset , j * 100 + yOffset);
 
                 // avoiding out of range of xOffset and YOffset :
+
                 if (xOffset > 0 )  xOffset = 0 ;
                 if (yOffset > 0 )  yOffset = 0 ;
                 if ( yOffset + 1500 < 600 )  yOffset = -900 ;
                 if ( xOffset + 3000 < 1200 )  xOffset = - 1800 ;
 
+                // draw map from array :
 
                     if (mapResource[i][j] == 2) {
                         g2d.drawImage(wall, null, i * 100 + xOffset, j * 100 + yOffset);
@@ -77,7 +81,7 @@ public class Map {
                     } else if ( mapResource[i][j] == 4) {
                         g2d.drawImage(plant, null, i * 100 + xOffset, j * 100 + yOffset);
                     }
-                    // enemy tank ...
+
                     else   {
                         g2d.drawImage(area, null, i * 100 + xOffset, j * 100 + yOffset);
                     }
@@ -87,6 +91,9 @@ public class Map {
 
     }
 
+    /**
+     * The Method that read data from file and initialize the map array .
+     */
     private void initializeMap () {
 
         try {
@@ -102,14 +109,15 @@ public class Map {
 //                    System.out.printf("(%d , %d) \n" , i , j);
                     mapResource[i][j] = Character.getNumericValue(line.charAt(i)) ;
                 }
-
                 j++ ;
-
             }
+
+            fileReader.close();
 
         }catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }
 
