@@ -81,7 +81,7 @@ public class GameState {
 				tankAngle = -Math.PI / 4;
 			locX += 1;
 			locY -= 1;
-		} else if (keyDOWN && keyLEFT && tankAngle < 3 * Math.PI / 4 && tankAngle >= 0) {
+		} else if (keyDOWN && keyLEFT && (tankAngle != -5 * Math.PI / 4 || tankAngle != 3 * Math.PI / 4) && tankAngle >= 0) {
 			tankAngle += 0.05;
 			if (almostEqual(tankAngle, 3 * Math.PI / 4))
 				tankAngle = 3 * Math.PI / 4;
