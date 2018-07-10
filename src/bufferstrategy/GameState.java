@@ -35,7 +35,7 @@ public class GameState {
 
 	public GameState() {
 		locX = 100;
-		locY = 300;
+		locY = 00;
 		diam = 40;
 		gameOver = false;
 		//
