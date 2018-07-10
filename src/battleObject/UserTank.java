@@ -61,6 +61,7 @@ public class UserTank implements Drawable {
         //paint the tank
         g2d.drawImage(ownTank,tankAt,null);
     }
+
     /**
      * Paint current gun
      */

@@ -2,7 +2,7 @@
 package bufferstrategy;
 
 import battleObject.Bullet;
-import battleObject.Map;
+import Map.Map;
 
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -164,21 +164,29 @@ public class GameState {
 			locY += 1;
 		} else {
 			if (keyUP) {
-				locY -= 3;
-				Map.yOffset += 6 ;
+			    if (Map.checkHitWithObjects()) {
+                    locY -= 3;
+                    Map.yOffset += 3;
+                }
 			}
 			if (keyDOWN) {
-				locY += 3;
-				Map.yOffset -= 6 ;
+			    if (Map.checkHitWithObjects()) {
+                    locY += 3;
+                    Map.yOffset -= 3;
+                }
 			}
 			if (keyLEFT) {
-				locX -= 3;
-				Map.xOffset += 6 ;
+			    if (Map.checkHitWithObjects()) {
+                    locX -= 3;
+                    Map.xOffset += 3;
+                }
 
 			}
 			if (keyRIGHT) {
-				locX += 3;
-				Map.xOffset -= 6 ;
+			    if (Map.checkHitWithObjects()) {
+                    locX += 3;
+                    Map.xOffset -= 3;
+                }
 			}
 		}
 

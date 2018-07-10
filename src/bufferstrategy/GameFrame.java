@@ -7,7 +7,8 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.*;
+import javax.swing.* ;
+import Map.Map ;
 
 /**
  * The window on which the rendering is performed.
