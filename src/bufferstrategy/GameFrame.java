@@ -138,7 +138,6 @@ public class GameFrame extends JFrame {
 
 		tank.fireSecondGun();
 
-
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();
 //		if (lastRender > 0) {
