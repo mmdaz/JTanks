@@ -1,6 +1,7 @@
 package battleObject;
 
 import bufferstrategy.GameState;
+import utility.SoundPlayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -101,14 +102,19 @@ public class UserTank implements Drawable {
         public void mousePressed(MouseEvent mouseEvent){
             if(mouseEvent.getButton() == MouseEvent.BUTTON3)
                 changeGun();
-            if(mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun && numberOfHeavyBullet > 0) {
-                if(System.currentTimeMillis() - lastShootTime > 500) {
-                    currentGun.addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
-                    numberOfHeavyBullet -= 1;
-                    lastShootTime = System.currentTimeMillis();
-                }
+            if(mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun) {
+                if(numberOfHeavyBullet > 0){
+                    if(System.currentTimeMillis() - lastShootTime > 500) {
+                        currentGun.addBullets(state.mouseX, state.mouseY, state.locX, state.locY);
+                        numberOfHeavyBullet -= 1;
+                        new SoundPlayer("Resources/Sounds/heavygun.wav").run();
+                        lastShootTime = System.currentTimeMillis();
+                        }
+                } else
+                    new SoundPlayer("Resources/Sounds/emptyGun.wav").run();
             }
-            mousePressed = true;
+            if(mouseEvent.getButton() == MouseEvent.BUTTON1)
+                 mousePressed = true;
 
         }
         @Override
@@ -146,10 +152,14 @@ public class UserTank implements Drawable {
 
     public void fireSecondGun(){
         if(System.currentTimeMillis() - lastShootTime > 200)
-            if(mousePressed && getCurrentGun() == getSecondGun() && numberOfLightBullet > 0) {
-                getSecondGun().addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
-                numberOfLightBullet -= 1;
-                lastShootTime = System.currentTimeMillis();
+            if(mousePressed && getCurrentGun() == getSecondGun()) {
+                if(numberOfLightBullet > 0) {
+                    getSecondGun().addBullets(state.mouseX, state.mouseY, state.locX, state.locY);
+                    numberOfLightBullet -= 1;
+                    new SoundPlayer("Resources/Sounds/mashingun.wav").run();
+                    lastShootTime = System.currentTimeMillis();
+                }else
+                    new SoundPlayer("Resources/Sounds/emptyGun.wav").run();
             }
     }
 

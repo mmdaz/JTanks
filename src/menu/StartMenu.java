@@ -7,6 +7,7 @@ package menu;
  */
 
 import bufferstrategy.Start;
+import utility.SoundPlayer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -151,6 +152,7 @@ public class StartMenu extends JFrame{
             ((JButton)mouseEvent.getSource()).setForeground(Color.decode("#FF9B28"));
             repaint();
             revalidate();
+            new SoundPlayer("Resources/Sounds/select.wav").run();
         }
 
         @Override
@@ -167,6 +169,8 @@ public class StartMenu extends JFrame{
             ((JButton)focusEvent.getSource()).setForeground(Color.decode("#FF9B28"));
             repaint();
             revalidate();
+
+            new SoundPlayer("Resources/Sounds/select.wav").run();
         }
 
         @Override

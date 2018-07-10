@@ -3,6 +3,7 @@ package bufferstrategy;
 
 import battleObject.Bullet;
 import battleObject.Map;
+import utility.SoundPlayer;
 
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class GameState {
 				tankAngle = -Math.PI / 4;
 			locX += 1;
 			locY -= 1;
+
 		} else if (keyUP && keyRIGHT && tankAngle < -Math.PI / 4) {
 			tankAngle += 0.05;
 			if (almostEqual(tankAngle, -Math.PI / 4))

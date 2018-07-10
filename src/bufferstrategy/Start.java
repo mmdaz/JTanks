@@ -2,6 +2,8 @@
 package bufferstrategy;
 
 
+import utility.SoundPlayer;
+
 import java.awt.EventQueue;
 import java.io.IOException;
 import javax.swing.JFrame;
@@ -14,6 +16,8 @@ import javax.swing.JFrame;
 public class Start {
 	
     public Start(String startStats) {
+
+		new SoundPlayer("Resources/Sounds/agree.wav").run();
 		// Initialize the global thread-pool
 		ThreadPool.init();
 		// Show the game menu ...
