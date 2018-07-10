@@ -31,7 +31,6 @@ public class UserTank implements Drawable {
 
 
     public UserTank() throws IOException {
-        //paintTank();
 
         mainGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun01.png")) , ImageIO.read(new File("Resources/Images/tankGun1.png")) , ImageIO.read(new File("Resources/Images/HeavyBullet.png")));
 
@@ -41,7 +40,6 @@ public class UserTank implements Drawable {
 
         isMainGun = true;
 
-        //paintCurrentGun();
 
         tankMouseHandler = new MouseHandler();
 
@@ -49,11 +47,10 @@ public class UserTank implements Drawable {
 
     }
 
-    /**
+    /*
      * Paint Thank body every moment
-     * @throws IOException
      */
-    public void paintTank() throws IOException {
+    private void paintTank() throws IOException {
         AffineTransform tankAt = new AffineTransform();
         tankAt.setToTranslation(state.locX + 50, state.locY + 50);
         tankAt.rotate(state.tankAngle);
@@ -61,10 +58,10 @@ public class UserTank implements Drawable {
         //paint the tank
         g2d.drawImage(ownTank,tankAt,null);
     }
-    /**
+    /*
      * Paint current gun
      */
-    public void paintCurrentGun() {
+    private void paintCurrentGun() {
         gunAT = new AffineTransform();
         gunAT.setToTranslation(state.locX + 50, state.locY + 50);
         gunAT.rotate(state.angle);

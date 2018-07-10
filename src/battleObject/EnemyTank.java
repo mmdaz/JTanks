@@ -29,10 +29,10 @@ public class EnemyTank implements Drawable {
         this.locX = locX;
         this.locY = locY;
     }
-    /**
+    /*
      * Paint gun
      */
-    public void paintCurrentGun() {
+    private void paintCurrentGun() {
         gunAT = new AffineTransform();
         gunAT.setToTranslation(locX + 50, locY + 50);
         double angle = Math.atan2(targetY - (locY + 50), targetX - (locX + 50));
@@ -52,11 +52,10 @@ public class EnemyTank implements Drawable {
         targetY = Y;
     }
 
-    /**
+    /*
      * Paint Thank body every moment
-     * @throws IOException
      */
-    public void paintTank() throws IOException {
+    private void paintTank() throws IOException {
         //paint the tank
         g2d.drawImage(tankBody,null,locX, locY);
     }
