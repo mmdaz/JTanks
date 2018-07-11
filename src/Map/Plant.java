@@ -7,6 +7,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The class that keep a Plant information for draw it on the Map .
+ *
+ * @author Azhdari Muhammad
+ * @since summer 2018
+ * @version 1.0
+ *
+ *
+ */
+
 public class Plant {
 
     private int locX ;

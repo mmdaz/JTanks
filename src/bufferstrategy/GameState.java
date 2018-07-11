@@ -1,11 +1,8 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
-
-import battleObject.Bullet;
 import Map.Map;
-
 import java.awt.event.*;
-import java.util.ArrayList;
+
 
 /**
  * This class holds the state of the game and all of its elements.
@@ -29,9 +26,6 @@ public class GameState {
 	private MouseHandler mouseHandler;
 
 
-	private ArrayList<Bullet> heavybullet‌‌s;
-	private ArrayList<Bullet> lightBullet;
-
 	public GameState() {
 		locX = 100;
 		locY = 300;
@@ -51,9 +45,6 @@ public class GameState {
 		//
 		tankAngle = 0;
 		angle = 1;
-		//
-		heavybullet‌‌s = new ArrayList<Bullet>();
-		lightBullet = new ArrayList<Bullet>();
 	}
 
 	private boolean almostEqual(double num1, double num2) {
@@ -81,7 +72,7 @@ public class GameState {
 				tankAngle = -Math.PI / 4;
 //			locX += 1;
 //			locY -= 1;
-		} else if (keyDOWN && keyLEFT && tankAngle < 3 * Math.PI / 4 && tankAngle >= 0) {
+		} else if (keyDOWN && keyLEFT && tankAngle != 3 * Math.PI / 4 && tankAngle >= 0) {
 			tankAngle += 0.05;
 			if (almostEqual(tankAngle, 3 * Math.PI / 4))
 				tankAngle = 3 * Math.PI / 4;
@@ -168,40 +159,40 @@ public class GameState {
 			preLocY = locY ;
 
 			if (keyUP) {
-                    locY -= 3;
-                    Map.yOffset += 3;
+                    locY -= 6;
+                    Map.yOffset += 6;
 			if (	!Map.checkHitWithObjects() ) {
 				locX = preLocX;
 				locY = preLocY;
-				Map.yOffset -= 3 ;
+				Map.yOffset -= 6 ;
 			}
 
 			}
 			if (keyDOWN) {
-                    locY += 3;
-                    Map.yOffset -= 3;
+                    locY += 6;
+                    Map.yOffset -= 6;
 				if (	!Map.checkHitWithObjects() ) {
 					locX = preLocX;
 					locY = preLocY;
-					Map.yOffset += 3 ;
+					Map.yOffset += 6 ;
 				}
 			}
 			if (keyLEFT) {
-                    locX -= 3;
-                    Map.xOffset += 3;
+                    locX -= 6;
+                    Map.xOffset += 6;
 				if (	!Map.checkHitWithObjects() ) {
 					locX = preLocX;
 					locY = preLocY;
-					Map.xOffset -= 3 ;
+					Map.xOffset -= 6 ;
 				}
 			}
 			if (keyRIGHT) {
-                    locX += 3;
-                    Map.xOffset -= 3;
+                    locX += 6;
+                    Map.xOffset -= 6;
 				if (	!Map.checkHitWithObjects() ) {
 					locX = preLocX;
 					locY = preLocY;
-					Map.xOffset += 3 ;
+					Map.xOffset += 6 ;
 				}
 			}
 		}
@@ -324,14 +315,6 @@ public class GameState {
 
 		@Override
 		public void mouseClicked(MouseEvent mouseEvent) {
-		}
-
-		public ArrayList<Bullet> getHeavybullet‌‌s() {
-			return heavybullet‌‌s;
-		}
-
-		public ArrayList<Bullet> getLightBullet() {
-			return lightBullet;
 		}
 
 		@Override

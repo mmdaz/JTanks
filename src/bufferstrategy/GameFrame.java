@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.* ;
 import Map.Map ;
+import utility.Images;
 
 /**
  * The window on which the rendering is performed.
@@ -39,6 +40,9 @@ public class GameFrame extends JFrame {
 
 	private ArrayList<Drawable> drawables;
 
+
+	private Map map;
+
 	public GameFrame(String title) throws IOException {
 		super(title);
 		setResizable(false);
@@ -47,6 +51,7 @@ public class GameFrame extends JFrame {
 		fpsHistory = new ArrayList<>(100);
 		drawables = new ArrayList<>();
 		drawables.add(tank);
+		map = new Map();
 	/*	try{
 			image = ImageIO.read(new File("Icon.png"));
 		}
@@ -111,13 +116,10 @@ public class GameFrame extends JFrame {
 	 */
 	private void doRendering(Graphics2D g2d, GameState state) throws IOException {
 		// Draw background
-		try {
-			Map map = new Map( state , g2d ) ;
-			map.paintMap();
+		map.setG2d(g2d);
+		Map.setState(state);
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		map.paintMap();
 
 		tank.setState(state);
 		tank.setG2d(g2d);
@@ -128,6 +130,7 @@ public class GameFrame extends JFrame {
 		for(Drawable drawable : drawables)
 			drawable.render();
 
+		tank.render();
 		for(Bullet bullet : tank.getMainGun().getBullets())
 			bullet.paint(g2d);
 		for(Bullet bullet : tank.getSecondGun().getBullets())
@@ -136,8 +139,10 @@ public class GameFrame extends JFrame {
 			bullet.paint(g2d);
 		enemyTank.fire();*/
 
-
 		tank.fireSecondGun();
+
+		g2d.drawImage(Images.softWall1, null, 0 , 0);
+
 
 
 		// Print FPS info

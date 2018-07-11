@@ -1,9 +1,11 @@
 package Map;
 
+import battleObject.Bullet;
 import bufferstrategy.GameState;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,9 +41,10 @@ public class Map {
     public static int yOffset;
     public static int intersectedLocx ;
     public static int intersectedLocY ;
+    public static int softWallMode = 1 ;
 
 
-    public Map(GameState state, Graphics2D g2d) throws IOException {
+    public Map() throws IOException {
 
         mapResource = new int[30][15];
         this.state = state;
@@ -49,6 +52,10 @@ public class Map {
 
         hardWalls = new ArrayList<HardWall>() ;
         softWalls = new ArrayList<SoftWall>() ;
+
+        for (int i = 0; i < 50 ; i++)
+            softWalls.add(new SoftWall(0, 0));
+
         plants  = new ArrayList<Plant>() ;
         teazels = new ArrayList<Teazel>() ;
 
@@ -60,6 +67,10 @@ public class Map {
 
         initializeMap();
 
+        System.out.println(softWalls.size());
+
+
+
     }
 
     /**
@@ -69,9 +80,10 @@ public class Map {
     public void paintMap() {
 
         hardWalls.clear();
-        softWalls.clear();
+//        softWalls.clear();
         plants.clear();
         teazels.clear();
+        int index = 0 ;
 
         for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 15; j++) {
@@ -89,13 +101,17 @@ public class Map {
                 // draw map :
 
                 if (mapResource[i][j] == 2) {
-                    g2d.drawImage(wall, null, i * 100 + xOffset, j * 100 + yOffset);
-                    hardWalls.add(new HardWall(i * 100 + xOffset , j * 100 + yOffset ));
+                    HardWall hardWall = new HardWall(i * 100 + xOffset , j * 100 + yOffset) ;
+                    hardWalls.add(hardWall);
+                    g2d.drawImage(hardWall.getImage(), null, hardWall.getLocX(), hardWall.getLocY());
+
                 }
 
                 else if (mapResource[i][j] == 1) {
-                    g2d.drawImage(hardWall, null, i * 100 + xOffset, j * 100 + yOffset) ;
-                    softWalls.add( new SoftWall( i*100 + xOffset , j * 100 + yOffset)) ;
+                    softWalls.get(index).setLocX(i * 100 + xOffset);
+                    softWalls.get(index).setLocY(j * 100 + yOffset);
+
+                    index ++ ;
 
                 }
 
@@ -116,8 +132,34 @@ public class Map {
 
         }
 
+        for (SoftWall softWall : softWalls ) {
+
+            System.out.println(softWall.getMode());
+
+            if (softWall.getMode() == 1) {
+//                System.out.println(softWall.getLocX());
+                g2d.drawImage(softWall.getImageMode1(), null , softWall.getLocX() , softWall.getLocY());
+            }
+            else if (softWall.getMode() == 2 )
+                g2d.drawImage(softWall.getImageMode2() , softWall.getLocX() , softWall.getLocY() , null);
+            else if (softWall.getMode() == 3)
+                g2d.drawImage(softWall.getImageMode3() , softWall.getLocX() , softWall.getLocY() , null);
+            else if (softWall.getMode() == 4)
+                g2d.drawImage(softWall.getImageMode4() , softWall.getLocX() , softWall.getLocY() , null);
+            else {
+                g2d.drawImage(area, softWall.getLocX(), softWall.getLocY(), null);
+//                System.out.println();
+            }
+        }
+
+
+
     }
 
+    /**
+     * The Method that read map data from file and initialize mapResource array .
+     *
+     */
     private void initializeMap() {
 
         try {
@@ -140,6 +182,14 @@ public class Map {
         }
     }
 
+
+
+    /**
+     *
+     * The Method that check if tank hit with map objects .
+     *
+     * @return if tank hits return false and if does not hit return true .
+     */
     public static boolean checkHitWithObjects() {
 
 
@@ -160,7 +210,9 @@ public class Map {
 
         for (SoftWall softWall : softWalls ) {
 
+/*
             System.out.println(softWall.getLocY() - state.locY);
+*/
 
             if ( softWall.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 )) {
                 intersectedLocx = state.locX ;
@@ -191,10 +243,44 @@ public class Map {
     }
 
 
+    /**
+     * The Method that check Bullet collision .
+     *
+     * @return
+     */
+
+    public static boolean checkBulletCollision (Bullet bullet )  {
+
+        Rectangle2D bulletRect = new Rectangle( bullet.getX() , bullet.getY() , 23 , 9 ) ;
+
+        for (SoftWall softWall : softWalls) {
+
+            if (bulletRect.intersects(softWall.getLocX() , softWall.getLocY() , 100 , 100 )) {
+                softWall.setMode(softWall.getMode() + 1);
+                softWallMode ++ ;
+                return true ;
+            }
+        }
+
+        for (HardWall hardWall : hardWalls ) {
+            if (bulletRect.intersects(hardWall.getLocX() , hardWall.getLocY() , 100 , 100)) return true ;
+        }
+
+        for (Teazel teazel : teazels ) {
+            if (bulletRect.intersects(teazel.getLocX() , teazel.getLocY() , 100 , 100 )) return true ;
+        }
+
+        return false ;
+
+    }
 
 
+    public static void setState(GameState state) {
+        Map.state = state;
+    }
 
-
-
+    public void setG2d(Graphics2D g2d) {
+        this.g2d = g2d;
+    }
 }
 

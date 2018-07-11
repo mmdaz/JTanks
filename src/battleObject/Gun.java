@@ -6,12 +6,10 @@ package battleObject;
  * @author Mohamad Chaman-Motlagh
  */
 
-import bufferstrategy.GameState;
-
-import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
+import Map.* ;
 
 public class Gun {
     protected BufferedImage level1Image;
@@ -27,10 +25,17 @@ public class Gun {
     }
 
     public ArrayList<Bullet> getBullets() {
+        Iterator<Bullet> bulletIterator = bullets.iterator();
+        while(bulletIterator.hasNext()){
+            if (Map.checkBulletCollision(bulletIterator.next()))
+                bulletIterator.remove();
+        }
         return bullets;
     }
 
     public void addBullets(int targetX, int targetY, int locX, int locY) {
         bullets.add(new Bullet(targetX,targetY,locX,locY,bulletImage));
     }
+
+
 }
