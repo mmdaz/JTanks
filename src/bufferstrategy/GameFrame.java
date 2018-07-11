@@ -23,8 +23,8 @@ import utility.Images;
  */
 public class GameFrame extends JFrame {
 
-	public static final int GAME_HEIGHT = 600;                  // 600p game resolution
-	public static final int GAME_WIDTH = 1200;  // 2:1 aspect ratio
+	public static final int GAME_HEIGHT = 800;                  // 600p game resolution
+	public static final int GAME_WIDTH = 1600;  // 2:1 aspect ratio
 
 	//uncomment all /*...*/ in the class for using UserTank icon instead of a simple circle
 	/*private BufferedImage image;*/
@@ -51,6 +51,25 @@ public class GameFrame extends JFrame {
 		fpsHistory = new ArrayList<>(100);
 		drawables = new ArrayList<>();
 		drawables.add(tank);
+
+		drawables.add(new Mine(400,100));
+		drawables.add(new Mine(400, 200));
+		drawables.add(new Mine(500,200));
+		drawables.add(new Turret(400,1300,400));
+		drawables.add(new KhengEnemy(400,2100,200));
+		drawables.add(new EnemyTank(400,2800,100));
+		drawables.add(new KhengEnemy(400,1600,600));
+		drawables.add(new KhengEnemy(400,500,600));
+		drawables.add(new KhengEnemy(400,500,800));
+		drawables.add(new Turret(400,1700,900));
+		drawables.add(new Mine(900,1600));
+		drawables.add(new EnemyTank(400,1000,600));
+		drawables.add(new EnemyTank(400,900,900));
+		drawables.add(new Mine(600,1300));
+		drawables.add(new Mine(700,1300));
+		drawables.add(new Mine(600,1400));
+		drawables.add(new Mine(700,1400));
+
 		map = new Map();
 	/*	try{
 			image = ImageIO.read(new File("Icon.png"));
@@ -63,6 +82,7 @@ public class GameFrame extends JFrame {
         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
                 new ImageIcon("Resources/Images/pointer.png").getImage(),
                 new Point(0,0),"custom cursor"));
+
 
 	}
 
@@ -127,8 +147,26 @@ public class GameFrame extends JFrame {
 			addMouseListener(tank.getTankMouseHandler());
 			mouseHandlerAdded = true;
 		}
-		for(Drawable drawable : drawables)
+		for(Drawable drawable : drawables) {
+			drawable.setG2d(g2d);
 			drawable.render();
+			if(drawable instanceof KhengEnemy){
+				((KhengEnemy) drawable).setTarget(state.locX + Map.xOffset, state.locY + Map.yOffset);
+			}else if(drawable instanceof EnemyTank){
+				((EnemyTank) drawable).setTarget(state.locX,state.locY);
+				((EnemyTank) drawable).fire();
+				for(Bullet bullet : ((EnemyTank) drawable).getGun().getBullets())
+					bullet.paint(g2d);
+			} else if(drawable instanceof Turret){
+				((Turret) drawable).setTarget(state.locX,state.locY);
+				((Turret) drawable).fire();
+				for(Bullet bullet : ((Turret) drawable).getGun().getBullets())
+					bullet.paint(g2d);
+			} else if(drawable instanceof Mine){
+
+			}
+
+		}
 
 
 		for(Bullet bullet : tank.getMainGun().getBullets())

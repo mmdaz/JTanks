@@ -51,7 +51,7 @@ public class Map {
         hardWalls = new ArrayList<HardWall>() ;
         softWalls = new ArrayList<SoftWall>() ;
 
-        for (int i = 0; i < 32 ; i++)
+        for (int i = 0; i < 40 ; i++)
             softWalls.add(new SoftWall(0, 0));
 
         plants  = new ArrayList<Plant>() ;
