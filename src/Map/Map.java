@@ -57,11 +57,9 @@ public class Map {
         plants  = new ArrayList<Plant>() ;
         teazels = new ArrayList<Teazel>() ;
 
-        wall = ImageIO.read(new File("Resources/Images/softWall.png"));
         teazel = ImageIO.read(new File("Resources/Images/teazel.png"));
         area = ImageIO.read(new File("Resources/Images/RedEarth.png"));
         plant = ImageIO.read(new File("Resources/Images/plant.png"));
-        hardWall = ImageIO.read(new File("Resources/Images/hardWall.png"));
 
         initializeMap();
 
@@ -109,6 +107,18 @@ public class Map {
                     softWalls.get(index).setLocX(i * 100 + xOffset);
                     softWalls.get(index).setLocY(j * 100 + yOffset);
 
+
+                    if (softWalls.get(index).getMode() == 1)
+                        g2d.drawImage(softWalls.get(index).getImageMode1(), softWalls.get(index).getLocX(), softWalls.get(index).getLocY() , null);
+                    else if (softWalls.get(index).getMode() == 2 )
+                        g2d.drawImage(softWalls.get(index).getImageMode2() , softWalls.get(index).getLocX() , softWalls.get(index).getLocY() , null);
+                    else if (softWalls.get(index).getMode() == 3)
+                        g2d.drawImage(softWalls.get(index).getImageMode3() , softWalls.get(index).getLocX() , softWalls.get(index).getLocY() , null);
+                    else if (softWalls.get(index).getMode() == 4)
+                        g2d.drawImage(softWalls.get(index).getImageMode4() , softWalls.get(index).getLocX() , softWalls.get(index).getLocY() , null);
+                    else
+                        g2d.drawImage(area, softWalls.get(index).getLocX(), softWalls.get(index).getLocY(), null);
+
                     index ++ ;
 
                 }
@@ -130,21 +140,6 @@ public class Map {
 
         }
 
-        for (SoftWall softWall : softWalls ) {
-
-            System.out.println(softWall.getMode());
-
-            if (softWall.getMode() == 1)
-                g2d.drawImage(softWall.getImageMode1(), null , softWall.getLocX() , softWall.getLocY());
-            else if (softWall.getMode() == 2 )
-                g2d.drawImage(softWall.getImageMode2() , softWall.getLocX() , softWall.getLocY() , null);
-            else if (softWall.getMode() == 3)
-                g2d.drawImage(softWall.getImageMode3() , softWall.getLocX() , softWall.getLocY() , null);
-            else if (softWall.getMode() == 4)
-                g2d.drawImage(softWall.getImageMode4() , softWall.getLocX() , softWall.getLocY() , null);
-            else
-                g2d.drawImage(area, softWall.getLocX(), softWall.getLocY(), null);
-        }
 
 
 
