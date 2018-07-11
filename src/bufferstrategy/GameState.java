@@ -29,9 +29,6 @@ public class GameState {
 	private MouseHandler mouseHandler;
 
 
-	private ArrayList<Bullet> heavybullet‌‌s;
-	private ArrayList<Bullet> lightBullet;
-
 	public GameState() {
 		locX = 100;
 		locY = 300;
@@ -51,9 +48,6 @@ public class GameState {
 		//
 		tankAngle = 0;
 		angle = 1;
-		//
-		heavybullet‌‌s = new ArrayList<Bullet>();
-		lightBullet = new ArrayList<Bullet>();
 	}
 
 	private boolean almostEqual(double num1, double num2) {
@@ -168,40 +162,40 @@ public class GameState {
 			preLocY = locY ;
 
 			if (keyUP) {
-                    locY -= 6;
-                    Map.yOffset += 3;
+                    locY -= 3;
+                    Map.yOffset += 6;
 			if (	!Map.checkHitWithObjects() ) {
 				locX = preLocX;
 				locY = preLocY;
-				Map.yOffset -= 3 ;
+				Map.yOffset -= 6 ;
 			}
 
 			}
 			if (keyDOWN) {
-                    locY += 6;
-                    Map.yOffset -= 3;
+                    locY += 3;
+                    Map.yOffset -= 6;
 				if (	!Map.checkHitWithObjects() ) {
 					locX = preLocX;
 					locY = preLocY;
-					Map.yOffset += 3 ;
+					Map.yOffset += 6 ;
 				}
 			}
 			if (keyLEFT) {
-                    locX -= 6;
-                    Map.xOffset += 3;
+                    locX -= 3;
+                    Map.xOffset += 6;
 				if (	!Map.checkHitWithObjects() ) {
 					locX = preLocX;
 					locY = preLocY;
-					Map.xOffset -= 3 ;
+					Map.xOffset -= 6 ;
 				}
 			}
 			if (keyRIGHT) {
-                    locX += 6;
-                    Map.xOffset -= 3;
+                    locX += 3;
+                    Map.xOffset -= 6;
 				if (	!Map.checkHitWithObjects() ) {
 					locX = preLocX;
 					locY = preLocY;
-					Map.xOffset += 3 ;
+					Map.xOffset += 6 ;
 				}
 			}
 		}
@@ -324,14 +318,6 @@ public class GameState {
 
 		@Override
 		public void mouseClicked(MouseEvent mouseEvent) {
-		}
-
-		public ArrayList<Bullet> getHeavybullet‌‌s() {
-			return heavybullet‌‌s;
-		}
-
-		public ArrayList<Bullet> getLightBullet() {
-			return lightBullet;
 		}
 
 		@Override

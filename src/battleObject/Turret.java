@@ -5,6 +5,7 @@ package battleObject;
  *
  * @author Mohamad Chaman-Motlagh
  */
+import Map.Map;
 import utility.SoundPlayer;
 
 import javax.imageio.ImageIO;
@@ -24,8 +25,9 @@ public class Turret implements Drawable{
     private Graphics2D g2d;
     public EnemyGun gun;
     private long lastShootTime;
+    private int activationDistance;
 
-    public Turret(int locX, int locY){
+    public Turret(int activationDistance,int locX, int locY){
         try {
             turretBody = ImageIO.read(new File("Resources/Images/TurretBody.png"));
             gun = new EnemyGun(ImageIO.read(new File("Resources/Images/TurretGun.png")) , ImageIO.read(new File("Resources/Images/EnemyBullet1.png")));
@@ -35,6 +37,7 @@ public class Turret implements Drawable{
 
         this.locX = locX;
         this.locY = locY;
+        this.activationDistance = activationDistance;
     }
 
 
@@ -58,8 +61,8 @@ public class Turret implements Drawable{
 
     private void paintCurrentGun() {
         gunAT = new AffineTransform();
-        gunAT.setToTranslation(locX + 50, locY + 50);
-        double angle = Math.atan2(targetY - (locY + 50), targetX - (locX + 50));
+        gunAT.setToTranslation(locX + 50 + Map.xOffset, locY + 50 + Map.yOffset);
+        double angle = Math.atan2(targetY - (locY + 50 + Map.yOffset), targetX - (locX + Map.xOffset + 50));
         gunAT.rotate(angle);
         gunAT.translate(-20, -20);
         g2d.drawImage(gun.getGunImage(), gunAT,null);
@@ -68,14 +71,17 @@ public class Turret implements Drawable{
 
     private void paintTurret() throws IOException {
         //paint the turret
-        g2d.drawImage(turretBody,null,locX, locY);
+        g2d.drawImage(turretBody,null,locX + Map.xOffset, locY + Map.yOffset);
     }
 
-    public void fire(){
-        if(System.currentTimeMillis() - lastShootTime > 200) {
-            gun.addBullets(targetX,targetY,locX,locY);
-            new SoundPlayer("Resources/Sounds/enemyshot.wav").run();
-            lastShootTime = System.currentTimeMillis();
+    public void fire() {
+        if(Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance)
+        {
+            if (System.currentTimeMillis() - lastShootTime > 500) {
+                gun.addBullets(targetX, targetY, locX + Map.xOffset, locY + Map.yOffset);
+                lastShootTime = System.currentTimeMillis();
+                new SoundPlayer("Resources/Sounds/enemyshot.wav").run();
+            }
         }
     }
 

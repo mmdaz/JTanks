@@ -1,5 +1,7 @@
 package battleObject;
 
+import Map.Map;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -38,10 +40,10 @@ public class KhengEnemy implements Drawable {
 
     @Override
     public void render() throws IOException {
-        if((Math.abs(targetX - locX) < activationDistance && Math.abs(targetY - locY) < activationDistance) || isRendered) {
+        if((Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance) || isRendered) {
             AffineTransform khEnemyAT = new AffineTransform();
-            khEnemyAT.setToTranslation(locX + 50, locY + 50);
-            double angle = Math.atan2(targetY - (locY + 50), targetX - (locX + 50));
+            khEnemyAT.setToTranslation(locX + 50 + Map.xOffset, locY + 50 + Map.yOffset);
+            double angle = Math.atan2(targetY - (locY + 50 + Map.yOffset), targetX - (locX + 50 + Map.yOffset));
             khEnemyAT.rotate(angle);
             khEnemyAT.translate(-50, -50);
             //paint the tank

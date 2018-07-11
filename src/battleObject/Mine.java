@@ -5,6 +5,8 @@ package battleObject;
  * @author Mohamad Chaman-Motlagh
  */
 
+import Map.Map;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -31,6 +33,6 @@ public class Mine implements Drawable{
 
     @Override
     public void render() throws IOException {
-        g2d.drawImage(mineImage,null,locX,locY);
+        g2d.drawImage(mineImage,null,locX +  Map.xOffset,locY + Map.yOffset);
     }
 }
