@@ -16,7 +16,7 @@ public class Bullet{
     private BufferedImage bulletImage;
     private int X;
     private int Y;
-    private int speed;
+    private final int speed;
 
     public Bullet(int mouseX, int mouseY, int locationX, int locationY, BufferedImage bulletImage) {
         this.bulletImage = bulletImage;
@@ -24,8 +24,8 @@ public class Bullet{
         Y = locationY + 50;
         angle = Math.atan2(mouseY - (locationY + 50), mouseX - (locationX + 50));
 
-        speed = 8;
-        for (int i = 0; i < 8; i++) {
+        speed = 12;
+        for (int i = 0; i < 5; i++) {
             forward();
         }
     }
@@ -43,4 +43,17 @@ public class Bullet{
         Y += Math.sin(angle) * speed;
     }
 
+    /**
+     * @return X location of each bullet
+     */
+    public int getX() {
+        return X;
+    }
+
+    /**
+     * @return Y location of each bullet
+     */
+    public int getY() {
+        return Y;
+    }
 }

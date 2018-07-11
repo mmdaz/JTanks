@@ -160,7 +160,9 @@ public class Map {
 
         for (SoftWall softWall : softWalls ) {
 
+/*
             System.out.println(softWall.getLocY() - state.locY);
+*/
 
             if ( softWall.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 )) {
                 intersectedLocx = state.locX ;

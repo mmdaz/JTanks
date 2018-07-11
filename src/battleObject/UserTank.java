@@ -28,6 +28,11 @@ public class UserTank implements Drawable {
     private long lastShootTime;
     public boolean mousePressed;
     private BufferedImage ownTank;
+    private int numberOfHeavyBullet = 50;
+    private int numberOfLightBullet = 200;
+    private BufferedImage numberOfHeavyBulletImage;
+    private BufferedImage numberOfLightBulletImage;
+
 
 
     public UserTank() throws IOException {
@@ -46,6 +51,11 @@ public class UserTank implements Drawable {
         tankMouseHandler = new MouseHandler();
 
         ownTank = ImageIO.read(new File("Resources/Images/tank.png"));
+
+        numberOfHeavyBulletImage = ImageIO.read(new File("Resources/Images/NumberOfHeavyBullet.png"));
+
+        numberOfLightBulletImage = ImageIO.read(new File("Resources/Images/NumberOfLightBullet.png"));
+
 
     }
 
@@ -94,18 +104,19 @@ public class UserTank implements Drawable {
      */
     class MouseHandler extends MouseAdapter {
         @Override
-        public void mousePressed(MouseEvent mouseEvent){
-            if(mouseEvent.getButton() == MouseEvent.BUTTON3)
+        public void mousePressed(MouseEvent mouseEvent) {
+            if (mouseEvent.getButton() == MouseEvent.BUTTON3)
                 changeGun();
-            if(mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun) {
-                if(System.currentTimeMillis() - lastShootTime > 500) {
-                    currentGun.addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
+            if (mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun && numberOfHeavyBullet > 0) {
+                if (System.currentTimeMillis() - lastShootTime > 500) {
+                    currentGun.addBullets(state.mouseX, state.mouseY, state.locX, state.locY);
+                    numberOfHeavyBullet -= 1;
                     lastShootTime = System.currentTimeMillis();
+                    }
                 }
+                if(mouseEvent.getButton() == MouseEvent.BUTTON1)
+                    mousePressed = true;
             }
-            mousePressed = true;
-
-        }
         @Override
         public void mouseReleased(MouseEvent mouseEvent){
             mousePressed = false;
@@ -141,14 +152,35 @@ public class UserTank implements Drawable {
 
     public void fireSecondGun(){
         if(System.currentTimeMillis() - lastShootTime > 200)
-            if(mousePressed && getCurrentGun() == getSecondGun()) {
-                getSecondGun().addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
-                lastShootTime = System.currentTimeMillis();
+                if(mousePressed && getCurrentGun() == getSecondGun() && numberOfLightBullet > 0) {
+                    getSecondGun().addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
+                    numberOfLightBullet -= 1;
+                    lastShootTime = System.currentTimeMillis();
+                }
             }
-    }
+
+
+
 
     public void render() throws IOException {
+
+        g2d.setColor(Color.ORANGE);
+
+        g2d.setFont(g2d.getFont().deriveFont(20.0f));
+
+        g2d.drawImage(numberOfHeavyBulletImage,null,50,50);
+
+        g2d.drawString("" + numberOfHeavyBullet ,120,90);
+
+        g2d.drawImage(numberOfLightBulletImage, null, 55, 110);
+
+        g2d.drawString("" + numberOfLightBullet, 125, 145);
+
+
+
         paintTank();
+
         paintCurrentGun();
+
     }
 }
