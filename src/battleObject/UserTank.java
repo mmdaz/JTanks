@@ -116,7 +116,7 @@ public class UserTank implements Drawable {
                     new SoundPlayer("Resources/Sounds/heavygun.wav").run();
                     }
                 }else if(numberOfHeavyBullet <= 0)
-                new SoundPlayer("emptyGun.wav").run();
+                new SoundPlayer("Resources/Sounds/emptyGun.wav").run();
                 if(mouseEvent.getButton() == MouseEvent.BUTTON1)
                     mousePressed = true;
             }
@@ -162,13 +162,18 @@ public class UserTank implements Drawable {
 
                     new SoundPlayer("Resources/Sounds/mashingun.wav").run();
                 } else if(numberOfLightBullet <= 0)
-                    new SoundPlayer("emptyGun.wav").run();
+                    new SoundPlayer("Resources/Sounds/emptyGun.wav").run();
             }
 
 
 
 
     public void render() throws IOException {
+
+        paintTank();
+
+        paintCurrentGun();
+
 
         g2d.setColor(Color.ORANGE);
 
@@ -183,10 +188,6 @@ public class UserTank implements Drawable {
         g2d.drawString("" + numberOfLightBullet, 125, 145);
 
 
-
-        paintTank();
-
-        paintCurrentGun();
 
     }
 }

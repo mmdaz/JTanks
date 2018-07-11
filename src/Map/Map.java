@@ -47,13 +47,11 @@ public class Map {
     public Map() throws IOException {
 
         mapResource = new int[30][15];
-        this.state = state;
-        this.g2d = g2d;
 
         hardWalls = new ArrayList<HardWall>() ;
         softWalls = new ArrayList<SoftWall>() ;
 
-        for (int i = 0; i < 50 ; i++)
+        for (int i = 0; i < 32 ; i++)
             softWalls.add(new SoftWall(0, 0));
 
         plants  = new ArrayList<Plant>() ;
@@ -136,20 +134,16 @@ public class Map {
 
             System.out.println(softWall.getMode());
 
-            if (softWall.getMode() == 1) {
-//                System.out.println(softWall.getLocX());
+            if (softWall.getMode() == 1)
                 g2d.drawImage(softWall.getImageMode1(), null , softWall.getLocX() , softWall.getLocY());
-            }
             else if (softWall.getMode() == 2 )
                 g2d.drawImage(softWall.getImageMode2() , softWall.getLocX() , softWall.getLocY() , null);
             else if (softWall.getMode() == 3)
                 g2d.drawImage(softWall.getImageMode3() , softWall.getLocX() , softWall.getLocY() , null);
             else if (softWall.getMode() == 4)
                 g2d.drawImage(softWall.getImageMode4() , softWall.getLocX() , softWall.getLocY() , null);
-            else {
+            else
                 g2d.drawImage(area, softWall.getLocX(), softWall.getLocY(), null);
-//                System.out.println();
-            }
         }
 
 
@@ -214,7 +208,7 @@ public class Map {
             System.out.println(softWall.getLocY() - state.locY);
 */
 
-            if ( softWall.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 )) {
+            if ( softWall.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) && softWall.getMode() <= 4) {
                 intersectedLocx = state.locX ;
                 intersectedLocY = state.locY ;
 //                state.locX = state.preLocX ;
@@ -246,7 +240,7 @@ public class Map {
     /**
      * The Method that check Bullet collision .
      *
-     * @return
+     * @return {@code true} in case of collision, {@code false} otherwise
      */
 
     public static boolean checkBulletCollision (Bullet bullet )  {
@@ -255,7 +249,7 @@ public class Map {
 
         for (SoftWall softWall : softWalls) {
 
-            if (bulletRect.intersects(softWall.getLocX() , softWall.getLocY() , 100 , 100 )) {
+            if (bulletRect.intersects(softWall.getLocX() , softWall.getLocY() , 100 , 100 ) && softWall.getMode() <= 4) {
                 softWall.setMode(softWall.getMode() + 1);
                 softWallMode ++ ;
                 return true ;

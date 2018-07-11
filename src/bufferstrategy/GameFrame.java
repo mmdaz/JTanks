@@ -130,7 +130,7 @@ public class GameFrame extends JFrame {
 		for(Drawable drawable : drawables)
 			drawable.render();
 
-		tank.render();
+
 		for(Bullet bullet : tank.getMainGun().getBullets())
 			bullet.paint(g2d);
 		for(Bullet bullet : tank.getSecondGun().getBullets())
@@ -141,7 +141,7 @@ public class GameFrame extends JFrame {
 
 		tank.fireSecondGun();
 
-		g2d.drawImage(Images.softWall1, null, 0 , 0);
+		tank.render();
 
 
 
