@@ -1,12 +1,17 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
-import battleObject.*;
+import battleObject.Bullet;
+import battleObject.Map;
+import battleObject.UserTank;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -21,8 +26,8 @@ import javax.swing.*;
  */
 public class GameFrame extends JFrame {
 
-	public static final int GAME_HEIGHT = 600;                  // 600p game resolution
-	public static final int GAME_WIDTH = 1200;  // 2:1 aspect ratio
+	public static final int GAME_HEIGHT = 600;                  // 720p game resolution
+	public static final int GAME_WIDTH = 1200;  // wide aspect ratio
 
 	//uncomment all /*...*/ in the class for using UserTank icon instead of a simple circle
 	/*private BufferedImage image;*/
@@ -35,18 +40,13 @@ public class GameFrame extends JFrame {
 	private UserTank tank = new UserTank();
 	private boolean mouseHandlerAdded;
 
-
-	private ArrayList<Drawable> drawables;
-
-
 	public GameFrame(String title) throws IOException {
 		super(title);
 		setResizable(false);
 		setSize(GAME_WIDTH, GAME_HEIGHT);
 		lastRender = -1;
 		fpsHistory = new ArrayList<>(100);
-		drawables = new ArrayList<>();
-		drawables.add(tank);
+
 	/*	try{
 			image = ImageIO.read(new File("Icon.png"));
 		}
@@ -114,6 +114,7 @@ public class GameFrame extends JFrame {
 		try {
 			Map map = new Map( state , g2d ) ;
 			map.paintMap();
+			System.out.printf("(%d , %d)\n" ,Map.xOffset , Map.yOffset ) ;
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -125,20 +126,13 @@ public class GameFrame extends JFrame {
 			addMouseListener(tank.getTankMouseHandler());
 			mouseHandlerAdded = true;
 		}
-		for(Drawable drawable : drawables)
-			drawable.render();
-
+		tank.paintTank();
+		tank.paintCurrentGun();
 		for(Bullet bullet : tank.getMainGun().getBullets())
 			bullet.paint(g2d);
 		for(Bullet bullet : tank.getSecondGun().getBullets())
 			bullet.paint(g2d);
 		tank.fireSecondGun();
-/*		for(Bullet bullet : enemyTank.getGun().getBullets())
-			bullet.paint(g2d);
-		enemyTank.fire();*/
-
-
-
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();
 //		if (lastRender > 0) {

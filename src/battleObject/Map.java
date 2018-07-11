@@ -67,21 +67,21 @@ public class Map {
                 if ( xOffset + 3000 < 1200 )  xOffset = - 1800 ;
 
 
-                if (mapResource[i][j] == 2) {
-                    g2d.drawImage(wall, null, i * 100 + xOffset, j * 100 + yOffset);
-                }else if (mapResource[i][j] == 1) {
-                    g2d.drawImage(hardWall, null, i * 100 + xOffset, j * 100 + yOffset);
+                    if (mapResource[i][j] == 2) {
+                        g2d.drawImage(wall, null, i * 100 + xOffset, j * 100 + yOffset);
+                    }else if (mapResource[i][j] == 1) {
+                        g2d.drawImage(hardWall, null, i * 100 + xOffset, j * 100 + yOffset);
+                    }
+                    else if (mapResource[i][j] == 5) {
+                        g2d.drawImage(teazel, null, i * 100 + xOffset, j * 100 + yOffset);
+                    } else if ( mapResource[i][j] == 4) {
+                        g2d.drawImage(plant, null, i * 100 + xOffset, j * 100 + yOffset);
+                    }
+                    // enemy tank ...
+                    else   {
+                        g2d.drawImage(area, null, i * 100 + xOffset, j * 100 + yOffset);
+                    }
                 }
-                else if (mapResource[i][j] == 5) {
-                    g2d.drawImage(teazel, null, i * 100 + xOffset, j * 100 + yOffset);
-                } else if ( mapResource[i][j] == 4) {
-                    g2d.drawImage(plant, null, i * 100 + xOffset, j * 100 + yOffset);
-                }
-                // enemy tank ...
-                else   {
-                    g2d.drawImage(area, null, i * 100 + xOffset, j * 100 + yOffset);
-                }
-            }
 
         }
 
@@ -112,3 +112,4 @@ public class Map {
         }
     }
 }
+

@@ -3,7 +3,6 @@ package bufferstrategy;
 
 import battleObject.Bullet;
 import battleObject.Map;
-import utility.SoundPlayer;
 
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class GameState {
 
 	public GameState() {
 		locX = 100;
-		locY = 00;
+		locY = 300;
 		diam = 40;
 		gameOver = false;
 		//
@@ -76,14 +75,13 @@ public class GameState {
 				tankAngle = -Math.PI / 4;
 			locX += 1;
 			locY -= 1;
-
 		} else if (keyUP && keyRIGHT && tankAngle < -Math.PI / 4) {
 			tankAngle += 0.05;
 			if (almostEqual(tankAngle, -Math.PI / 4))
 				tankAngle = -Math.PI / 4;
 			locX += 1;
 			locY -= 1;
-		} else if (keyDOWN && keyLEFT && (tankAngle != -5 * Math.PI / 4 || tankAngle != 3 * Math.PI / 4) && tankAngle >= 0) {
+		} else if (keyDOWN && keyLEFT && tankAngle < 3 * Math.PI / 4 && tankAngle >= 0) {
 			tankAngle += 0.05;
 			if (almostEqual(tankAngle, 3 * Math.PI / 4))
 				tankAngle = 3 * Math.PI / 4;
@@ -166,21 +164,21 @@ public class GameState {
 			locY += 1;
 		} else {
 			if (keyUP) {
-				locY -= 3;
-				Map.yOffset += 6 ;
+				locY -= 8;
+				Map.yOffset += 8 ;
 			}
 			if (keyDOWN) {
-				locY += 3;
-				Map.yOffset -= 6 ;
+				locY += 8;
+				Map.yOffset -= 8 ;
 			}
 			if (keyLEFT) {
-				locX -= 3;
-				Map.xOffset += 6 ;
+				locX -= 8;
+				Map.xOffset += 8 ;
 
 			}
 			if (keyRIGHT) {
-				locX += 3;
-				Map.xOffset -= 6 ;
+				locX += 8;
+				Map.xOffset -= 8 ;
 			}
 		}
 
@@ -191,9 +189,9 @@ public class GameState {
 			tankAngle += 2 * Math.PI;
 
 		locX = Math.max(locX, 0);
-		locX = Math.min(locX, GameFrame.GAME_WIDTH - diam);
+		locX = Math.min(locX, GameFrame.GAME_WIDTH  - diam );
 		locY = Math.max(locY, 0);
-		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam);
+		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam );
 
 		tankCenterX = locX + 50;
 		tankCenterY = locY + 50;
