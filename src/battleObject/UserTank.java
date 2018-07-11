@@ -134,6 +134,7 @@ public class UserTank implements Drawable {
         this.state = state;
     }
 
+    @Override
     public void setG2d(Graphics2D g2d){
         this.g2d = g2d;
     }

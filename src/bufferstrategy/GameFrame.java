@@ -38,6 +38,7 @@ public class GameFrame extends JFrame {
 
 	private ArrayList<Drawable> drawables;
 
+
 	public GameFrame(String title) throws IOException {
 		super(title);
 		setResizable(false);
@@ -131,12 +132,12 @@ public class GameFrame extends JFrame {
 			bullet.paint(g2d);
 		for(Bullet bullet : tank.getSecondGun().getBullets())
 			bullet.paint(g2d);
+		tank.fireSecondGun();
 /*		for(Bullet bullet : enemyTank.getGun().getBullets())
 			bullet.paint(g2d);
 		enemyTank.fire();*/
 
 
-		tank.fireSecondGun();
 
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();
