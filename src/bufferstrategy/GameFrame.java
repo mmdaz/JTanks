@@ -139,7 +139,7 @@ public class GameFrame extends JFrame {
 		enemyTank.fire();*/
 
 		tank.fireSecondGun();
-		
+
 
 
 		// Print FPS info
