@@ -1,6 +1,5 @@
 package battleObject;
 
-import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -10,5 +9,4 @@ import java.io.IOException;
  */
 public interface Drawable {
     public void render() throws IOException;
-    public void setG2d(Graphics2D g2d);
 }

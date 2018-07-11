@@ -4,8 +4,6 @@ package battleObject;
  *
  * @author Mohamad Chaman-Motlagh
  */
-import utility.SoundPlayer;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -31,10 +29,10 @@ public class EnemyTank implements Drawable {
         this.locX = locX;
         this.locY = locY;
     }
-    /*
+    /**
      * Paint gun
      */
-    private void paintCurrentGun() {
+    public void paintCurrentGun() {
         gunAT = new AffineTransform();
         gunAT.setToTranslation(locX + 50, locY + 50);
         double angle = Math.atan2(targetY - (locY + 50), targetX - (locX + 50));
@@ -54,10 +52,11 @@ public class EnemyTank implements Drawable {
         targetY = Y;
     }
 
-    /*
+    /**
      * Paint Thank body every moment
+     * @throws IOException
      */
-    private void paintTank() throws IOException {
+    public void paintTank() throws IOException {
         //paint the tank
         g2d.drawImage(tankBody,null,locX, locY);
     }
@@ -71,7 +70,6 @@ public class EnemyTank implements Drawable {
     public void fire(){
         if(System.currentTimeMillis() - lastShootTime > 500) {
                 gun.addBullets(targetX,targetY,locX,locY);
-                new SoundPlayer("Resources/Sounds/enemyshot.wav").run();
                 lastShootTime = System.currentTimeMillis();
             }
     }

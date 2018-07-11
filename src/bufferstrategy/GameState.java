@@ -2,7 +2,7 @@
 package bufferstrategy;
 
 import battleObject.Bullet;
-import battleObject.Map;
+import Map.Map;
 
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class GameState {
 
-	public int locX, locY, diam;
+	public int locX, locY, diam , preLocX , preLocY;
 	public boolean gameOver;
 	public int mouseX, mouseY;
 	public double angle;
@@ -73,112 +73,136 @@ public class GameState {
 			tankAngle -= 0.05;
 			if (almostEqual(tankAngle, -Math.PI / 4))
 				tankAngle = -Math.PI / 4;
-			locX += 1;
-			locY -= 1;
+//			locX += 1;
+//			locY -= 1;
 		} else if (keyUP && keyRIGHT && tankAngle < -Math.PI / 4) {
 			tankAngle += 0.05;
 			if (almostEqual(tankAngle, -Math.PI / 4))
 				tankAngle = -Math.PI / 4;
-			locX += 1;
-			locY -= 1;
+//			locX += 1;
+//			locY -= 1;
 		} else if (keyDOWN && keyLEFT && tankAngle < 3 * Math.PI / 4 && tankAngle >= 0) {
 			tankAngle += 0.05;
 			if (almostEqual(tankAngle, 3 * Math.PI / 4))
 				tankAngle = 3 * Math.PI / 4;
-			locX -= 1;
-			locY += 1;
+//			locX -= 1;
+//			locY += 1;
 		} else if (keyDOWN && keyLEFT && tankAngle > -5 * Math.PI / 4 && tankAngle < 0) {
 			tankAngle -= 0.05;
 			if (almostEqual(tankAngle, -5 * Math.PI / 4))
 				tankAngle = -5 * Math.PI / 4;
-			locX -= 1;
-			locY += 1;
+//			locX -= 1;
+//			locY += 1;
 		} else if (keyDOWN && keyRIGHT && tankAngle < Math.PI / 4) {
 			tankAngle += 0.05;
 			if (almostEqual(tankAngle, Math.PI / 4))
 				tankAngle = Math.PI / 4;
-			locX += 1;
-			locY += 1;
+//			locX += 1;
+//			locY += 1;
 		} else if (keyDOWN && keyRIGHT && tankAngle > Math.PI / 4) {
 			tankAngle -= 0.05;
 			if (almostEqual(tankAngle, Math.PI / 4))
 				tankAngle = Math.PI / 4;
-			locX += 1;
-			locY += 1;
+//			locX += 1;
+//			locY += 1;
 		} else if (keyUP && keyLEFT && tankAngle > -3 * Math.PI / 4 && tankAngle <= 0) {
 			tankAngle -= 0.05;
 			if (almostEqual(-3 * Math.PI / 4, tankAngle))
 				tankAngle = -3 * Math.PI / 4;
-			locX -= 1;
-			locY -= 1;
+//			locX -= 1;
+//			locY -= 1;
 		} else if (keyUP && keyLEFT && tankAngle < 5 * Math.PI / 4 && tankAngle > 0) {
 			tankAngle += 0.05;
 			if (almostEqual(5 * Math.PI / 4, tankAngle))
 				tankAngle = 5 * Math.PI / 4;
-			locX -= 1;
-			locY -= 1;
+//			locX -= 1;
+//			locY -= 1;
 		} else if (keyRIGHT && tankAngle < 0 && !keyUP && !keyDOWN) {
 			tankAngle += 0.05;
 			if (almostEqual(0, tankAngle))
 				tankAngle = 0;
-			locX += 1;
+//			locX += 1;
 		} else if (keyRIGHT && tankAngle > 0 && !keyUP && !keyDOWN) {
 			tankAngle -= 0.05;
 			if (almostEqual(0, tankAngle))
 				tankAngle = 0;
-			locX += 1;
+//			locX += 1;
 		} else if (keyLEFT && tankAngle < Math.PI && !keyUP && !keyDOWN) {
 			tankAngle += 0.05;
 			if (almostEqual(Math.PI, tankAngle))
 				tankAngle = Math.PI;
-			locX -= 1;
+//			locX -= 1;
 		} else if (keyLEFT && tankAngle > Math.PI && !keyUP && !keyDOWN) {
 			tankAngle -= 0.05;
 			if (almostEqual(Math.PI, tankAngle))
 				tankAngle = Math.PI;
-			locX -= 1;
+//			locX -= 1;
 		} else if (keyUP && (tankAngle > -Math.PI / 2) && !keyLEFT && !keyRIGHT) {
 			tankAngle -= 0.05;
 			if (almostEqual(-Math.PI / 2, tankAngle))
 				tankAngle = -Math.PI / 2;
-			locY -= 1;
+//			locY -= 1;
 		} else if (keyUP && (tankAngle < -Math.PI / 2) && !keyLEFT && !keyRIGHT) {
 			tankAngle += 0.05;
 			if (almostEqual(-Math.PI / 2, tankAngle))
 				tankAngle = -Math.PI / 2;
-			locY -= 1;
+//			locY -= 1;
 		} else if (keyUP && (tankAngle != 3 * Math.PI / 2 && tankAngle != -Math.PI / 2) && !keyLEFT && !keyRIGHT) {
 			tankAngle -= 0.05;
 			if (almostEqual(-Math.PI / 2, tankAngle) || almostEqual(tankAngle, 3 * Math.PI / 2))
 				tankAngle = -Math.PI / 2;
-			locY -= 1;
+//			locY -= 1;
 		} else if (keyDOWN && tankAngle < Math.PI / 2 && !keyLEFT && !keyRIGHT) {
 			tankAngle += 0.05;
 			if (almostEqual(Math.PI / 2, tankAngle))
 				tankAngle = Math.PI / 2;
-			locY += 1;
+//			locY += 1;
 		} else if (keyDOWN && tankAngle != Math.PI / 2 && !keyLEFT && !keyRIGHT) {
 			tankAngle -= 0.05;
 			if (almostEqual(Math.PI / 2, tankAngle))
 				tankAngle = Math.PI / 2;
-			locY += 1;
+//			locY += 1;
 		} else {
+
+			preLocX = locX ;
+			preLocY = locY ;
+
 			if (keyUP) {
-				locY -= 8;
-				Map.yOffset += 8 ;
+                    locY -= 3;
+                    Map.yOffset += 3;
+			if (	!Map.checkHitWithObjects() ) {
+				locX = preLocX;
+				locY = preLocY;
+				Map.yOffset -= 3 ;
 			}
-			if (keyDOWN) {
-				locY += 8;
-				Map.yOffset -= 8 ;
-			}
-			if (keyLEFT) {
-				locX -= 8;
-				Map.xOffset += 8 ;
 
 			}
+			if (keyDOWN) {
+                    locY += 3;
+                    Map.yOffset -= 3;
+				if (	!Map.checkHitWithObjects() ) {
+					locX = preLocX;
+					locY = preLocY;
+					Map.yOffset += 3 ;
+				}
+			}
+			if (keyLEFT) {
+                    locX -= 3;
+                    Map.xOffset += 3;
+				if (	!Map.checkHitWithObjects() ) {
+					locX = preLocX;
+					locY = preLocY;
+					Map.xOffset -= 3 ;
+				}
+			}
 			if (keyRIGHT) {
-				locX += 8;
-				Map.xOffset -= 8 ;
+                    locX += 3;
+                    Map.xOffset -= 3;
+				if (	!Map.checkHitWithObjects() ) {
+					locX = preLocX;
+					locY = preLocY;
+					Map.xOffset += 3 ;
+				}
 			}
 		}
 
@@ -189,9 +213,9 @@ public class GameState {
 			tankAngle += 2 * Math.PI;
 
 		locX = Math.max(locX, 0);
-		locX = Math.min(locX, GameFrame.GAME_WIDTH  - diam );
+		locX = Math.min(locX, GameFrame.GAME_WIDTH - diam);
 		locY = Math.max(locY, 0);
-		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam );
+		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam);
 
 		tankCenterX = locX + 50;
 		tankCenterY = locY + 50;

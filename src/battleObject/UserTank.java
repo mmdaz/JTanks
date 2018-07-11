@@ -1,7 +1,6 @@
 package battleObject;
 
 import bufferstrategy.GameState;
-import utility.SoundPlayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -30,13 +29,9 @@ public class UserTank implements Drawable {
     public boolean mousePressed;
     private BufferedImage ownTank;
 
-    private int numberOfHeavyBullet = 50;
-    private int numberOfLightBullet = 200;
-    private BufferedImage numberOfHeavyBulletImage;
-    private BufferedImage numberOfLightBulletImage;
-
 
     public UserTank() throws IOException {
+        //paintTank();
 
         mainGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun01.png")) , ImageIO.read(new File("Resources/Images/tankGun1.png")) , ImageIO.read(new File("Resources/Images/HeavyBullet.png")));
 
@@ -46,20 +41,19 @@ public class UserTank implements Drawable {
 
         isMainGun = true;
 
+        //paintCurrentGun();
 
         tankMouseHandler = new MouseHandler();
 
         ownTank = ImageIO.read(new File("Resources/Images/tank.png"));
 
-        numberOfHeavyBulletImage = ImageIO.read(new File("Resources/Images/NumberOfHeavyBullet.png"));
-
-        numberOfLightBulletImage = ImageIO.read(new File("Resources/Images/NumberOfLightBullet.png"));
     }
 
-    /*
+    /**
      * Paint Thank body every moment
+     * @throws IOException
      */
-    private void paintTank() throws IOException {
+    public void paintTank() throws IOException {
         AffineTransform tankAt = new AffineTransform();
         tankAt.setToTranslation(state.locX + 50, state.locY + 50);
         tankAt.rotate(state.tankAngle);
@@ -67,10 +61,11 @@ public class UserTank implements Drawable {
         //paint the tank
         g2d.drawImage(ownTank,tankAt,null);
     }
-    /*
+
+    /**
      * Paint current gun
      */
-    private void paintCurrentGun() {
+    public void paintCurrentGun() {
         gunAT = new AffineTransform();
         gunAT.setToTranslation(state.locX + 50, state.locY + 50);
         gunAT.rotate(state.angle);
@@ -103,18 +98,12 @@ public class UserTank implements Drawable {
             if(mouseEvent.getButton() == MouseEvent.BUTTON3)
                 changeGun();
             if(mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun) {
-                if(numberOfHeavyBullet > 0){
-                    if(System.currentTimeMillis() - lastShootTime > 500) {
-                        currentGun.addBullets(state.mouseX, state.mouseY, state.locX, state.locY);
-                        numberOfHeavyBullet -= 1;
-                        new SoundPlayer("Resources/Sounds/heavygun.wav").run();
-                        lastShootTime = System.currentTimeMillis();
-                        }
-                } else
-                    new SoundPlayer("Resources/Sounds/emptyGun.wav").run();
+                if(System.currentTimeMillis() - lastShootTime > 500) {
+                    currentGun.addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
+                    lastShootTime = System.currentTimeMillis();
+                }
             }
-            if(mouseEvent.getButton() == MouseEvent.BUTTON1)
-                 mousePressed = true;
+            mousePressed = true;
 
         }
         @Override
@@ -134,7 +123,6 @@ public class UserTank implements Drawable {
         this.state = state;
     }
 
-    @Override
     public void setG2d(Graphics2D g2d){
         this.g2d = g2d;
     }
@@ -154,24 +142,12 @@ public class UserTank implements Drawable {
     public void fireSecondGun(){
         if(System.currentTimeMillis() - lastShootTime > 200)
             if(mousePressed && getCurrentGun() == getSecondGun()) {
-                if(numberOfLightBullet > 0) {
-                    getSecondGun().addBullets(state.mouseX, state.mouseY, state.locX, state.locY);
-                    numberOfLightBullet -= 1;
-                    new SoundPlayer("Resources/Sounds/mashingun.wav").run();
-                    lastShootTime = System.currentTimeMillis();
-                }else
-                    new SoundPlayer("Resources/Sounds/emptyGun.wav").run();
+                getSecondGun().addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
+                lastShootTime = System.currentTimeMillis();
             }
     }
 
     public void render() throws IOException {
-        g2d.setColor(Color.ORANGE);
-        g2d.setFont(g2d.getFont().deriveFont(20.0f));
-        g2d.drawImage(numberOfHeavyBulletImage,null,50,50);
-        g2d.drawString("" + numberOfHeavyBullet ,120,90);
-        g2d.drawImage(numberOfLightBulletImage, null, 55, 110);
-        g2d.drawString("" + numberOfLightBullet, 125, 145);
-
         paintTank();
         paintCurrentGun();
     }
