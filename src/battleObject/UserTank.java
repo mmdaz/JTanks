@@ -1,6 +1,7 @@
 package battleObject;
 
 import bufferstrategy.GameState;
+import utility.SoundPlayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -112,8 +113,10 @@ public class UserTank implements Drawable {
                     currentGun.addBullets(state.mouseX, state.mouseY, state.locX, state.locY);
                     numberOfHeavyBullet -= 1;
                     lastShootTime = System.currentTimeMillis();
+                    new SoundPlayer("Resources/Sounds/heavygun.wav").run();
                     }
-                }
+                }else if(numberOfHeavyBullet <= 0)
+                new SoundPlayer("emptyGun.wav").run();
                 if(mouseEvent.getButton() == MouseEvent.BUTTON1)
                     mousePressed = true;
             }
@@ -156,7 +159,10 @@ public class UserTank implements Drawable {
                     getSecondGun().addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
                     numberOfLightBullet -= 1;
                     lastShootTime = System.currentTimeMillis();
-                }
+
+                    new SoundPlayer("Resources/Sounds/mashingun.wav").run();
+                } else if(numberOfLightBullet <= 0)
+                    new SoundPlayer("emptyGun.wav").run();
             }
 
 

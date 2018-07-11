@@ -4,6 +4,8 @@ package battleObject;
  *
  * @author Mohamad Chaman-Motlagh
  */
+import utility.SoundPlayer;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -71,6 +73,7 @@ public class EnemyTank implements Drawable {
         if(System.currentTimeMillis() - lastShootTime > 500) {
                 gun.addBullets(targetX,targetY,locX,locY);
                 lastShootTime = System.currentTimeMillis();
+            new SoundPlayer("Resources/Sounds/enemyshot.wav").run();
             }
     }
 
