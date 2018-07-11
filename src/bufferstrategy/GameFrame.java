@@ -22,7 +22,7 @@ import utility.Images;
  * @author Seyed Mohammad Ghaffarian
  */
 public class GameFrame extends JFrame {
-
+	//TODO: Fix
 	public static final int GAME_HEIGHT = 800;                  // 600p game resolution
 	public static final int GAME_WIDTH = 1600;  // 2:1 aspect ratio
 
