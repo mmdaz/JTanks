@@ -128,6 +128,7 @@ public class GameFrame extends JFrame {
 		for(Drawable drawable : drawables)
 			drawable.render();
 
+		tank.render();
 		for(Bullet bullet : tank.getMainGun().getBullets())
 			bullet.paint(g2d);
 		for(Bullet bullet : tank.getSecondGun().getBullets())
