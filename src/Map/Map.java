@@ -37,6 +37,8 @@ public class Map {
     public static ArrayList<Teazel> teazels ;
     public static int xOffset;
     public static int yOffset;
+    public static int intersectedLocx ;
+    public static int intersectedLocY ;
 
 
     public Map(GameState state, Graphics2D g2d) throws IOException {
@@ -142,13 +144,15 @@ public class Map {
 
 
 
-//        if (mapResource[xIindexForCheck ][yIndexForCheck] != 0) return false;
-
-        System.out.println(hardWalls.size());
+//        System.out.println(hardWalls.size());
 
         for (HardWall hardWall : hardWalls) {
 
             if (hardWall.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) ) {
+                intersectedLocx = state.locX ;
+                intersectedLocY = state.locY ;
+//                state.locX = state.preLocX ;
+//                state.locY = state.preLocY ;
                 return false ;
             }
 
@@ -156,29 +160,41 @@ public class Map {
 
         for (SoftWall softWall : softWalls ) {
 
-            if (softWall.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) ) {
+            System.out.println(softWall.getLocY() - state.locY);
+
+            if ( softWall.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 )) {
+                intersectedLocx = state.locX ;
+                intersectedLocY = state.locY ;
+//                state.locX = state.preLocX ;
+//                state.locY = state.preLocY ;
+
                 return false ;
             }
         }
 
 
-        for (HardWall hardWall : hardWalls) {
-
-            if (hardWall.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) ) {
-                return false ;
-            }
-        }
 
         for (Teazel teazel : teazels) {
 
             if (teazel.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) ) {
+                intersectedLocx = state.locX ;
+                intersectedLocY = state.locY ;
+//                state.locX = state.preLocX ;
+//                state.locY = state.preLocY ;
                 return false ;
             }
 
         }
 
-        return true;
+        return true ;
+
     }
+
+
+
+
+
+
 
 }
 
