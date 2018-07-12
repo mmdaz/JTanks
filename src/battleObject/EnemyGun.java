@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 public class EnemyGun extends Gun{
     private BufferedImage gunImage;
 
-    public EnemyGun(BufferedImage gunImage, BufferedImage bulletImage){
-        super(gunImage, bulletImage);
+    public EnemyGun(BufferedImage gunImage, BufferedImage bulletImage, int damage){
+        super(gunImage, bulletImage, damage);
         this.gunImage = gunImage;
     }
 

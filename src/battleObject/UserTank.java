@@ -14,6 +14,7 @@ import java.io.IOException;
 
 /**
  * This class is used to create user played tank tanks
+ * Each tank needs a starting health
  *
  * @author MohamadCM
  */
@@ -33,15 +34,17 @@ public class UserTank implements Drawable {
     private int numberOfLightBullet = 200;
     private BufferedImage numberOfHeavyBulletImage;
     private BufferedImage numberOfLightBulletImage;
+    private int health;
 
 
 
-    public UserTank() throws IOException {
+    public UserTank(int health) throws IOException {
+        this.health = health;
         //paintTank();
 
-        mainGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun01.png")) , ImageIO.read(new File("Resources/Images/tankGun1.png")) , ImageIO.read(new File("Resources/Images/HeavyBullet.png")));
+        mainGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun01.png")) , ImageIO.read(new File("Resources/Images/tankGun1.png")) , ImageIO.read(new File("Resources/Images/HeavyBullet.png")),50);
 
-        secondGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun02.png")) , ImageIO.read(new File("Resources/Images/tankGun2.png")) , ImageIO.read(new File("Resources/Images/LightBullet.png")));
+        secondGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun02.png")) , ImageIO.read(new File("Resources/Images/tankGun2.png")) , ImageIO.read(new File("Resources/Images/LightBullet.png")), 20);
 
         currentGun = mainGun;
 
@@ -141,6 +144,19 @@ public class UserTank implements Drawable {
         this.g2d = g2d;
     }
 
+    @Override
+    public boolean isAlive() {
+        if(health > 0)
+            return true;
+        return false;
+    }
+
+
+    @Override
+    public void damage(int damage) {
+        health -= damage;
+    }
+
     public UserTankGun getCurrentGun() {
         return currentGun;
     }
@@ -186,8 +202,5 @@ public class UserTank implements Drawable {
         g2d.drawImage(numberOfLightBulletImage, null, 55, 110);
 
         g2d.drawString("" + numberOfLightBullet, 125, 145);
-
-
-
     }
 }

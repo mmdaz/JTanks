@@ -187,7 +187,7 @@ public class Map {
 
         for (HardWall hardWall : hardWalls) {
 
-            if (hardWall.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) ) {
+            if (hardWall.getRectangle2D().intersects(state.locX , state.locY , 80 , 80 ) ) {
                 intersectedLocx = state.locX ;
                 intersectedLocY = state.locY ;
 //                state.locX = state.preLocX ;
@@ -203,7 +203,7 @@ public class Map {
             System.out.println(softWall.getLocY() - state.locY);
 */
 
-            if ( softWall.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) && softWall.getMode() <= 4) {
+            if ( softWall.getRectangle2D().intersects(state.locX , state.locY , 80 , 80 ) && softWall.getMode() <= 4) {
                 intersectedLocx = state.locX ;
                 intersectedLocY = state.locY ;
 //                state.locX = state.preLocX ;
@@ -217,7 +217,7 @@ public class Map {
 
         for (Teazel teazel : teazels) {
 
-            if (teazel.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) ) {
+            if (teazel.getRectangle2D().intersects(state.locX , state.locY , 80 , 80 ) ) {
                 intersectedLocx = state.locX ;
                 intersectedLocY = state.locY ;
 //                state.locX = state.preLocX ;
@@ -249,6 +249,7 @@ public class Map {
                 softWallMode ++ ;
                 return true ;
             }
+
         }
 
         for (HardWall hardWall : hardWalls ) {

@@ -26,11 +26,12 @@ public class Turret implements Drawable{
     public EnemyGun gun;
     private long lastShootTime;
     private int activationDistance;
+    private int health = 100;
 
     public Turret(int activationDistance,int locX, int locY){
         try {
             turretBody = ImageIO.read(new File("Resources/Images/TurretBody.png"));
-            gun = new EnemyGun(ImageIO.read(new File("Resources/Images/TurretGun.png")) , ImageIO.read(new File("Resources/Images/EnemyBullet1.png")));
+            gun = new EnemyGun(ImageIO.read(new File("Resources/Images/TurretGun.png")) , ImageIO.read(new File("Resources/Images/EnemyBullet1.png")), 35);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,6 +39,7 @@ public class Turret implements Drawable{
         this.locX = locX;
         this.locY = locY;
         this.activationDistance = activationDistance;
+
     }
 
 
@@ -52,6 +54,19 @@ public class Turret implements Drawable{
     @Override
     public void setG2d(Graphics2D g2d) {
         this.g2d = g2d;
+    }
+
+    @Override
+    public boolean isAlive() {
+        if(health > 0)
+            return true;
+        return false;
+    }
+
+
+    @Override
+    public void damage(int damage) {
+        health -= damage;
     }
 
     public void setTarget(int X, int Y){

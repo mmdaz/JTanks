@@ -19,6 +19,7 @@ public class Mine implements Drawable{
     private int locY;
     private BufferedImage mineImage;
     private Graphics2D g2d;
+    private int health = 20;
 
     public Mine(int locX, int locY) throws IOException {
         this.locX = locX;
@@ -34,5 +35,18 @@ public class Mine implements Drawable{
     @Override
     public void render() throws IOException {
         g2d.drawImage(mineImage,null,locX +  Map.xOffset,locY + Map.yOffset);
+    }
+
+    @Override
+    public boolean isAlive() {
+        if(health > 0)
+            return true;
+        return false;
+    }
+
+
+    @Override
+    public void damage(int damage) {
+        health -= damage;
     }
 }

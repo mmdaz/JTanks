@@ -20,8 +20,8 @@ public class UserTankGun extends Gun{
     private int currentLevel;
     BufferedImage bulletImage;
 
-    public UserTankGun(BufferedImage Level1Image, BufferedImage level2Image, BufferedImage bulletImage){
-        super(Level1Image, bulletImage);
+    public UserTankGun(BufferedImage Level1Image, BufferedImage level2Image, BufferedImage bulletImage,int damage){
+        super(Level1Image, bulletImage,damage);
         currentLevel = 1;
         this.level2Image = level2Image;
         currentModImage = Level1Image;
@@ -34,6 +34,10 @@ public class UserTankGun extends Gun{
         currentLevel++;
         currentModImage = level2Image;
         return true;
+    }
+
+    public void setBulletDamage(int newDamge){
+        damage = newDamge;
     }
 
 

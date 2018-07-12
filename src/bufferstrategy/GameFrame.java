@@ -7,9 +7,9 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.* ;
 import Map.Map ;
-import utility.Images;
 
 /**
  * The window on which the rendering is performed.
@@ -34,7 +34,7 @@ public class GameFrame extends JFrame {
 
 	private BufferStrategy bufferStrategy;
 
-	private UserTank tank = new UserTank();
+	private UserTank tank = new UserTank(200);
 	private boolean mouseHandlerAdded;
 
 
@@ -167,6 +167,11 @@ public class GameFrame extends JFrame {
 			}
 
 		}
+
+		Iterator<Drawable> drawableIterator = drawables.iterator();
+		while (drawableIterator.hasNext())
+			if(!drawableIterator.next().isAlive())
+				drawableIterator.remove();
 
 
 		for(Bullet bullet : tank.getMainGun().getBullets())

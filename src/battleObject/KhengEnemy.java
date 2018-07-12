@@ -19,6 +19,7 @@ public class KhengEnemy implements Drawable {
     private Graphics2D g2d;
     private boolean isRendered;
     private int speed = 8;
+    private int health = 50;
 
     public KhengEnemy(int activationDistance, int locX, int locY) throws IOException {
         this.activationDistance = activationDistance;
@@ -69,5 +70,17 @@ public class KhengEnemy implements Drawable {
      */
     public void setG2d(Graphics2D g2d) {
         this.g2d = g2d;
+    }
+
+    @Override
+    public boolean isAlive() {
+        if(health > 0)
+            return true;
+        return false;
+    }
+
+    @Override
+    public void damage(int damage) {
+        health -= damage;
     }
 }

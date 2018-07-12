@@ -25,9 +25,10 @@ public class EnemyTank implements Drawable {
     private BufferedImage tankBody;
     private long lastShootTime;
     private int activationDistance;
+    private int health = 80;
 
     public EnemyTank(int activationDistance,int locX, int locY) throws IOException {
-        gun = new EnemyGun(ImageIO.read(new File("Resources/Images/BigEnemyGun.png")) , ImageIO.read(new File("Resources/Images/Enemy2Bullet.png")));
+        gun = new EnemyGun(ImageIO.read(new File("Resources/Images/BigEnemyGun.png")) , ImageIO.read(new File("Resources/Images/Enemy2Bullet.png")),30);
         tankBody = ImageIO.read(new File("Resources/Images/BigEnemy.png"));
 
         this.locX = locX;
@@ -85,5 +86,18 @@ public class EnemyTank implements Drawable {
 
     public EnemyGun getGun() {
         return gun;
+    }
+
+    @Override
+    public boolean isAlive() {
+        if(health > 0)
+            return true;
+        return false;
+    }
+
+
+    @Override
+    public void damage(int damge) {
+        health -= damge;
     }
 }
