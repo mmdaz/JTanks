@@ -53,12 +53,12 @@ public class Mine implements Drawable{
 
     @Override
     public Rectangle2D getRect() {
-        return new Rectangle( locX , locY, 100 , 100 ) ;
+        return new Rectangle( locX + 30, locY + 30, 50 , 50 ) ;
     }
 
     public void checkIntersect(Drawable drawable) {
 
-        if (drawable.getRect().intersects(getRect())); {
+        if (drawable.getRect().intersects(getRect())) {
             drawable.damage(50);
             health = 0;
         }

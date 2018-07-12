@@ -92,9 +92,10 @@ public class KhengEnemy implements Drawable {
 
     public void checkIntersect(Drawable drawable) {
 
-            if (drawable.getRect().intersects(getRect())); {
+            if (drawable.getRect().intersects(getRect())) {
                 drawable.damage(50);
                 health = 0;
+            //System.out.println("Shit");
             }
 
         }

@@ -167,11 +167,11 @@ public class GameFrame extends JFrame {
 			}
 		}
 
-		Iterator<Drawable> drawableIterator = drawables.iterator();
+/*		Iterator<Drawable> drawableIterator = drawables.iterator();
 		while (drawableIterator.hasNext())
 			if(drawableIterator.next().isAlive()) {
 				drawableIterator.remove();
-			}
+			}*/
 
 
 		for(Bullet bullet : tank.getMainGun().getBullets())

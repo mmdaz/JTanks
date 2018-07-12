@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * This class is used to create user played tank tanks
@@ -167,9 +168,11 @@ public class UserTank implements Drawable {
     @Override
     public void checkIntersect(Drawable drawable) {
 
-        for (Bullet bullet : currentGun.bullets ) {
-            if (drawable.getRect().intersects(bullet.getRect())); {
+        Iterator<Bullet> bulletIterator = currentGun.getBullets().iterator();
+        while (bulletIterator.hasNext() ) {
+            if (drawable.getRect().intersects(bulletIterator.next().getRect())) {
                 drawable.damage(currentGun.damage);
+                bulletIterator.remove();
             }
 
         }
