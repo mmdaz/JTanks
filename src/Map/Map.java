@@ -49,7 +49,7 @@ public class Map {
         teazels = new ArrayList<Teazel>() ;
 
 
-        for (int i = 0; i < 40 ; i++)
+        for (int i = 0; i < 16 ; i++)
             softWalls.add(new SoftWall(0, 0));
 
         initializeMap();
@@ -118,11 +118,10 @@ public class Map {
                     g2d.drawImage(Images.plant, null, i * 100 + xOffset, j * 100 + yOffset);
                     plants.add( new Plant( i * 100 + xOffset , j * 100 + yOffset));
                 }
-                else if (mapResource[i][j] == 6) {
-                    RepairPackItem repairPackItem = new RepairPackItem(i*00 + xOffset , j * 100 + yOffset) ;
-                    g2d.drawImage(Images.repairItem , null , repairPackItem.getLocX() , repairPackItem.getLocY() );
-                    repairPackItems.add(repairPackItem) ;
 
+                else if (mapResource[i][j] == 6) {
+                    g2d.drawImage(Images.repairItem, null, i * 100 + xOffset, j * 100 + yOffset);
+                    repairPackItems.add(new RepairPackItem ( i * 100 + xOffset , j * 100 + yOffset));
                 }
                 else {
                     g2d.drawImage(Images.area, null, i * 100 + xOffset, j * 100 + yOffset);
