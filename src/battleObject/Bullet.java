@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class Bullet{
 
@@ -70,7 +69,7 @@ public class Bullet{
     }
 
     public Rectangle2D getRect() {
-        Rectangle2D tankRect = new Rectangle( X , Y , 23 , 9 ) ;
-        return tankRect ;
+        Rectangle2D bulletRect = new Rectangle( X , Y , 23 , 9 ) ;
+        return bulletRect;
     }
 }

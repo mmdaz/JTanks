@@ -34,7 +34,7 @@ public class GameFrame extends JFrame {
 
 	private BufferStrategy bufferStrategy;
 
-	private UserTank tank = new UserTank(200);
+	private UserTank tank = new UserTank(1000);
 	private boolean mouseHandlerAdded;
 
 
@@ -135,15 +135,12 @@ public class GameFrame extends JFrame {
 	 * Rendering all game elements based on the game state.
 	 */
 	private void doRendering(Graphics2D g2d, GameState state) throws IOException {
-		// Draw Map objects :
+		// Draw background
 		map.setG2d(g2d);
 		Map.setState(state);
+
 		map.paintMap();
 
-		// Draw tanks :
-
-		tank.setState(state);
-		tank.setG2d(g2d);
 		if(!mouseHandlerAdded) {
 			addMouseListener(tank.getTankMouseHandler());
 			mouseHandlerAdded = true;
@@ -151,6 +148,10 @@ public class GameFrame extends JFrame {
 		for(Drawable drawable : drawables) {
 			if(!(drawable instanceof UserTank))
 				drawable.checkIntersect(tank);
+			if(drawable instanceof UserTank){
+				((UserTank) drawable).setState(state);
+				((UserTank) drawable).fireSecondGun();
+			}
 			drawable.setG2d(g2d);
 			drawable.render();
 			if(drawable instanceof KhengEnemy){
@@ -167,10 +168,11 @@ public class GameFrame extends JFrame {
 					bullet.paint(g2d);
 			}
 		}
+		drawables.get(0).render();
 
 		Iterator<Drawable> drawableIterator = drawables.iterator();
 		while (drawableIterator.hasNext())
-			if(drawableIterator.next().isAlive()) {
+			if(!drawableIterator.next().isAlive()) {
 				drawableIterator.remove();
 			}
 
@@ -183,12 +185,9 @@ public class GameFrame extends JFrame {
 		for (Drawable drawable : drawables)
 				tank.checkIntersect(drawable);
 
-		tank.fireSecondGun();
 
-		tank.render();
-
-
-
+		if(!(drawables.get(0) instanceof UserTank))
+			state.gameOver = true;
 
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();
@@ -224,6 +223,7 @@ public class GameFrame extends JFrame {
 			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
 			int strWidth = g2d.getFontMetrics().stringWidth(str);
 			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+
 		}
 	}
 

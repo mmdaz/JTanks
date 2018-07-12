@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Turret implements Drawable{
     private BufferedImage turretBody;
@@ -71,7 +72,7 @@ public class Turret implements Drawable{
 
     @Override
     public Rectangle2D getRect() {
-        Rectangle2D turrectRect = new Rectangle( locX , locY , 100 ,100 ) ;
+        Rectangle2D turrectRect = new Rectangle( locX + Map.xOffset, locY + Map.yOffset , 100 ,100 ) ;
         return turrectRect ;
     }
 
@@ -108,11 +109,14 @@ public class Turret implements Drawable{
 
     public void checkIntersect(Drawable drawable) {
 
-        for (Bullet bullet : gun.bullets ) {
-            if (drawable.getRect().intersects(bullet.getRect())); {
+        Iterator<Bullet> bulletIterator = gun.getBullets().iterator();
+        while (bulletIterator.hasNext() ) {
+            if (drawable.getRect().intersects(bulletIterator.next().getRect())) {
                 drawable.damage(gun.damage);
+                bulletIterator.remove();
             }
         }
+
 
     }
 

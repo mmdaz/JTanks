@@ -87,14 +87,15 @@ public class KhengEnemy implements Drawable {
 
     @Override
     public Rectangle2D getRect() {
-        return new Rectangle( locX , locY , 100 , 100 ) ;
+        return new Rectangle( locX + Map.xOffset, locY + Map.yOffset , 100 , 100 ) ;
     }
 
     public void checkIntersect(Drawable drawable) {
 
-            if (drawable.getRect().intersects(getRect())); {
+            if (drawable.getRect().intersects(getRect())) {
                 drawable.damage(50);
                 health = 0;
+            //System.out.println("Shit");
             }
 
         }
