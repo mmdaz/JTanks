@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="686f1513-8bf6-4598-8cd1-bb6a1deb2fd2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/Bullet.java" afterPath="$PROJECT_DIR$/src/battleObject/Bullet.java" />
+      <change beforePath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/GameLoop.class" afterPath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/GameLoop.class" />
       <change beforePath="$PROJECT_DIR$/src/battleObject/EnemyTank.java" afterPath="$PROJECT_DIR$/src/battleObject/EnemyTank.java" />
       <change beforePath="$PROJECT_DIR$/src/battleObject/KhengEnemy.java" afterPath="$PROJECT_DIR$/src/battleObject/KhengEnemy.java" />
       <change beforePath="$PROJECT_DIR$/src/battleObject/Mine.java" afterPath="$PROJECT_DIR$/src/battleObject/Mine.java" />
@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="KhengEnemy.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="KhengEnemy.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/battleObject/KhengEnemy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="94" column="57" lean-forward="false" selection-start-line="94" selection-start-column="57" selection-end-line="94" selection-end-column="57" />
+            <state relative-caret-position="668">
+              <caret line="89" column="68" lean-forward="false" selection-start-line="89" selection-start-column="68" selection-end-line="89" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -34,11 +34,11 @@
       <file leaf-file-name="Mine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/battleObject/Mine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="60" column="53" lean-forward="false" selection-start-line="60" selection-start-column="53" selection-end-line="60" selection-end-column="53" />
+            <state relative-caret-position="146">
+              <caret line="55" column="69" lean-forward="false" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
               <folding>
                 <element signature="e#1156#1157#0" expanded="true" />
-                <element signature="e#1226#1227#0" expanded="true" />
+                <element signature="e#1245#1246#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -47,21 +47,23 @@
       <file leaf-file-name="Turret.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/battleObject/Turret.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="113" column="72" lean-forward="true" selection-start-line="113" selection-start-column="72" selection-end-line="113" selection-end-column="72" />
+            <state relative-caret-position="96">
+              <caret line="74" column="87" lean-forward="false" selection-start-line="74" selection-start-column="87" selection-end-line="74" selection-end-column="87" />
               <folding>
-                <element signature="e#3417#3418#0" expanded="true" />
-                <element signature="e#3443#3444#0" expanded="true" />
+                <element signature="e#1678#1679#0" expanded="true" />
+                <element signature="e#1710#1711#0" expanded="true" />
+                <element signature="e#3444#3445#0" expanded="true" />
+                <element signature="e#3470#3471#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameFrame.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bufferstrategy/GameFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="149" column="44" lean-forward="false" selection-start-line="149" selection-start-column="44" selection-end-line="149" selection-end-column="44" />
+            <state relative-caret-position="110">
+              <caret line="36" column="43" lean-forward="false" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,10 +71,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="GameLoop.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/bufferstrategy/GameLoop.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="866">
+              <caret line="61" column="5" lean-forward="false" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Gun.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/battleObject/Gun.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
+            <state relative-caret-position="540">
               <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
               <folding />
             </state>
@@ -82,7 +94,7 @@
       <file leaf-file-name="Map.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Map/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1986">
+            <state relative-caret-position="4356">
               <caret line="255" column="0" lean-forward="false" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
               <folding>
                 <element signature="e#8152#8153#0" expanded="true" />
@@ -97,8 +109,8 @@
       <file leaf-file-name="Bullet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/battleObject/Bullet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="70" column="23" lean-forward="false" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
+            <state relative-caret-position="792">
+              <caret line="49" column="9" lean-forward="false" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
               <folding>
                 <element signature="e#1534#1535#0" expanded="true" />
                 <element signature="e#1563#1564#0" expanded="true" />
@@ -110,9 +122,10 @@
       <file leaf-file-name="EnemyTank.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/battleObject/EnemyTank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1338">
-              <caret line="102" column="35" lean-forward="false" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
+            <state relative-caret-position="150">
+              <caret line="108" column="85" lean-forward="false" selection-start-line="108" selection-start-column="85" selection-end-line="108" selection-end-column="85" />
               <folding>
+                <element signature="e#2912#2913#0" expanded="true" />
                 <element signature="e#2943#2944#0" expanded="true" />
               </folding>
             </state>
@@ -122,8 +135,8 @@
       <file leaf-file-name="UserTank.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/battleObject/UserTank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="172" column="79" lean-forward="false" selection-start-line="172" selection-start-column="79" selection-end-line="172" selection-end-column="79" />
+            <state relative-caret-position="162">
+              <caret line="43" column="22" lean-forward="false" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
               <folding>
                 <element signature="e#4297#4298#0" expanded="true" />
                 <element signature="e#4341#4342#0" expanded="true" />
@@ -136,16 +149,6 @@
                 <element signature="e#4809#4810#0" expanded="true" />
                 <element signature="e#4841#4842#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Drawable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/battleObject/Drawable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -190,11 +193,12 @@
         <option value="$PROJECT_DIR$/src/battleObject/Gun.java" />
         <option value="$PROJECT_DIR$/src/battleObject/Bullet.java" />
         <option value="$PROJECT_DIR$/src/battleObject/UserTank.java" />
-        <option value="$PROJECT_DIR$/src/battleObject/Turret.java" />
-        <option value="$PROJECT_DIR$/src/battleObject/Mine.java" />
+        <option value="$PROJECT_DIR$/src/bufferstrategy/GameLoop.java" />
         <option value="$PROJECT_DIR$/src/battleObject/EnemyTank.java" />
+        <option value="$PROJECT_DIR$/src/battleObject/Turret.java" />
         <option value="$PROJECT_DIR$/src/battleObject/KhengEnemy.java" />
         <option value="$PROJECT_DIR$/src/bufferstrategy/GameFrame.java" />
+        <option value="$PROJECT_DIR$/src/battleObject/Mine.java" />
       </list>
     </option>
   </component>
@@ -220,8 +224,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -380,12 +384,12 @@
       <option name="project" value="LOCAL" />
       <updated>1531400404262</updated>
     </task>
-    <task id="LOCAL-00004" summary="Improvements in using bullets.">
-      <created>1531035218288</created>
+    <task id="LOCAL-00004" summary="Intersect between bullets implemented (Need a fix).">
+      <created>1531408482313</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1531035218288</updated>
+      <updated>1531408482313</updated>
     </task>
     <task id="LOCAL-00005" summary="Second Gun rotation added.">
       <created>1531039290760</created>
@@ -429,11 +433,11 @@
       <option name="project" value="LOCAL" />
       <updated>1531129749865</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
+    <frame x="144" y="70" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -581,7 +585,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -591,7 +594,7 @@
           <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="50" selection-end-column="5" />
           <folding>
             <element signature="e#1156#1157#0" expanded="true" />
-            <element signature="e#1226#1227#0" expanded="true" />
+            <element signature="e#1245#1246#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -639,6 +642,7 @@
         <state relative-caret-position="396">
           <caret line="30" column="150" lean-forward="false" selection-start-line="30" selection-start-column="150" selection-end-line="30" selection-end-column="150" />
           <folding>
+            <element signature="e#2912#2913#0" expanded="true" />
             <element signature="e#2943#2944#0" expanded="true" />
           </folding>
         </state>
@@ -670,8 +674,10 @@
         <state relative-caret-position="450">
           <caret line="33" column="153" lean-forward="false" selection-start-line="33" selection-start-column="153" selection-end-line="33" selection-end-column="153" />
           <folding>
-            <element signature="e#3417#3418#0" expanded="true" />
-            <element signature="e#3443#3444#0" expanded="true" />
+            <element signature="e#1678#1679#0" expanded="true" />
+            <element signature="e#1710#1711#0" expanded="true" />
+            <element signature="e#3444#3445#0" expanded="true" />
+            <element signature="e#3470#3471#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -773,10 +779,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="24" column="23" lean-forward="false" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-          <folding>
-            <element signature="e#1074#1075#0" expanded="false" />
-            <element signature="e#1102#1103#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -784,14 +786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
           <caret line="87" column="35" lean-forward="false" selection-start-line="87" selection-start-column="35" selection-end-line="87" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bufferstrategy/GameLoop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -821,22 +815,77 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/battleObject/Gun.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
+        <state relative-caret-position="540">
           <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/battleObject/UserTank.java">
+    <entry file="file://$PROJECT_DIR$/src/Map/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4356">
+          <caret line="255" column="0" lean-forward="false" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+          <folding>
+            <element signature="e#8152#8153#0" expanded="true" />
+            <element signature="e#8185#8186#0" expanded="true" />
+            <element signature="e#8227#8228#0" expanded="true" />
+            <element signature="e#8257#8258#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battleObject/Bullet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="49" column="9" lean-forward="false" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+          <folding>
+            <element signature="e#1534#1535#0" expanded="true" />
+            <element signature="e#1563#1564#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bufferstrategy/GameLoop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="866">
+          <caret line="61" column="5" lean-forward="false" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battleObject/EnemyTank.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="172" column="79" lean-forward="false" selection-start-line="172" selection-start-column="79" selection-end-line="172" selection-end-column="79" />
+          <caret line="108" column="85" lean-forward="false" selection-start-line="108" selection-start-column="85" selection-end-line="108" selection-end-column="85" />
+          <folding>
+            <element signature="e#2912#2913#0" expanded="true" />
+            <element signature="e#2943#2944#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battleObject/Turret.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="74" column="87" lean-forward="false" selection-start-line="74" selection-start-column="87" selection-end-line="74" selection-end-column="87" />
+          <folding>
+            <element signature="e#1678#1679#0" expanded="true" />
+            <element signature="e#1710#1711#0" expanded="true" />
+            <element signature="e#3444#3445#0" expanded="true" />
+            <element signature="e#3470#3471#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battleObject/UserTank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="43" column="22" lean-forward="false" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
           <folding>
             <element signature="e#4297#4298#0" expanded="true" />
             <element signature="e#4341#4342#0" expanded="true" />
@@ -852,77 +901,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Map/Map.java">
+    <entry file="file://$PROJECT_DIR$/src/bufferstrategy/GameFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1986">
-          <caret line="255" column="0" lean-forward="false" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+        <state relative-caret-position="110">
+          <caret line="36" column="43" lean-forward="false" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
           <folding>
-            <element signature="e#8152#8153#0" expanded="true" />
-            <element signature="e#8185#8186#0" expanded="true" />
-            <element signature="e#8227#8228#0" expanded="true" />
-            <element signature="e#8257#8258#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/battleObject/EnemyTank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1338">
-          <caret line="102" column="35" lean-forward="false" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
-          <folding>
-            <element signature="e#2943#2944#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/battleObject/Bullet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="70" column="23" lean-forward="false" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
-          <folding>
-            <element signature="e#1534#1535#0" expanded="true" />
-            <element signature="e#1563#1564#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/battleObject/Turret.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="113" column="72" lean-forward="true" selection-start-line="113" selection-start-column="72" selection-end-line="113" selection-end-column="72" />
-          <folding>
-            <element signature="e#3417#3418#0" expanded="true" />
-            <element signature="e#3443#3444#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/battleObject/Mine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="60" column="53" lean-forward="false" selection-start-line="60" selection-start-column="53" selection-end-line="60" selection-end-column="53" />
+        <state relative-caret-position="146">
+          <caret line="55" column="69" lean-forward="false" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
           <folding>
             <element signature="e#1156#1157#0" expanded="true" />
-            <element signature="e#1226#1227#0" expanded="true" />
+            <element signature="e#1245#1246#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/battleObject/KhengEnemy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="94" column="57" lean-forward="false" selection-start-line="94" selection-start-column="57" selection-end-line="94" selection-end-column="57" />
+        <state relative-caret-position="668">
+          <caret line="89" column="68" lean-forward="false" selection-start-line="89" selection-start-column="68" selection-end-line="89" selection-end-column="68" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bufferstrategy/GameFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="149" column="44" lean-forward="false" selection-start-line="149" selection-start-column="44" selection-end-line="149" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

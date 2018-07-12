@@ -106,13 +106,14 @@ public class EnemyTank implements Drawable {
 
     @Override
     public Rectangle2D getRect() {
-        Rectangle2D tankRect = new Rectangle( locX , locY , 100 , 100 ) ;
+        Rectangle2D tankRect = new Rectangle( locX + Map.xOffset , locY + Map.yOffset , 100 , 100 ) ;
         return tankRect ;
     }
 
     public void checkIntersect(Drawable drawable) {
 
         Iterator<Bullet> bulletIterator = gun.getBullets().iterator();
+
         while (bulletIterator.hasNext()) {
             if (drawable.getRect().intersects(bulletIterator.next().getRect())) {
                 drawable.damage(gun.damage);

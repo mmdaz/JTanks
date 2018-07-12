@@ -72,7 +72,7 @@ public class Turret implements Drawable{
 
     @Override
     public Rectangle2D getRect() {
-        Rectangle2D turrectRect = new Rectangle( locX , locY , 100 ,100 ) ;
+        Rectangle2D turrectRect = new Rectangle( locX + Map.xOffset, locY + Map.yOffset , 100 ,100 ) ;
         return turrectRect ;
     }
 

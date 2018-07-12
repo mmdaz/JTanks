@@ -53,7 +53,7 @@ public class Mine implements Drawable{
 
     @Override
     public Rectangle2D getRect() {
-        return new Rectangle( locX + 30, locY + 30, 50 , 50 ) ;
+        return new Rectangle( locX  + Map.xOffset, locY + Map.yOffset, 50 , 50 ) ;
     }
 
     public void checkIntersect(Drawable drawable) {
