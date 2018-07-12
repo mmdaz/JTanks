@@ -15,4 +15,5 @@ public interface Drawable {
     public boolean isAlive();
     public void damage(int damge);
     public Rectangle2D getRect () ;
+    public void checkIntersect(Drawable drawable);
 }

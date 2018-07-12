@@ -87,6 +87,16 @@ public class KhengEnemy implements Drawable {
 
     @Override
     public Rectangle2D getRect() {
-        return null;
+        return new Rectangle( locX , locY , 100 , 100 ) ;
     }
+
+    public void checkIntersect(Drawable drawable) {
+
+            if (drawable.getRect().intersects(getRect())); {
+                drawable.damage(50);
+                health = 0;
+            }
+
+        }
+
 }

@@ -15,6 +15,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Turret implements Drawable{
     private BufferedImage turretBody;
@@ -94,23 +95,23 @@ public class Turret implements Drawable{
         g2d.drawImage(turretBody,null,locX + Map.xOffset, locY + Map.yOffset);
     }
 
-    public void fire() {
+    public void fire(ArrayList<Drawable> drawables) {
         if(Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance)
         {
             if (System.currentTimeMillis() - lastShootTime > 500) {
-                gun.addBullets(targetX, targetY, locX + Map.xOffset, locY + Map.yOffset);
+                gun.addBullets(targetX, targetY, locX + Map.xOffset, locY + Map.yOffset, drawables);
                 lastShootTime = System.currentTimeMillis();
                 new SoundPlayer("Resources/Sounds/enemyshot.wav").run();
             }
         }
     }
 
-    public void intersect (Drawable drawable) {
+    public void checkIntersect(Drawable drawable) {
 
         for (Bullet bullet : gun.bullets ) {
-
-            if (drawable.getRect().intersects(bullet.getX() , bullet.getY() , 23 , 9))
+            if (drawable.getRect().intersects(bullet.getRect())); {
                 drawable.damage(gun.damage);
+            }
 
         }
 

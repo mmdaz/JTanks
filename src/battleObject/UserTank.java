@@ -12,6 +12,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * This class is used to create user played tank tanks
@@ -35,7 +36,13 @@ public class UserTank implements Drawable {
     private int numberOfLightBullet = 200;
     private BufferedImage numberOfHeavyBulletImage;
     private BufferedImage numberOfLightBulletImage;
-    private int health;
+    public int health;
+
+    public void setDrawables(ArrayList<Drawable> drawables) {
+        this.drawables = drawables;
+    }
+
+    private ArrayList<Drawable> drawables;
 
 
 
@@ -114,7 +121,7 @@ public class UserTank implements Drawable {
                 changeGun();
             if (mouseEvent.getButton() == MouseEvent.BUTTON1 && isMainGun && numberOfHeavyBullet > 0) {
                 if (System.currentTimeMillis() - lastShootTime > 500) {
-                    currentGun.addBullets(state.mouseX, state.mouseY, state.locX, state.locY);
+                    currentGun.addBullets(state.mouseX, state.mouseY, state.locX, state.locY,drawables);
                     numberOfHeavyBullet -= 1;
                     lastShootTime = System.currentTimeMillis();
                     new SoundPlayer("Resources/Sounds/heavygun.wav").run();
@@ -160,7 +167,20 @@ public class UserTank implements Drawable {
 
     @Override
     public Rectangle2D getRect() {
-        return null;
+        Rectangle2D tankRect = new Rectangle( state.locX , state.locY , 100 , 100 ) ;
+        return tankRect ;
+    }
+
+    @Override
+    public void checkIntersect(Drawable drawable) {
+
+        for (Bullet bullet : currentGun.bullets ) {
+            if (drawable.getRect().intersects(bullet.getRect())); {
+                drawable.damage(currentGun.damage);
+            }
+
+        }
+
     }
 
     public UserTankGun getCurrentGun() {
@@ -178,7 +198,7 @@ public class UserTank implements Drawable {
     public void fireSecondGun(){
         if(System.currentTimeMillis() - lastShootTime > 200)
                 if(mousePressed && getCurrentGun() == getSecondGun() && numberOfLightBullet > 0) {
-                    getSecondGun().addBullets(state.mouseX,state.mouseY,state.locX,state.locY);
+                    getSecondGun().addBullets(state.mouseX,state.mouseY,state.locX,state.locY,drawables);
                     numberOfLightBullet -= 1;
                     lastShootTime = System.currentTimeMillis();
 

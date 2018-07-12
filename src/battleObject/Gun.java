@@ -15,7 +15,7 @@ public class Gun {
     protected BufferedImage level1Image;
     protected BufferedImage bulletImage;
     public BufferedImage currentModImage;
-    protected ArrayList<Bullet> bullets;
+    public ArrayList<Bullet> bullets;
     protected int damage;
 
     public Gun(BufferedImage level1Image, BufferedImage bulletImage,int damage){
@@ -35,8 +35,8 @@ public class Gun {
         return bullets;
     }
 
-    public void addBullets(int targetX, int targetY, int locX, int locY) {
-        bullets.add(new Bullet(targetX,targetY,locX,locY,bulletImage,damage));
+    public void addBullets(int targetX, int targetY, int locX, int locY, ArrayList<Drawable> drawables) {
+        bullets.add(new Bullet(targetX,targetY,locX,locY,bulletImage,damage,drawables));
     }
 
 

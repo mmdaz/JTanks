@@ -1,6 +1,7 @@
 package Map;
 
 import battleObject.Bullet;
+import battleObject.Drawable;
 import bufferstrategy.GameState;
 
 import javax.imageio.ImageIO;
@@ -238,7 +239,7 @@ public class Map {
      * @return {@code true} in case of collision, {@code false} otherwise
      */
 
-    public static boolean checkBulletCollision (Bullet bullet )  {
+    public static boolean checkBulletCollision (Bullet bullet)  {
 
         Rectangle2D bulletRect = new Rectangle( bullet.getX() , bullet.getY() , 23 , 9 ) ;
 
@@ -259,6 +260,7 @@ public class Map {
         for (Teazel teazel : teazels ) {
             if (bulletRect.intersects(teazel.getLocX() , teazel.getLocY() , 100 , 100 )) return true ;
         }
+
 
         return false ;
 
