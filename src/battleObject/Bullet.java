@@ -22,9 +22,7 @@ public class Bullet{
     private int Y;
     private final int speed;
     private int damage;
-    private ArrayList<Drawable> drawables;
-
-    public Bullet(int mouseX, int mouseY, int locationX, int locationY, BufferedImage bulletImage, int damage, ArrayList<Drawable> drawables) {
+    public Bullet(int mouseX, int mouseY, int locationX, int locationY, BufferedImage bulletImage, int damage) {
         this.bulletImage = bulletImage;
         this.damage = damage;
 
@@ -33,21 +31,20 @@ public class Bullet{
         angle = Math.atan2(mouseY - (locationY + 50), mouseX - (locationX + 50));
         speed = 12;
 
-        this.drawables = drawables;
         for (int i = 0; i < 5; i++) {
-            forward(drawables);
+            forward();
         }
     }
 
     public void paint(Graphics2D g2d) {
-        forward(drawables);
+        forward();
         AffineTransform bulletAT = new AffineTransform();
         bulletAT.setToTranslation(X , Y);
         bulletAT.rotate(angle);
         g2d.drawImage(bulletImage, bulletAT, null);
     }
 
-    public void forward(ArrayList<Drawable> drawables){
+    public void forward(){
         if (!Map.checkBulletCollision(this)) {
             X += Math.cos(angle) * speed;
             Y += Math.sin(angle) * speed;

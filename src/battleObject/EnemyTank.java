@@ -79,7 +79,7 @@ public class EnemyTank implements Drawable {
     public void fire(ArrayList<Drawable> drawables){
         if((Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance)) {
             if (System.currentTimeMillis() - lastShootTime > 500) {
-                gun.addBullets(targetX, targetY, locX + Map.xOffset, locY + Map.yOffset, drawables);
+                gun.addBullets(targetX, targetY, locX + Map.xOffset, locY + Map.yOffset);
                 lastShootTime = System.currentTimeMillis();
                 new SoundPlayer("Resources/Sounds/enemyshot.wav").run();
             }
@@ -112,7 +112,7 @@ public class EnemyTank implements Drawable {
     public void checkIntersect(Drawable drawable) {
 
         for (Bullet bullet : gun.bullets ) {
-            if (drawable.getRect().intersects(bullet.getRect())); {
+            if (drawable.getRect().intersects(bullet.getRect()) && drawable instanceof UserTank); {
                 drawable.damage(gun.damage);
             }
 

@@ -143,7 +143,6 @@ public class GameFrame extends JFrame {
 
 		tank.setState(state);
 		tank.setG2d(g2d);
-		tank.setDrawables(drawables);
 		if(!mouseHandlerAdded) {
 			addMouseListener(tank.getTankMouseHandler());
 			mouseHandlerAdded = true;
@@ -162,14 +161,14 @@ public class GameFrame extends JFrame {
 					bullet.paint(g2d);
 			} else if(drawable instanceof Turret){
 				((Turret) drawable).setTarget(state.locX,state.locY);
-				((Turret) drawable).fire(drawables);
+				((Turret) drawable).fire();
 				for(Bullet bullet : ((Turret) drawable).getGun().getBullets())
 					bullet.paint(g2d);
 			}
 		}
 
 		Iterator<Drawable> drawableIterator = drawables.iterator();
-		while (!drawableIterator.hasNext())
+		while (drawableIterator.hasNext())
 			if(drawableIterator.next().isAlive()) {
 				drawableIterator.remove();
 			}
@@ -179,17 +178,14 @@ public class GameFrame extends JFrame {
 			bullet.paint(g2d);
 		for(Bullet bullet : tank.getSecondGun().getBullets())
 			bullet.paint(g2d);
-/*		for(Bullet bullet : enemyTank.getGun().getBullets())
-			bullet.paint(g2d);
-		enemyTank.fire();*/
 
 		for (Drawable drawable : drawables)
-			if(!(drawable instanceof UserTank))
 				tank.checkIntersect(drawable);
 
 		tank.fireSecondGun();
 
 		tank.render();
+
 
 
 
