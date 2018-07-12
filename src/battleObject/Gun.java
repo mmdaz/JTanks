@@ -16,12 +16,14 @@ public class Gun {
     protected BufferedImage bulletImage;
     public BufferedImage currentModImage;
     protected ArrayList<Bullet> bullets;
+    protected int damage;
 
-    public Gun(BufferedImage level1Image, BufferedImage bulletImage){
+    public Gun(BufferedImage level1Image, BufferedImage bulletImage,int damage){
         this.level1Image = level1Image;
         currentModImage = level1Image;
         this.bulletImage = bulletImage;
         bullets = new ArrayList<Bullet>();
+        this.damage = damage;
     }
 
     public ArrayList<Bullet> getBullets() {
@@ -34,7 +36,7 @@ public class Gun {
     }
 
     public void addBullets(int targetX, int targetY, int locX, int locY) {
-        bullets.add(new Bullet(targetX,targetY,locX,locY,bulletImage));
+        bullets.add(new Bullet(targetX,targetY,locX,locY,bulletImage,damage));
     }
 
 

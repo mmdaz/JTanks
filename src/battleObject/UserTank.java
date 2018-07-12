@@ -8,12 +8,14 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 /**
  * This class is used to create user played tank tanks
+ * Each tank needs a starting health
  *
  * @author MohamadCM
  */
@@ -33,15 +35,17 @@ public class UserTank implements Drawable {
     private int numberOfLightBullet = 200;
     private BufferedImage numberOfHeavyBulletImage;
     private BufferedImage numberOfLightBulletImage;
+    private int health;
 
 
 
-    public UserTank() throws IOException {
+    public UserTank(int health) throws IOException {
+        this.health = health;
         //paintTank();
 
-        mainGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun01.png")) , ImageIO.read(new File("Resources/Images/tankGun1.png")) , ImageIO.read(new File("Resources/Images/HeavyBullet.png")));
+        mainGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun01.png")) , ImageIO.read(new File("Resources/Images/tankGun1.png")) , ImageIO.read(new File("Resources/Images/HeavyBullet.png")),50);
 
-        secondGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun02.png")) , ImageIO.read(new File("Resources/Images/tankGun2.png")) , ImageIO.read(new File("Resources/Images/LightBullet.png")));
+        secondGun = new UserTankGun( ImageIO.read(new File("Resources/Images/tankGun02.png")) , ImageIO.read(new File("Resources/Images/tankGun2.png")) , ImageIO.read(new File("Resources/Images/LightBullet.png")), 20);
 
         currentGun = mainGun;
 
@@ -116,7 +120,7 @@ public class UserTank implements Drawable {
                     new SoundPlayer("Resources/Sounds/heavygun.wav").run();
                     }
                 }else if(numberOfHeavyBullet <= 0)
-                new SoundPlayer("emptyGun.wav").run();
+                new SoundPlayer("Resources/Sounds/emptyGun.wav").run();
                 if(mouseEvent.getButton() == MouseEvent.BUTTON1)
                     mousePressed = true;
             }
@@ -141,6 +145,24 @@ public class UserTank implements Drawable {
         this.g2d = g2d;
     }
 
+    @Override
+    public boolean isAlive() {
+        if(health > 0)
+            return true;
+        return false;
+    }
+
+
+    @Override
+    public void damage(int damage) {
+        health -= damage;
+    }
+
+    @Override
+    public Rectangle2D getRect() {
+        return null;
+    }
+
     public UserTankGun getCurrentGun() {
         return currentGun;
     }
@@ -162,13 +184,18 @@ public class UserTank implements Drawable {
 
                     new SoundPlayer("Resources/Sounds/mashingun.wav").run();
                 } else if(numberOfLightBullet <= 0)
-                    new SoundPlayer("emptyGun.wav").run();
+                    new SoundPlayer("Resources/Sounds/emptyGun.wav").run();
             }
 
 
 
 
     public void render() throws IOException {
+
+        paintTank();
+
+        paintCurrentGun();
+
 
         g2d.setColor(Color.ORANGE);
 
@@ -181,12 +208,5 @@ public class UserTank implements Drawable {
         g2d.drawImage(numberOfLightBulletImage, null, 55, 110);
 
         g2d.drawString("" + numberOfLightBullet, 125, 145);
-
-
-
-        paintTank();
-
-        paintCurrentGun();
-
     }
 }

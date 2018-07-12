@@ -11,6 +11,7 @@ import utility.SoundPlayer;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,11 +27,12 @@ public class Turret implements Drawable{
     public EnemyGun gun;
     private long lastShootTime;
     private int activationDistance;
+    private int health = 100;
 
     public Turret(int activationDistance,int locX, int locY){
         try {
             turretBody = ImageIO.read(new File("Resources/Images/TurretBody.png"));
-            gun = new EnemyGun(ImageIO.read(new File("Resources/Images/TurretGun.png")) , ImageIO.read(new File("Resources/Images/EnemyBullet1.png")));
+            gun = new EnemyGun(ImageIO.read(new File("Resources/Images/TurretGun.png")) , ImageIO.read(new File("Resources/Images/EnemyBullet1.png")), 35);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,9 +40,8 @@ public class Turret implements Drawable{
         this.locX = locX;
         this.locY = locY;
         this.activationDistance = activationDistance;
+
     }
-
-
 
 
     @Override
@@ -52,6 +53,25 @@ public class Turret implements Drawable{
     @Override
     public void setG2d(Graphics2D g2d) {
         this.g2d = g2d;
+    }
+
+    @Override
+    public boolean isAlive() {
+        if(health > 0)
+            return true;
+        return false;
+    }
+
+
+    @Override
+    public void damage(int damage) {
+        health -= damage;
+    }
+
+    @Override
+    public Rectangle2D getRect() {
+        Rectangle2D turrectRect = new Rectangle( locX , locY , 100 ,100 ) ;
+        return turrectRect ;
     }
 
     public void setTarget(int X, int Y){
@@ -83,6 +103,17 @@ public class Turret implements Drawable{
                 new SoundPlayer("Resources/Sounds/enemyshot.wav").run();
             }
         }
+    }
+
+    public void intersect (Drawable drawable) {
+
+        for (Bullet bullet : gun.bullets ) {
+
+            if (drawable.getRect().intersects(bullet.getX() , bullet.getY() , 23 , 9))
+                drawable.damage(gun.damage);
+
+        }
+
     }
 
     public EnemyGun getGun() {

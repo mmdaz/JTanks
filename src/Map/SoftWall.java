@@ -87,9 +87,13 @@ public class SoftWall {
 
     public void setLocX(int locX) {
         this.locX = locX;
+
+        rectangle2D = new Rectangle(locX , locY , 100 , 100 ) ;
     }
 
     public void setLocY(int locY) {
         this.locY = locY;
+
+        rectangle2D = new Rectangle(locX , locY , 100 , 100 ) ;
     }
 }

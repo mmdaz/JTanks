@@ -19,9 +19,12 @@ public class Bullet{
     private int X;
     private int Y;
     private final int speed;
+    private int damage;
 
-    public Bullet(int mouseX, int mouseY, int locationX, int locationY, BufferedImage bulletImage) {
+    public Bullet(int mouseX, int mouseY, int locationX, int locationY, BufferedImage bulletImage, int damage) {
         this.bulletImage = bulletImage;
+        this.damage = damage;
+
         X = locationX + 50;
         Y = locationY + 50;
         angle = Math.atan2(mouseY - (locationY + 50), mouseX - (locationX + 50));
@@ -59,5 +62,9 @@ public class Bullet{
      */
     public int getY() {
         return Y;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }

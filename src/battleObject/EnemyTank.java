@@ -10,6 +10,7 @@ import utility.SoundPlayer;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,9 +26,10 @@ public class EnemyTank implements Drawable {
     private BufferedImage tankBody;
     private long lastShootTime;
     private int activationDistance;
+    private int health = 80;
 
     public EnemyTank(int activationDistance,int locX, int locY) throws IOException {
-        gun = new EnemyGun(ImageIO.read(new File("Resources/Images/BigEnemyGun.png")) , ImageIO.read(new File("Resources/Images/Enemy2Bullet.png")));
+        gun = new EnemyGun(ImageIO.read(new File("Resources/Images/BigEnemyGun.png")) , ImageIO.read(new File("Resources/Images/Enemy2Bullet.png")),30);
         tankBody = ImageIO.read(new File("Resources/Images/BigEnemy.png"));
 
         this.locX = locX;
@@ -48,7 +50,7 @@ public class EnemyTank implements Drawable {
 
     }
 
-
+    @Override
     public void setG2d(Graphics2D g2d){
         this.g2d = g2d;
     }
@@ -86,4 +88,35 @@ public class EnemyTank implements Drawable {
     public EnemyGun getGun() {
         return gun;
     }
+
+    @Override
+    public boolean isAlive() {
+        if(health > 0)
+            return true;
+        return false;
+    }
+
+
+    @Override
+    public void damage(int damge) {
+        health -= damge;
+    }
+
+    @Override
+    public Rectangle2D getRect() {
+        Rectangle2D tankRect = new Rectangle( locX , locY , 100 , 100 ) ;
+        return tankRect ;
+    }
+
+    public void intersect ( Drawable drawable ) {
+
+        for (Bullet bullet : gun.bullets ) {
+
+            if (drawable.getRect().intersects(bullet.getX() , bullet.getY() , 23 , 9))
+                drawable.damage(gun.damage);
+
+        }
+
+    }
+
 }
