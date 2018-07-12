@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="686f1513-8bf6-4598-8cd1-bb6a1deb2fd2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/EnemyTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/EnemyTank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/Turret.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/Turret.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bufferstrategy/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bufferstrategy/GameFrame.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,7 +59,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/battleObject/KhengEnemy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
+            <state relative-caret-position="110">
               <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
               <folding>
                 <element signature="e#2532#2533#0" expanded="true" />
@@ -164,7 +161,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="292" />
     <option name="y" value="27" />
     <option name="width" value="944" />
@@ -360,10 +357,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="27" width="1299" height="741" extended-state="7" />
-    <editor active="true" />
+    <frame x="67" y="27" width="1299" height="741" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17158818" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17158818" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -373,12 +369,12 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32980973" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4980048" visible="true" weight="0.09933775" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4980048" weight="0.6009934" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.85235435" weight="0.01821192" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.85235435" visible="true" weight="0.6258278" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5019952" side_tool="true" weight="0.0397351" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32980973" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49960095" weight="0.3294702" />
@@ -634,7 +630,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/battleObject/KhengEnemy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
+        <state relative-caret-position="110">
           <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
           <folding>
             <element signature="e#2532#2533#0" expanded="true" />
