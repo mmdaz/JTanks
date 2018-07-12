@@ -109,7 +109,7 @@ public class Turret implements Drawable{
     public void checkIntersect(Drawable drawable) {
 
         for (Bullet bullet : gun.bullets ) {
-            if (drawable.getRect().intersects(bullet.getRect()) && drawable instanceof UserTank); {
+            if (drawable.getRect().intersects(bullet.getRect())); {
                 drawable.damage(gun.damage);
             }
 

@@ -168,7 +168,7 @@ public class UserTank implements Drawable {
     public void checkIntersect(Drawable drawable) {
 
         for (Bullet bullet : currentGun.bullets ) {
-            if (drawable.getRect().intersects(bullet.getRect()) && !(drawable instanceof UserTank)); {
+            if (drawable.getRect().intersects(bullet.getRect())); {
                 drawable.damage(currentGun.damage);
             }
 
