@@ -88,7 +88,7 @@ public class UserTank implements Drawable {
     /*
      * Changes the current gun
      * and paint the new gun
-     */
+*/
     private void changeGun(){
         if(isMainGun) {
             currentGun = secondGun;
