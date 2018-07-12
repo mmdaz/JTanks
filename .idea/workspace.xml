@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="686f1513-8bf6-4598-8cd1-bb6a1deb2fd2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Images/softWall2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Images/softWall2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Images/softWall3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Images/softWall3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Images/tankGun01.png" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Images/tankGun01.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Save/Map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Save/Map.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Map/SoftWall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map/SoftWall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/Drawable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/Drawable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/EnemyGun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/EnemyGun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/EnemyTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/EnemyTank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/Gun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/KhengEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/KhengEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/Mine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/Mine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/Turret.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/Turret.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/UserTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/UserTank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/UserTankGun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/UserTankGun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bufferstrategy/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bufferstrategy/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bufferstrategy/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bufferstrategy/GameState.java" afterDir="false" />
-    </list>
+    <list default="true" id="686f1513-8bf6-4598-8cd1-bb6a1deb2fd2" name="Default" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -107,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/battleObject/Turret.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="376">
-              <caret line="117" column="4" selection-start-line="117" selection-start-column="4" selection-end-line="117" selection-end-column="4" />
+              <caret line="117" selection-start-line="117" selection-end-line="117" />
               <folding>
                 <element signature="e#3120#3121#0" expanded="true" />
                 <element signature="e#3146#3147#0" expanded="true" />
@@ -120,10 +99,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/battleObject/UserTank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
+            <state relative-caret-position="100">
               <caret line="162" column="8" selection-start-line="162" selection-start-column="8" selection-end-line="162" selection-end-column="20" />
               <folding>
                 <element signature="e#4209#4210#0" expanded="true" />
@@ -386,9 +365,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1299" height="741" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21069433" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21069433" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -398,12 +376,12 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32980973" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4980048" visible="true" weight="0.117549665" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4980048" weight="0.117549665" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.85235435" weight="0.013245033" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.85235435" visible="true" weight="0.56953645" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5019952" side_tool="true" weight="0.0397351" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32980973" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49960095" weight="0.3294702" />
@@ -632,9 +610,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/battleObject/EnemyTank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="115" column="44" selection-start-line="115" selection-start-column="44" selection-end-line="115" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battleObject/Turret.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="117" selection-start-line="117" selection-end-line="117" />
+          <folding>
+            <element signature="e#3120#3121#0" expanded="true" />
+            <element signature="e#3146#3147#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/battleObject/UserTank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
+        <state relative-caret-position="100">
           <caret line="162" column="8" selection-start-line="162" selection-start-column="8" selection-end-line="162" selection-end-column="20" />
           <folding>
             <element signature="e#4209#4210#0" expanded="true" />
@@ -655,27 +654,6 @@
             <element signature="e#4897#4898#0" expanded="true" />
             <element signature="e#4938#4939#0" expanded="true" />
             <element signature="e#4970#4971#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/battleObject/EnemyTank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="115" column="44" selection-start-line="115" selection-start-column="44" selection-end-line="115" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/battleObject/Turret.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="117" column="4" selection-start-line="117" selection-start-column="4" selection-end-line="117" selection-end-column="4" />
-          <folding>
-            <element signature="e#3120#3121#0" expanded="true" />
-            <element signature="e#3146#3147#0" expanded="true" />
           </folding>
         </state>
       </provider>
