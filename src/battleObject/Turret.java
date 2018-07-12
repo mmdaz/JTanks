@@ -112,7 +112,6 @@ public class Turret implements Drawable{
             if (drawable.getRect().intersects(bullet.getRect())); {
                 drawable.damage(gun.damage);
             }
-
         }
 
     }

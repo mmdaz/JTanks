@@ -135,11 +135,12 @@ public class GameFrame extends JFrame {
 	 * Rendering all game elements based on the game state.
 	 */
 	private void doRendering(Graphics2D g2d, GameState state) throws IOException {
-		// Draw background
+		// Draw Map objects :
 		map.setG2d(g2d);
 		Map.setState(state);
-
 		map.paintMap();
+
+		// Draw tanks :
 
 		tank.setState(state);
 		tank.setG2d(g2d);

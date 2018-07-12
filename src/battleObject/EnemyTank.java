@@ -113,6 +113,7 @@ public class EnemyTank implements Drawable {
 
         for (Bullet bullet : gun.bullets ) {
             if (drawable.getRect().intersects(bullet.getRect())); {
+                System.out.println("salam");
                 drawable.damage(gun.damage);
             }
 
