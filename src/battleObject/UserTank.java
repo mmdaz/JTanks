@@ -76,6 +76,7 @@ public class UserTank implements Drawable {
         tankAt.translate(-50, -50);
         //paint the tank
         g2d.drawImage(ownTank,tankAt,null);
+
     }
 
     /**

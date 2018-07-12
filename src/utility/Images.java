@@ -20,6 +20,10 @@ public class Images {
     public static BufferedImage softWall3 ;
     public static BufferedImage softWall4 ;
     public static BufferedImage hardWall ;
+    public static BufferedImage repairItem ;
+    public static BufferedImage teazel ;
+    public static BufferedImage area ;
+    public static BufferedImage plant ;
 
 
     public Images () {
@@ -29,6 +33,10 @@ public class Images {
             softWall3 = ImageIO.read(new File("Resources/Images/softWall2.png")) ;
             softWall4 = ImageIO.read(new File("Resources/Images/softWall3.png")) ;
             hardWall = ImageIO.read(new File("Resources/Images/hardWall.png")) ;
+            repairItem = ImageIO.read( new File("Resources/Images/RepairFood.png")) ;
+            teazel = ImageIO.read(new File("Resources/Images/teazel.png"));
+            area = ImageIO.read(new File("Resources/Images/RedEarth.png"));
+            plant = ImageIO.read(new File("Resources/Images/plant.png"));
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -3,15 +3,13 @@ package Map;
 import battleObject.Bullet;
 import battleObject.Drawable;
 import bufferstrategy.GameState;
+import utility.Images;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -29,15 +27,11 @@ public class Map {
     public static int[][] mapResource;
     public static GameState state;
     private Graphics2D g2d;
-    private BufferedImage wall;
-    private BufferedImage teazel;
-    private BufferedImage area;
-    private BufferedImage plant;
-    private BufferedImage hardWall;
     public static ArrayList<HardWall> hardWalls;
     public static ArrayList<SoftWall> softWalls ;
     public static ArrayList<Plant> plants ;
     public static ArrayList<Teazel> teazels ;
+    public static ArrayList<RepairPackItem> repairPackItems ;
     public static int xOffset;
     public static int yOffset;
     public static int intersectedLocx ;
@@ -45,28 +39,20 @@ public class Map {
     public static int softWallMode = 1 ;
 
 
-    public Map() throws IOException {
+    public Map() {
 
         mapResource = new int[30][15];
-
         hardWalls = new ArrayList<HardWall>() ;
         softWalls = new ArrayList<SoftWall>() ;
+        repairPackItems = new ArrayList<RepairPackItem>() ;
+        plants  = new ArrayList<Plant>() ;
+        teazels = new ArrayList<Teazel>() ;
+
 
         for (int i = 0; i < 40 ; i++)
             softWalls.add(new SoftWall(0, 0));
 
-        plants  = new ArrayList<Plant>() ;
-        teazels = new ArrayList<Teazel>() ;
-
-        teazel = ImageIO.read(new File("Resources/Images/teazel.png"));
-        area = ImageIO.read(new File("Resources/Images/RedEarth.png"));
-        plant = ImageIO.read(new File("Resources/Images/plant.png"));
-
         initializeMap();
-
-        System.out.println(softWalls.size());
-
-
 
     }
 
@@ -91,8 +77,8 @@ public class Map {
 
                 if (xOffset > 0) xOffset = 0;
                 if (yOffset > 0) yOffset = 0;
-                if (yOffset + 1500 < 600) yOffset = -900;
-                if (xOffset + 3000 < 1200) xOffset = -1800;
+                if (yOffset + 1500 < 800) yOffset = -700;
+                if (xOffset + 3000 < 1600) xOffset = -1400;
 
 
                 // draw map :
@@ -118,24 +104,28 @@ public class Map {
                     else if (softWalls.get(index).getMode() == 4)
                         g2d.drawImage(softWalls.get(index).getImageMode4() , softWalls.get(index).getLocX() , softWalls.get(index).getLocY() , null);
                     else
-                        g2d.drawImage(area, softWalls.get(index).getLocX(), softWalls.get(index).getLocY(), null);
+                        g2d.drawImage(Images.area, softWalls.get(index).getLocX(), softWalls.get(index).getLocY(), null);
 
                     index ++ ;
-
                 }
 
                 else if (mapResource[i][j] == 5) {
-                    g2d.drawImage(teazel, null, i * 100 + xOffset, j * 100 + yOffset);
+                    g2d.drawImage(Images.teazel, null, i * 100 + xOffset, j * 100 + yOffset);
                     teazels.add( new Teazel(i * 100 + xOffset , j * 100 + yOffset ));
                 }
 
                 else if (mapResource[i][j] == 4) {
-                    g2d.drawImage(plant, null, i * 100 + xOffset, j * 100 + yOffset);
+                    g2d.drawImage(Images.plant, null, i * 100 + xOffset, j * 100 + yOffset);
                     plants.add( new Plant( i * 100 + xOffset , j * 100 + yOffset));
                 }
-                // enemy tank ...
+                else if (mapResource[i][j] == 6) {
+                    RepairPackItem repairPackItem = new RepairPackItem(i*00 + xOffset , j * 100 + yOffset) ;
+                    g2d.drawImage(Images.repairItem , null , repairPackItem.getLocX() , repairPackItem.getLocY() );
+                    repairPackItems.add(repairPackItem) ;
+
+                }
                 else {
-                    g2d.drawImage(area, null, i * 100 + xOffset, j * 100 + yOffset);
+                    g2d.drawImage(Images.area, null, i * 100 + xOffset, j * 100 + yOffset);
                 }
             }
 
@@ -183,7 +173,6 @@ public class Map {
     public static boolean checkHitWithObjects() {
 
 
-
 //        System.out.println(hardWalls.size());
 
         for (HardWall hardWall : hardWalls) {
@@ -191,8 +180,6 @@ public class Map {
             if (hardWall.getRectangle2D().intersects(state.locX , state.locY , 80 , 80 ) ) {
                 intersectedLocx = state.locX ;
                 intersectedLocY = state.locY ;
-//                state.locX = state.preLocX ;
-//                state.locY = state.preLocY ;
                 return false ;
             }
 
@@ -207,8 +194,6 @@ public class Map {
             if ( softWall.getRectangle2D().intersects(state.locX , state.locY , 80 , 80 ) && softWall.getMode() <= 4) {
                 intersectedLocx = state.locX ;
                 intersectedLocY = state.locY ;
-//                state.locX = state.preLocX ;
-//                state.locY = state.preLocY ;
 
                 return false ;
             }
@@ -221,8 +206,7 @@ public class Map {
             if (teazel.getRectangle2D().intersects(state.locX , state.locY , 80 , 80 ) ) {
                 intersectedLocx = state.locX ;
                 intersectedLocY = state.locY ;
-//                state.locX = state.preLocX ;
-//                state.locY = state.preLocY ;
+
                 return false ;
             }
 
@@ -266,6 +250,20 @@ public class Map {
 
     }
 
+    public static boolean intersectWithadditionalObjects () {
+
+
+        boolean status  = true ;
+
+        for (RepairPackItem repairPackItem : repairPackItems ) {
+
+
+        }
+
+return true;
+
+
+    }
 
     public static void setState(GameState state) {
         Map.state = state;
