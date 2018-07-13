@@ -34,7 +34,7 @@ public class GameFrame extends JFrame {
 
 	private BufferStrategy bufferStrategy;
 
-	private UserTank tank = new UserTank(500);
+	private UserTank tank = new UserTank(1000);
 	private boolean mouseHandlerAdded;
 
 
@@ -173,7 +173,6 @@ public class GameFrame extends JFrame {
 					bullet.paint(g2d);
 			}
 		}
-		drawables.get(0).render();
 
 		Iterator<Drawable> drawableIterator = drawables.iterator();
 		while (drawableIterator.hasNext())

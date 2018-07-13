@@ -1,6 +1,7 @@
 package battleObject;
 
 import bufferstrategy.GameState;
+import utility.Images;
 import utility.SoundPlayer;
 
 import javax.imageio.ImageIO;
@@ -226,5 +227,20 @@ public class UserTank implements Drawable {
         g2d.drawImage(numberOfLightBulletImage, null, 55, 110);
 
         g2d.drawString("" + numberOfLightBullet, 125, 145);
+
+        if(health >= 1000)
+            g2d.drawImage(Images.health5,null,600, 30);
+
+        else if(health >= 750)
+            g2d.drawImage(Images.health4,null,600, 30);
+
+        else if(health >= 500)
+            g2d.drawImage(Images.health3,null,600, 30);
+
+        else if(health >= 250)
+            g2d.drawImage(Images.health2,null,600, 30);
+
+        else if(health > 0)
+            g2d.drawImage(Images.health1,null,600, 30);
     }
 }

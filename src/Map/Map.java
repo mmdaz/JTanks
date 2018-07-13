@@ -328,10 +328,10 @@ public class Map {
 
             if ( repairPackItem.getRectangle2D().intersects( state.locX , state.locY , 100 , 100 ) && repairPackItem.getStatus()  ) {
 
-                if(UserTank.health < 250)
-                    UserTank.health += 250 ;
+                if(UserTank.health < 500)
+                    UserTank.health += 500 ;
                 else
-                    UserTank.health = 500;
+                    UserTank.health = 1000;
                 repairPackItem.setStatus(false) ;
 
             }
