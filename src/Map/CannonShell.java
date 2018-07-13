@@ -6,16 +6,16 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-
 /**
- * The class that keep Repair Item information on the map .
+ * The class that keep CannonShell information on the map .
  *
  * @author Azhdari Muhammad
  * @since summer 2018
  * @version 1.0
  */
 
-public class RepairPackItem {
+
+public class CannonShell {
 
     private int locX ;
     private int locY ;
@@ -25,12 +25,12 @@ public class RepairPackItem {
 
 
 
-    public RepairPackItem(int locx , int locY ) {
+    public CannonShell(int locx , int locY ) {
 
         this.locX = locx ;
         this.locY = locY ;
-        image = Images.repairItem ;
-        rectangle2D = new Rectangle(locx , locY , 80 , 80 ) ;
+        image = Images.cannonShell;
+        rectangle2D = new Rectangle(locx , locY , 100 , 100 ) ;
         status = true ;
 
     }
@@ -58,7 +58,7 @@ public class RepairPackItem {
     public Rectangle2D getRectangle2D() {
 
 
-        rectangle2D = new Rectangle(locX , locY , 100 , 100) ;
+        rectangle2D = new Rectangle(locX , locY , 80 , 80) ;
         return rectangle2D;
     }
 
@@ -78,6 +78,7 @@ public class RepairPackItem {
     public int getLocX() {
         return locX;
     }
+
 
 
 }

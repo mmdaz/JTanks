@@ -25,7 +25,7 @@ public class UserTank implements Drawable {
     private GameState state;
     private UserTankGun mainGun;
     private UserTankGun secondGun;
-    private UserTankGun currentGun;
+    private static UserTankGun currentGun;
     private boolean isMainGun;
     private Graphics2D g2d;
     private MouseHandler tankMouseHandler;
@@ -181,7 +181,7 @@ public class UserTank implements Drawable {
 
     }
 
-    public UserTankGun getCurrentGun() {
+    public static UserTankGun getCurrentGun() {
         return currentGun;
     }
 

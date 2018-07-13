@@ -142,7 +142,9 @@ public class GameFrame extends JFrame {
 
 		// draw additional objects :
 		map.intersectWithRepairObject();
-		map.intersectWithWicket();
+		map.intersectWithCannonShell();
+		map.intersectWithMachineGunShell();
+		map.intersectWithUpgrader();
 
 		if(!mouseHandlerAdded) {
 			addMouseListener(tank.getTankMouseHandler());

@@ -1,19 +1,13 @@
 package Map;
 
 import battleObject.Bullet;
-import battleObject.Drawable;
 import battleObject.UserTank;
-import battleObject.UserTankGun;
 import bufferstrategy.GameState;
 import utility.Images;
 
-import javax.imageio.ImageIO;
-import javax.jws.soap.SOAPBinding;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.Socket;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +29,9 @@ public class Map {
     public static ArrayList<Plant> plants ;
     public static ArrayList<Teazel> teazels ;
     public static ArrayList<RepairPackItem> repairPackItems ;
-    public static ArrayList<Wicket> wickets ;
+    public static ArrayList<CannonShell> cannonShells;
+    public static ArrayList<MachineGunShell> machineGunShells;
+    public static ArrayList<UpgradeWeapon> upgradeWeapons;
     public static int xOffset;
     public static int yOffset;
     public static int intersectedLocx ;
@@ -51,7 +47,10 @@ public class Map {
         repairPackItems = new ArrayList<RepairPackItem>() ;
         plants  = new ArrayList<Plant>() ;
         teazels = new ArrayList<Teazel>() ;
-        wickets = new ArrayList<Wicket>() ;
+        cannonShells = new ArrayList<CannonShell>() ;
+        machineGunShells = new ArrayList<MachineGunShell>();
+        upgradeWeapons = new ArrayList<UpgradeWeapon>();
+
 
 
         for (int i = 0; i < 16 ; i++)
@@ -62,9 +61,14 @@ public class Map {
         }
 
         for (int i = 0; i < 2 ; i++) {
-            wickets.add( new Wicket(0 , 0 )) ;
+            cannonShells.add( new CannonShell(0 , 0 )) ;
         }
-
+        for (int i = 0; i < 2 ; i++) {
+            machineGunShells.add( new MachineGunShell(0 , 0 )) ;
+        }
+        for (int i = 0; i < 2 ; i++) {
+            upgradeWeapons.add( new UpgradeWeapon(0 , 0 )) ;
+        }
         initializeMap();
 
     }
@@ -81,7 +85,9 @@ public class Map {
         teazels.clear();
         int softWallindex = 0 ;
         int repairIndex = 0 ;
-        int wicketIndex = 0 ;
+        int cannonIndex = 0 ;
+        int machineGunIndex = 0;
+        int upgraderIndex = 0;
 
         for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 15; j++) {
@@ -94,7 +100,6 @@ public class Map {
                 if (yOffset > 0) yOffset = 0;
                 if (yOffset + 1500 < 800) yOffset = -700;
                 if (xOffset + 3000 < 1600) xOffset = -1400;
-
 
                 // draw map :
 
@@ -149,16 +154,40 @@ public class Map {
                 }
 
                 else if (mapResource[i][j] == 7 ) {
-                    wickets.get(wicketIndex).setLocX(i * 100 + xOffset);
-                    wickets.get(wicketIndex).setLocY(j * 100 + yOffset);
+                    cannonShells.get(cannonIndex).setLocX(i * 100 + xOffset);
+                    cannonShells.get(cannonIndex).setLocY(j * 100 + yOffset);
 
-                    if (wickets.get(wicketIndex).getStatus())
-                        g2d.drawImage(Images.wicket , null , i * 100 + xOffset , j * 100 + yOffset);
+                    if (cannonShells.get(cannonIndex).getStatus())
+                        g2d.drawImage(Images.cannonShell, null , i * 100 + xOffset , j * 100 + yOffset);
                     else
                         g2d.drawImage(Images.area , null , i * 100 + xOffset , j *100 + yOffset) ;
 
-                    wicketIndex ++ ;
+                    cannonIndex++ ;
 
+                }  else if (mapResource[i][j] == 8 ) {
+                    machineGunShells.get(machineGunIndex).setLocX(i * 100 + xOffset);
+                    machineGunShells.get(machineGunIndex).setLocY(j * 100 + yOffset);
+
+                    if (machineGunShells.get(machineGunIndex).getStatus())
+                        g2d.drawImage(Images.machineGunShell, null , i * 100 + xOffset , j * 100 + yOffset);
+                    else
+                        g2d.drawImage(Images.area , null , i * 100 + xOffset , j *100 + yOffset) ;
+
+                    machineGunIndex ++;
+
+                }
+                else if (mapResource[i][j] == 9) {
+                    upgradeWeapons.get(upgraderIndex).setLocX(i * 100 + xOffset) ;
+                    upgradeWeapons.get(upgraderIndex).setLocY(j * 100 + yOffset) ;
+
+
+
+                    if (upgradeWeapons.get(upgraderIndex).getStatus())
+                        g2d.drawImage(Images.upgradeWeapon , null , i * 100 + xOffset , j * 100 + yOffset ) ;
+                    else
+                        g2d.drawImage(Images.area , null , i * 100 + xOffset , j *100 + yOffset) ;
+
+                    upgraderIndex ++ ;
                 }
 
                 else {
@@ -299,7 +328,10 @@ public class Map {
 
             if ( repairPackItem.getRectangle2D().intersects( state.locX , state.locY , 100 , 100 ) && repairPackItem.getStatus()  ) {
 
-                UserTank.health += 500 ;
+                if(UserTank.health < 500)
+                    UserTank.health += 500 ;
+                else
+                    UserTank.health = 1000;
                 repairPackItem.setStatus(false) ;
 
             }
@@ -309,15 +341,42 @@ public class Map {
     }
 
 
-    public void intersectWithWicket () {
+    public void intersectWithCannonShell() {
 
-        for (Wicket wicket : wickets) {
+        for (CannonShell cannonShell : cannonShells) {
 
-            if (wicket.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) && wicket.getStatus()) {
+            if (cannonShell.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) && cannonShell.getStatus()) {
 
-                UserTank.numberOfHeavyBullet = 50 ;
-                UserTank.numberOfLightBullet = 200 ;
-                wicket.setStatus(false);
+                UserTank.numberOfHeavyBullet += 10 ;
+                cannonShell.setStatus(false);
+
+            }
+
+        }
+
+    }
+    public void intersectWithMachineGunShell() {
+
+        for (MachineGunShell machineGunShell : machineGunShells) {
+
+            if (machineGunShell.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) && machineGunShell.getStatus()) {
+
+                UserTank.numberOfLightBullet += 30 ;
+                machineGunShell.setStatus(false);
+
+            }
+
+        }
+
+    }
+    public void intersectWithUpgrader() {
+
+        for (UpgradeWeapon upgradeWeapon : upgradeWeapons) {
+
+            if (upgradeWeapon.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) && upgradeWeapon.getStatus()) {
+
+                UserTank.getCurrentGun().upgradeWeapon();
+                upgradeWeapon.setStatus(false);
 
             }
 

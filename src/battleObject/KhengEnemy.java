@@ -56,12 +56,11 @@ public class KhengEnemy implements Drawable {
         }
     }
 
-    private void forward(){ {
+    private void forward(){
         if(isRendered) {
             double angle = Math.atan2(targetY - (locY + 50 + Map.yOffset * 2), targetX - (locX + 50 + Map.yOffset * 2));
             locX += Math.cos(angle) * speed;
             locY += Math.sin(angle) * speed;
-        }
         }
     }
 

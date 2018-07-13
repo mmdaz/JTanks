@@ -24,7 +24,9 @@ public class Images {
     public static BufferedImage teazel ;
     public static BufferedImage area ;
     public static BufferedImage plant ;
-    public static BufferedImage wicket ;
+    public static BufferedImage cannonShell;
+    public static BufferedImage machineGunShell;
+    public static BufferedImage upgradeWeapon;
 
 
     public Images () {
@@ -38,7 +40,9 @@ public class Images {
             teazel = ImageIO.read(new File("Resources/Images/teazel.png"));
             area = ImageIO.read(new File("Resources/Images/RedEarth.png"));
             plant = ImageIO.read(new File("Resources/Images/plant.png"));
-            wicket = ImageIO.read( new File("Resources/Images/wicket1.png")) ;
+            cannonShell = ImageIO.read( new File("Resources/Images/CannonFood.png")) ;
+            machineGunShell = ImageIO.read( new File("Resources/Images/MashinGunFood.png")) ;
+            upgradeWeapon = ImageIO.read( new File("Resources/Images/upgrader.png")) ;
 
         } catch (IOException e) {
             e.printStackTrace();
