@@ -14,9 +14,10 @@ import javax.swing.JFrame;
  * @author Seyed Mohammad Ghaffarian
  */
 public class Start {
+	public static String startState;
 	
     public Start(String startStats) {
-
+		startState = startStats;
 		new SoundPlayer("Resources/Sounds/agree.wav").run();
 		// Initialize the global thread-pool
 		ThreadPool.init();

@@ -88,15 +88,15 @@ public class StartMenu extends JFrame{
         continueButton.setLocation(10,220);
 
         easyButton.setSize(240,30);
-        easyButton.setLocation(10,270);
+        easyButton.setLocation(10,220);
 
         mediumButton.setSize(290,30);
-        mediumButton.setLocation(10,320);
+        mediumButton.setLocation(10,270);
 
         hardButton.setSize(240,30);
-        hardButton.setLocation(10,370);
+        hardButton.setLocation(10,320);
 
-        mainPanel.add(continueButton);
+        //mainPanel.add(continueButton);
         mainPanel.add(easyButton);
         mainPanel.add(mediumButton);
         mainPanel.add(hardButton);
