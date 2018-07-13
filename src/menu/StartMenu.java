@@ -6,6 +6,7 @@ package menu;
  * @author Mohamad Chaman-Motlagh
  */
 
+import Map.MapEditor;
 import bufferstrategy.Start;
 import utility.SoundPlayer;
 
@@ -183,8 +184,9 @@ public class StartMenu extends JFrame{
     }
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        new StartMenu();
+//        new StartMenu();
         new Images() ;
+        new MapEditor() ;
     }
 
 

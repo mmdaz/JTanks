@@ -4,7 +4,6 @@ import battleObject.Bullet;
 import battleObject.UserTank;
 import bufferstrategy.GameState;
 import utility.Images;
-
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.io.*;
@@ -340,7 +339,9 @@ public class Map {
 
     }
 
-
+    /**
+     * The method that handle intersect with thank and cannon shell .
+     */
     public void intersectWithCannonShell() {
 
         for (CannonShell cannonShell : cannonShells) {
@@ -355,6 +356,11 @@ public class Map {
         }
 
     }
+
+    /**
+     * THe method that handled intersect with tank and machine gun shell .
+     */
+
     public void intersectWithMachineGunShell() {
 
         for (MachineGunShell machineGunShell : machineGunShells) {
@@ -369,6 +375,11 @@ public class Map {
         }
 
     }
+
+    /**
+     * The method that handled intersect tank and upgrader .
+     */
+
     public void intersectWithUpgrader() {
 
         for (UpgradeWeapon upgradeWeapon : upgradeWeapons) {
