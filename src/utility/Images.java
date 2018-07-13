@@ -24,6 +24,7 @@ public class Images {
     public static BufferedImage teazel ;
     public static BufferedImage area ;
     public static BufferedImage plant ;
+    public static BufferedImage wicket ;
 
 
     public Images () {
@@ -37,6 +38,7 @@ public class Images {
             teazel = ImageIO.read(new File("Resources/Images/teazel.png"));
             area = ImageIO.read(new File("Resources/Images/RedEarth.png"));
             plant = ImageIO.read(new File("Resources/Images/plant.png"));
+            wicket = ImageIO.read( new File("Resources/Images/wicket1.png")) ;
 
         } catch (IOException e) {
             e.printStackTrace();

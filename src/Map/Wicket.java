@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-
 /**
  * The class that keep Repair Item information on the map .
  *
@@ -15,7 +14,8 @@ import java.awt.image.BufferedImage;
  * @version 1.0
  */
 
-public class RepairPackItem {
+
+public class Wicket {
 
     private int locX ;
     private int locY ;
@@ -25,11 +25,11 @@ public class RepairPackItem {
 
 
 
-    public RepairPackItem(int locx , int locY ) {
+    public Wicket (int locx , int locY ) {
 
         this.locX = locx ;
         this.locY = locY ;
-        image = Images.repairItem ;
+        image = Images.wicket ;
         rectangle2D = new Rectangle(locx , locY , 100 , 100 ) ;
         status = true ;
 
@@ -78,6 +78,7 @@ public class RepairPackItem {
     public int getLocX() {
         return locX;
     }
+
 
 
 }

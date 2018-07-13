@@ -2,10 +2,13 @@ package Map;
 
 import battleObject.Bullet;
 import battleObject.Drawable;
+import battleObject.UserTank;
+import battleObject.UserTankGun;
 import bufferstrategy.GameState;
 import utility.Images;
 
 import javax.imageio.ImageIO;
+import javax.jws.soap.SOAPBinding;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -32,6 +35,7 @@ public class Map {
     public static ArrayList<Plant> plants ;
     public static ArrayList<Teazel> teazels ;
     public static ArrayList<RepairPackItem> repairPackItems ;
+    public static ArrayList<Wicket> wickets ;
     public static int xOffset;
     public static int yOffset;
     public static int intersectedLocx ;
@@ -47,10 +51,19 @@ public class Map {
         repairPackItems = new ArrayList<RepairPackItem>() ;
         plants  = new ArrayList<Plant>() ;
         teazels = new ArrayList<Teazel>() ;
+        wickets = new ArrayList<Wicket>() ;
 
 
         for (int i = 0; i < 16 ; i++)
             softWalls.add(new SoftWall(0, 0));
+
+        for (int i = 0; i < 5 ; i++) {
+            repairPackItems.add(new RepairPackItem(0,0)) ;
+        }
+
+        for (int i = 0; i < 2 ; i++) {
+            wickets.add( new Wicket(0 , 0 )) ;
+        }
 
         initializeMap();
 
@@ -66,7 +79,9 @@ public class Map {
 //        softWalls.clear();
         plants.clear();
         teazels.clear();
-        int index = 0 ;
+        int softWallindex = 0 ;
+        int repairIndex = 0 ;
+        int wicketIndex = 0 ;
 
         for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 15; j++) {
@@ -91,22 +106,22 @@ public class Map {
                 }
 
                 else if (mapResource[i][j] == 1) {
-                    softWalls.get(index).setLocX(i * 100 + xOffset);
-                    softWalls.get(index).setLocY(j * 100 + yOffset);
+                    softWalls.get(softWallindex).setLocX(i * 100 + xOffset);
+                    softWalls.get(softWallindex).setLocY(j * 100 + yOffset);
 
 
-                    if (softWalls.get(index).getMode() == 1)
-                        g2d.drawImage(softWalls.get(index).getImageMode1(), softWalls.get(index).getLocX(), softWalls.get(index).getLocY() , null);
-                    else if (softWalls.get(index).getMode() == 2 )
-                        g2d.drawImage(softWalls.get(index).getImageMode2() , softWalls.get(index).getLocX() , softWalls.get(index).getLocY() , null);
-                    else if (softWalls.get(index).getMode() == 3)
-                        g2d.drawImage(softWalls.get(index).getImageMode3() , softWalls.get(index).getLocX() , softWalls.get(index).getLocY() , null);
-                    else if (softWalls.get(index).getMode() == 4)
-                        g2d.drawImage(softWalls.get(index).getImageMode4() , softWalls.get(index).getLocX() , softWalls.get(index).getLocY() , null);
+                    if (softWalls.get(softWallindex).getMode() == 1)
+                        g2d.drawImage(softWalls.get(softWallindex).getImageMode1(), softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY() , null);
+                    else if (softWalls.get(softWallindex).getMode() == 2 )
+                        g2d.drawImage(softWalls.get(softWallindex).getImageMode2() , softWalls.get(softWallindex).getLocX() , softWalls.get(softWallindex).getLocY() , null);
+                    else if (softWalls.get(softWallindex).getMode() == 3)
+                        g2d.drawImage(softWalls.get(softWallindex).getImageMode3() , softWalls.get(softWallindex).getLocX() , softWalls.get(softWallindex).getLocY() , null);
+                    else if (softWalls.get(softWallindex).getMode() == 4)
+                        g2d.drawImage(softWalls.get(softWallindex).getImageMode4() , softWalls.get(softWallindex).getLocX() , softWalls.get(softWallindex).getLocY() , null);
                     else
-                        g2d.drawImage(Images.area, softWalls.get(index).getLocX(), softWalls.get(index).getLocY(), null);
+                        g2d.drawImage(Images.area, softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY(), null);
 
-                    index ++ ;
+                    softWallindex ++ ;
                 }
 
                 else if (mapResource[i][j] == 5) {
@@ -120,11 +135,34 @@ public class Map {
                 }
 
                 else if (mapResource[i][j] == 6) {
-                    g2d.drawImage(Images.repairItem, null, i * 100 + xOffset, j * 100 + yOffset);
-                    repairPackItems.add(new RepairPackItem ( i * 100 + xOffset , j * 100 + yOffset));
+                    repairPackItems.get(repairIndex).setLocX(i * 100 + xOffset) ;
+                    repairPackItems.get(repairIndex).setLocY(j * 100 + yOffset) ;
+
+
+
+                    if (repairPackItems.get(repairIndex).getStatus())
+                        g2d.drawImage(Images.repairItem , null , repairPackItems.get(repairIndex).getLocX() , repairPackItems.get(repairIndex).getLocY()  ) ;
+                    else
+                        g2d.drawImage(Images.area , null , i * 100 + xOffset , j *100 + yOffset) ;
+
+                    repairIndex ++ ;
                 }
+
+                else if (mapResource[i][j] == 7 ) {
+                    wickets.get(wicketIndex).setLocX(i * 100 + xOffset);
+                    wickets.get(wicketIndex).setLocY(j * 100 + yOffset);
+
+                    if (wickets.get(wicketIndex).getStatus())
+                        g2d.drawImage(Images.wicket , null , i * 100 + xOffset , j * 100 + yOffset);
+                    else
+                        g2d.drawImage(Images.area , null , i * 100 + xOffset , j *100 + yOffset) ;
+
+                    wicketIndex ++ ;
+
+                }
+
                 else {
-                    g2d.drawImage(Images.area, null, i * 100 + xOffset, j * 100 + yOffset);
+                    g2d.drawImage(Images.area, null, i * 100 + xOffset, j * 100 + yOffset) ;
                 }
             }
 
@@ -249,18 +287,41 @@ public class Map {
 
     }
 
-    public static boolean intersectWithadditionalObjects () {
+    /**
+     * Check intersect repair object with tank and increase health of tank .
+     */
+    public  void intersectWithRepairObject() {
 
 
-        boolean status  = true ;
+        System.out.println(repairPackItems.get(0).getLocX());
 
         for (RepairPackItem repairPackItem : repairPackItems ) {
 
+            if ( repairPackItem.getRectangle2D().intersects( state.locX , state.locY , 100 , 100 ) && repairPackItem.getStatus()  ) {
+
+                UserTank.health += 500 ;
+                repairPackItem.setStatus(false) ;
+
+            }
 
         }
 
-return true;
+    }
 
+
+    public void intersectWithWicket () {
+
+        for (Wicket wicket : wickets) {
+
+            if (wicket.getRectangle2D().intersects(state.locX , state.locY , 100 , 100 ) && wicket.getStatus()) {
+
+                UserTank.numberOfHeavyBullet = 50 ;
+                UserTank.numberOfLightBullet = 200 ;
+                wicket.setStatus(false);
+
+            }
+
+        }
 
     }
 

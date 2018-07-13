@@ -138,8 +138,11 @@ public class GameFrame extends JFrame {
 		// Draw background
 		map.setG2d(g2d);
 		Map.setState(state);
-
 		map.paintMap();
+
+		// draw additional objects :
+		map.intersectWithRepairObject();
+		map.intersectWithWicket();
 
 		if(!mouseHandlerAdded) {
 			addMouseListener(tank.getTankMouseHandler());
