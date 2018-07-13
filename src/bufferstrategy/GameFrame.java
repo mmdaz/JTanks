@@ -246,7 +246,6 @@ public class GameFrame extends JFrame {
 					System.exit(0);
 				}
 			}).start();
-
 		}
 
 		// Print FPS info
