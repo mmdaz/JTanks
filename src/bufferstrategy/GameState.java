@@ -5,6 +5,7 @@ import battleObject.UserTank;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.Serializable;
 
 
 /**
@@ -13,7 +14,7 @@ import java.awt.event.*;
  *
  * @author Seyed Mohammad Ghaffarian
  */
-public class GameState {
+public class GameState implements Serializable {
 
 	public int locX, locY, diam , preLocX , preLocY;
 	public boolean gameOver;

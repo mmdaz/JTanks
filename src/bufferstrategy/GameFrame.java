@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.* ;
@@ -104,6 +106,42 @@ public class GameFrame extends JFrame {
 			drawables.add(new Mine(700, 1300));
 			drawables.add(new Mine(600, 1400));
 			drawables.add(new Mine(700, 1400));
+		} else if(Start.startState.equals("server")){
+			try(final DatagramSocket socket = new DatagramSocket()){
+				socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+				String ip = socket.getLocalAddress().getHostAddress();
+				JOptionPane.showMessageDialog(null , "Try connecting to:" +
+						"" + ip +"\n" +
+						"On port: 7080");
+			}
+
+			drawables.add(new Mine(400, 100));
+			drawables.add(new Mine(400, 200));
+			drawables.add(new Mine(500, 200));
+			drawables.add(new Turret(500, 1400, 200));
+			drawables.add(new Turret(500, 1300, 400));
+			drawables.add(new KhengEnemy(300, 2100, 200));
+			drawables.add(new EnemyTank(500, 2700, 100));
+			drawables.add(new Turret(500, 1700, 900));
+			drawables.add(new Turret(500, 1400, 900));
+			drawables.add(new Mine(900, 1600));
+			drawables.add(new EnemyTank(600, 1000, 800));
+			drawables.add(new EnemyTank(600, 900, 950));
+			drawables.add(new Mine(600, 1300));
+			drawables.add(new Mine(700, 1300));
+			drawables.add(new Mine(600, 1400));
+			drawables.add(new Mine(700, 1400));
+
+			//serverAccept here
+
+			//Send drawables and gameState here and update in do render
+
+		} else if(Start.startState.equals("client")){
+			String ip = JOptionPane.showInputDialog("Enter IP here:");
+			String port = JOptionPane.showInputDialog("Enter port here:");
+			//Get drawables and gamesState here
+
+			//Update drawables and gameState in doRender
 		}
 
 		map = new Map();
