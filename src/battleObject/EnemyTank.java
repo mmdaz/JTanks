@@ -75,6 +75,7 @@ public class EnemyTank implements Drawable {
     public void render() throws IOException {
         paintTank();
         paintCurrentGun();
+        forward();
     }
 
     public void fire(ArrayList<Drawable> drawables){
@@ -84,6 +85,15 @@ public class EnemyTank implements Drawable {
                 lastShootTime = System.currentTimeMillis();
                 new SoundPlayer("Resources/Sounds/enemyshot.wav").run();
             }
+        }
+    }
+
+    private void forward(){
+        if((Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance)) {
+            if(targetX > (locX + Map.xOffset))
+                locX += 2;
+            else
+                locX -= 2;
         }
     }
 
@@ -122,6 +132,7 @@ public class EnemyTank implements Drawable {
 
         }
     }
+
 
 
 }

@@ -60,8 +60,8 @@ public class GameFrame extends JFrame {
 			drawables.add(new EnemyTank(500, 2800, 100));
 			drawables.add(new Turret(500, 1700, 900));
 			drawables.add(new Mine(900, 1600));
-			drawables.add(new EnemyTank(500, 1000, 600));
-			drawables.add(new EnemyTank(500, 900, 900));
+			drawables.add(new EnemyTank(600, 1000, 800));
+			drawables.add(new EnemyTank(600, 900, 950));
 			drawables.add(new Mine(600, 1300));
 			drawables.add(new Mine(700, 1300));
 			drawables.add(new Mine(600, 1400));
@@ -77,8 +77,8 @@ public class GameFrame extends JFrame {
 			drawables.add(new Turret(500, 1700, 900));
 			drawables.add(new Turret(500, 1400, 900));
 			drawables.add(new Mine(900, 1600));
-			drawables.add(new EnemyTank(500, 1000, 600));
-			drawables.add(new EnemyTank(500, 900, 900));
+			drawables.add(new EnemyTank(600, 1000, 800));
+			drawables.add(new EnemyTank(600, 900, 950));
 			drawables.add(new Mine(600, 1300));
 			drawables.add(new Mine(700, 1300));
 			drawables.add(new Mine(600, 1400));
@@ -95,9 +95,9 @@ public class GameFrame extends JFrame {
 			drawables.add(new Turret(500, 1700, 900));
 			drawables.add(new Turret(500, 1400, 900));
 			drawables.add(new Mine(900, 1600));
-			drawables.add(new EnemyTank(500, 1000, 600));
-			drawables.add(new EnemyTank(500, 900, 1000));
-			drawables.add(new EnemyTank(500, 900, 1000));
+			drawables.add(new EnemyTank(600, 1000, 800));
+			drawables.add(new EnemyTank(600, 900, 1000));
+			drawables.add(new EnemyTank(600, 800, 900));
 			drawables.add(new Mine(600, 1300));
 			drawables.add(new Mine(700, 1300));
 			drawables.add(new Mine(600, 1400));
@@ -221,6 +221,7 @@ public class GameFrame extends JFrame {
 			bullet.paint(g2d);
 
 		for (Drawable drawable : drawables)
+			if(!(drawable instanceof UserTank))
 				tank.checkIntersect(drawable);
 
 

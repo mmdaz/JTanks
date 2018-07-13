@@ -19,7 +19,7 @@ public class KhengEnemy implements Drawable {
     private BufferedImage khengEnemyImage;
     private Graphics2D g2d;
     private boolean isRendered;
-    private int speed = 8;
+    private int speed = 4;
     private int health = 50;
 
     public KhengEnemy(int activationDistance, int locX, int locY) throws IOException {
