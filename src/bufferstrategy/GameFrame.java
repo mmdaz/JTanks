@@ -4,6 +4,8 @@ package bufferstrategy;
 import battleObject.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class GameFrame extends JFrame {
 			drawables.add(new Mine(500, 200));
 			drawables.add(new Turret(500, 1300, 400));
 			drawables.add(new KhengEnemy(300, 2100, 200));
-			drawables.add(new EnemyTank(500, 2800, 100));
+			drawables.add(new EnemyTank(500, 2700, 100));
 			drawables.add(new Turret(500, 1700, 900));
 			drawables.add(new Mine(900, 1600));
 			drawables.add(new EnemyTank(600, 1000, 800));
@@ -73,7 +75,7 @@ public class GameFrame extends JFrame {
 			drawables.add(new Turret(500, 1400, 200));
 			drawables.add(new Turret(500, 1300, 400));
 			drawables.add(new KhengEnemy(300, 2100, 200));
-			drawables.add(new EnemyTank(500, 2800, 100));
+			drawables.add(new EnemyTank(500, 2700, 100));
 			drawables.add(new Turret(500, 1700, 900));
 			drawables.add(new Turret(500, 1400, 900));
 			drawables.add(new Mine(900, 1600));
@@ -90,8 +92,8 @@ public class GameFrame extends JFrame {
 			drawables.add(new Turret(500, 1400, 200));
 			drawables.add(new Turret(500, 1300, 400));
 			drawables.add(new KhengEnemy(300, 2100, 200));
-			drawables.add(new EnemyTank(500, 2800, 100));
-			drawables.add(new EnemyTank(500, 2800, 300));
+			drawables.add(new EnemyTank(500, 2700, 100));
+			drawables.add(new EnemyTank(500, 2700, 300));
 			drawables.add(new Turret(500, 1700, 900));
 			drawables.add(new Turret(500, 1400, 900));
 			drawables.add(new Mine(900, 1600));
@@ -214,11 +216,13 @@ public class GameFrame extends JFrame {
 				drawableIterator.remove();
 			}
 
-
-		for(Bullet bullet : tank.getMainGun().getBullets())
-			bullet.paint(g2d);
-		for(Bullet bullet : tank.getSecondGun().getBullets())
-			bullet.paint(g2d);
+		for(Drawable drawable: drawables)
+			if(drawable instanceof  UserTank) {
+				for (Bullet bullet : tank.getMainGun().getBullets())
+					bullet.paint(g2d);
+				for (Bullet bullet : tank.getSecondGun().getBullets())
+					bullet.paint(g2d);
+			}
 
 		for (Drawable drawable : drawables)
 			if(!(drawable instanceof UserTank))
@@ -227,6 +231,23 @@ public class GameFrame extends JFrame {
 
 		if(!(drawables.get(0) instanceof UserTank))
 			state.gameOver = true;
+
+
+		if(state.locX - Map.xOffset >= 800 && state.locY - Map.yOffset >= 1200){
+			state.gameWon = true;
+			String str = "You Won!";
+			g2d.setColor(Color.RED);
+			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+			int strWidth = g2d.getFontMetrics().stringWidth(str);
+			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+			new Timer(2000, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.exit(0);
+				}
+			}).start();
+
+		}
 
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();
@@ -262,6 +283,12 @@ public class GameFrame extends JFrame {
 			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
 			int strWidth = g2d.getFontMetrics().stringWidth(str);
 			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+			new Timer(2000, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.exit(0);
+				}
+			}).start();
 
 		}
 	}

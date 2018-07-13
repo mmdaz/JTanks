@@ -202,8 +202,7 @@ public class UserTank implements Drawable {
                     lastShootTime = System.currentTimeMillis();
 
                     new SoundPlayer("Resources/Sounds/mashingun.wav").run();
-                } else if(numberOfLightBullet <= 0)
-                    new SoundPlayer("Resources/Sounds/emptyGun.wav").run();
+                }
             }
 
 

@@ -32,6 +32,7 @@ public class Images {
     public static BufferedImage health3;
     public static BufferedImage health2;
     public static BufferedImage health1;
+    public static BufferedImage endFlag;
 
     public Images () {
         try {
@@ -53,6 +54,7 @@ public class Images {
             health2 = ImageIO.read( new File("Resources/Images/2health.png"));
             health1 = ImageIO.read( new File("Resources/Images/1health.png"));
 
+           endFlag = ImageIO.read( new File("Resources/Images/EndFlag.png"));
 
         } catch (IOException e) {
             e.printStackTrace();

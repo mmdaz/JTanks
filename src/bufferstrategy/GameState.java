@@ -17,6 +17,7 @@ public class GameState {
 
 	public int locX, locY, diam , preLocX , preLocY;
 	public boolean gameOver;
+	public boolean gameWon;
 	public int mouseX, mouseY;
 	public double angle;
 	public double tankAngle;
