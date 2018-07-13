@@ -4,6 +4,9 @@ package Map;
 
 
 
+
+import bufferstrategy.Start;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -11,7 +14,15 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 
 /**
+
  *
+=======
+ *This class is use to create a new map and play in it
+ *
+ * @author Azhdari Muhammad
+ * @since summer 2018
+ * @version 1.0
+
  */
 public class MapEditor extends JFrame {
 
@@ -32,6 +43,7 @@ public class MapEditor extends JFrame {
         mapResource = new int[15][30] ;
 
         save = new JButton("Save Map") ;
+        save = new JButton("Save Map & start a new game with it") ;
         cancel = new JButton("Cancel") ;
         buttonsPanel.add(save , BorderLayout.WEST) ;
         buttonsPanel.add(cancel , BorderLayout.EAST) ;
@@ -74,11 +86,17 @@ public class MapEditor extends JFrame {
                     for (int j = 0; j < 30 ; j++) {
 
                         if (comboBoxes[i][j].getItemAt(comboBoxes[i][j].getSelectedIndex()).equals("Area"))
+
                             mapResource[i][j] = 1 ;
                         else if (comboBoxes[i][j].getItemAt(comboBoxes[i][j].getSelectedIndex()).equals("Soft Wall"))
                             mapResource[i][j] = 2 ;
                         else if (comboBoxes[i][j].getItemAt(comboBoxes[i][j].getSelectedIndex()).equals("Hard Wall"))
                             mapResource[i][j] = 3 ;
+                        else if (comboBoxes[i][j].getItemAt(comboBoxes[i][j].getSelectedIndex()).equals("Soft Wall"))
+                            mapResource[i][j] = 2 ;
+                        else if (comboBoxes[i][j].getItemAt(comboBoxes[i][j].getSelectedIndex()).equals("Hard Wall"))
+                            mapResource[i][j] = 1 ;
+
                         else if (comboBoxes[i][j].getItemAt(comboBoxes[i][j].getSelectedIndex()).equals("Plant"))
                             mapResource[i][j] = 4 ;
                         else if (comboBoxes[i][j].getItemAt(comboBoxes[i][j].getSelectedIndex()).equals("Teazel"))
@@ -122,6 +140,9 @@ public class MapEditor extends JFrame {
                     writer.close();
                     fileWriter.close();
 
+                    new Start("easy");
+
+
 
 
                 }catch (IOException ex) {
@@ -143,12 +164,12 @@ public class MapEditor extends JFrame {
 
 
 
-    }
-
-
-
-
-
 
     }
 
+
+
+
+
+
+    }

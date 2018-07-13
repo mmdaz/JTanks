@@ -4,6 +4,8 @@ package bufferstrategy;
 import battleObject.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class GameFrame extends JFrame {
 	private boolean mouseHandlerAdded;
 
 
-	private ArrayList<Drawable> drawables;
+	public static ArrayList<Drawable> drawables;
 
 
 	private Map map;
@@ -51,24 +53,58 @@ public class GameFrame extends JFrame {
 		fpsHistory = new ArrayList<>(100);
 		drawables = new ArrayList<>();
 		drawables.add(tank);
-
-		drawables.add(new Mine(400,100));
-		drawables.add(new Mine(400, 200));
-		drawables.add(new Mine(500,200));
-		drawables.add(new Turret(400,1300,400));
-		drawables.add(new KhengEnemy(400,2100,200));
-		drawables.add(new EnemyTank(400,2800,100));
-		drawables.add(new KhengEnemy(400,1600,600));
-		drawables.add(new KhengEnemy(400,500,600));
-		drawables.add(new KhengEnemy(400,500,800));
-		drawables.add(new Turret(400,1700,900));
-		drawables.add(new Mine(900,1600));
-		drawables.add(new EnemyTank(400,1000,600));
-		drawables.add(new EnemyTank(400,900,900));
-		drawables.add(new Mine(600,1300));
-		drawables.add(new Mine(700,1300));
-		drawables.add(new Mine(600,1400));
-		drawables.add(new Mine(700,1400));
+		if(Start.startState.equals("easy")) {
+			drawables.add(new Mine(400, 100));
+			drawables.add(new Mine(400, 200));
+			drawables.add(new Mine(500, 200));
+			drawables.add(new Turret(500, 1300, 400));
+			drawables.add(new KhengEnemy(300, 2100, 200));
+			drawables.add(new EnemyTank(500, 2700, 100));
+			drawables.add(new Turret(500, 1700, 900));
+			drawables.add(new Mine(900, 1600));
+			drawables.add(new EnemyTank(600, 1000, 800));
+			drawables.add(new EnemyTank(600, 900, 950));
+			drawables.add(new Mine(600, 1300));
+			drawables.add(new Mine(700, 1300));
+			drawables.add(new Mine(600, 1400));
+			drawables.add(new Mine(700, 1400));
+		} else if(Start.startState.equals("medium")){
+			drawables.add(new Mine(400, 100));
+			drawables.add(new Mine(400, 200));
+			drawables.add(new Mine(500, 200));
+			drawables.add(new Turret(500, 1400, 200));
+			drawables.add(new Turret(500, 1300, 400));
+			drawables.add(new KhengEnemy(300, 2100, 200));
+			drawables.add(new EnemyTank(500, 2700, 100));
+			drawables.add(new Turret(500, 1700, 900));
+			drawables.add(new Turret(500, 1400, 900));
+			drawables.add(new Mine(900, 1600));
+			drawables.add(new EnemyTank(600, 1000, 800));
+			drawables.add(new EnemyTank(600, 900, 950));
+			drawables.add(new Mine(600, 1300));
+			drawables.add(new Mine(700, 1300));
+			drawables.add(new Mine(600, 1400));
+			drawables.add(new Mine(700, 1400));
+		} else if(Start.startState.equals("hard")){
+			drawables.add(new Mine(400, 100));
+			drawables.add(new Mine(400, 200));
+			drawables.add(new Mine(500, 200));
+			drawables.add(new Turret(500, 1400, 200));
+			drawables.add(new Turret(500, 1300, 400));
+			drawables.add(new KhengEnemy(300, 2100, 200));
+			drawables.add(new EnemyTank(500, 2700, 100));
+			drawables.add(new EnemyTank(500, 2700, 300));
+			drawables.add(new Turret(500, 1700, 900));
+			drawables.add(new Turret(500, 1400, 900));
+			drawables.add(new Mine(900, 1600));
+			drawables.add(new EnemyTank(600, 1000, 800));
+			drawables.add(new EnemyTank(600, 900, 1000));
+			drawables.add(new EnemyTank(600, 800, 900));
+			drawables.add(new Mine(600, 1300));
+			drawables.add(new Mine(700, 1300));
+			drawables.add(new Mine(600, 1400));
+			drawables.add(new Mine(700, 1400));
+		}
 
 		map = new Map();
 	/*	try{
@@ -160,7 +196,7 @@ public class GameFrame extends JFrame {
 			drawable.setG2d(g2d);
 			drawable.render();
 			if(drawable instanceof KhengEnemy){
-				((KhengEnemy) drawable).setTarget(state.locX + Map.xOffset, state.locY + Map.yOffset);
+				((KhengEnemy) drawable).setTarget(state.locX, state.locY);
 			}else if(drawable instanceof EnemyTank){
 				((EnemyTank) drawable).setTarget(state.locX,state.locY);
 				((EnemyTank) drawable).fire(drawables);
@@ -173,7 +209,6 @@ public class GameFrame extends JFrame {
 					bullet.paint(g2d);
 			}
 		}
-		drawables.get(0).render();
 
 		Iterator<Drawable> drawableIterator = drawables.iterator();
 		while (drawableIterator.hasNext())
@@ -181,18 +216,37 @@ public class GameFrame extends JFrame {
 				drawableIterator.remove();
 			}
 
-
-		for(Bullet bullet : tank.getMainGun().getBullets())
-			bullet.paint(g2d);
-		for(Bullet bullet : tank.getSecondGun().getBullets())
-			bullet.paint(g2d);
+		for(Drawable drawable: drawables)
+			if(drawable instanceof  UserTank) {
+				for (Bullet bullet : tank.getMainGun().getBullets())
+					bullet.paint(g2d);
+				for (Bullet bullet : tank.getSecondGun().getBullets())
+					bullet.paint(g2d);
+			}
 
 		for (Drawable drawable : drawables)
+			if(!(drawable instanceof UserTank))
 				tank.checkIntersect(drawable);
 
 
 		if(!(drawables.get(0) instanceof UserTank))
 			state.gameOver = true;
+
+
+		if(state.locX - Map.xOffset >= 800 && state.locY - Map.yOffset >= 1200){
+			state.gameWon = true;
+			String str = "You Won!";
+			g2d.setColor(Color.RED);
+			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+			int strWidth = g2d.getFontMetrics().stringWidth(str);
+			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+			new Timer(2000, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.exit(0);
+				}
+			}).start();
+		}
 
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();
@@ -228,6 +282,12 @@ public class GameFrame extends JFrame {
 			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
 			int strWidth = g2d.getFontMetrics().stringWidth(str);
 			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+			new Timer(2000, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.exit(0);
+				}
+			}).start();
 
 		}
 	}

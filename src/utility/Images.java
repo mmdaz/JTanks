@@ -27,7 +27,12 @@ public class Images {
     public static BufferedImage cannonShell;
     public static BufferedImage machineGunShell;
     public static BufferedImage upgradeWeapon;
-
+    public static BufferedImage health5;
+    public static BufferedImage health4;
+    public static BufferedImage health3;
+    public static BufferedImage health2;
+    public static BufferedImage health1;
+    public static BufferedImage endFlag;
 
     public Images () {
         try {
@@ -43,6 +48,13 @@ public class Images {
             cannonShell = ImageIO.read( new File("Resources/Images/CannonFood.png")) ;
             machineGunShell = ImageIO.read( new File("Resources/Images/MashinGunFood.png")) ;
             upgradeWeapon = ImageIO.read( new File("Resources/Images/upgrader.png")) ;
+            health5 = ImageIO.read( new File("Resources/Images/5health.png"));
+            health4 = ImageIO.read( new File("Resources/Images/4health.png"));
+            health3 = ImageIO.read( new File("Resources/Images/3health.png"));
+            health2 = ImageIO.read( new File("Resources/Images/2health.png"));
+            health1 = ImageIO.read( new File("Resources/Images/1health.png"));
+
+           endFlag = ImageIO.read( new File("Resources/Images/EndFlag.png"));
 
         } catch (IOException e) {
             e.printStackTrace();

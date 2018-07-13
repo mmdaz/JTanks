@@ -22,7 +22,7 @@ import utility.* ;
 
 public class StartMenu extends JFrame{
 
-    private JButton continueButton;
+    private JButton mapEditor;
     private JButton easyButton;
     private JButton mediumButton;
     private JButton hardButton;
@@ -41,16 +41,16 @@ public class StartMenu extends JFrame{
         setContentPane(mainPanel);
         mainPanel.setBackground(Color.BLACK);
 
-        continueButton = new JButton("Continue old game:)");
-        continueButton.setFont(new Font("Arial",Font.BOLD,25));
-        continueButton.setHorizontalAlignment(SwingConstants.LEFT);
-        continueButton.setOpaque(false);
-        continueButton.setContentAreaFilled(false);
-        continueButton.setBorderPainted(false);
-        continueButton.setForeground(Color.WHITE);
-        continueButton.addActionListener(new MyActionListener());
-        continueButton.addMouseListener(new MyMouseListener());
-        continueButton.addFocusListener(new MyFocusListener());
+        mapEditor = new JButton("Map editor");
+        mapEditor.setFont(new Font("Arial",Font.BOLD,25));
+        mapEditor.setHorizontalAlignment(SwingConstants.LEFT);
+        mapEditor.setOpaque(false);
+        mapEditor.setContentAreaFilled(false);
+        mapEditor.setBorderPainted(false);
+        mapEditor.setForeground(Color.WHITE);
+        mapEditor.addActionListener(new MyActionListener());
+        mapEditor.addMouseListener(new MyMouseListener());
+        mapEditor.addFocusListener(new MyFocusListener());
 
         easyButton = new JButton("New Easy game");
         easyButton.setFont(new Font("Arial",Font.BOLD,25));
@@ -85,19 +85,19 @@ public class StartMenu extends JFrame{
         hardButton.addMouseListener(new MyMouseListener());
         hardButton.addFocusListener(new MyFocusListener());
 
-        continueButton.setSize(310,30);
-        continueButton.setLocation(10,220);
+        mapEditor.setSize(310,30);
+        mapEditor.setLocation(10,370);
 
         easyButton.setSize(240,30);
-        easyButton.setLocation(10,270);
+        easyButton.setLocation(10,220);
 
         mediumButton.setSize(290,30);
-        mediumButton.setLocation(10,320);
+        mediumButton.setLocation(10,270);
 
         hardButton.setSize(240,30);
-        hardButton.setLocation(10,370);
+        hardButton.setLocation(10,320);
 
-        mainPanel.add(continueButton);
+        mainPanel.add(mapEditor);
         mainPanel.add(easyButton);
         mainPanel.add(mediumButton);
         mainPanel.add(hardButton);
@@ -117,8 +117,8 @@ public class StartMenu extends JFrame{
     {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            if (actionEvent.getActionCommand().equals(continueButton.getText())){
-                new Start("continue");
+            if (actionEvent.getActionCommand().equals(mapEditor.getText())){
+                new MapEditor();
                 dispose();
             }
             else if (actionEvent.getActionCommand().equals(easyButton.getText())){
@@ -184,9 +184,9 @@ public class StartMenu extends JFrame{
     }
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//        new StartMenu();
+        new StartMenu();
         new Images() ;
-        new MapEditor() ;
+//        new MapEditor() ;
     }
 
 

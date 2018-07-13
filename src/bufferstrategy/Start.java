@@ -2,6 +2,7 @@
 package bufferstrategy;
 
 
+import utility.LoopSoundPlayer;
 import utility.SoundPlayer;
 
 import java.awt.EventQueue;
@@ -14,9 +15,10 @@ import javax.swing.JFrame;
  * @author Seyed Mohammad Ghaffarian
  */
 public class Start {
+	public static String startState;
 	
     public Start(String startStats) {
-
+		startState = startStats;
 		new SoundPlayer("Resources/Sounds/agree.wav").run();
 		// Initialize the global thread-pool
 		ThreadPool.init();
@@ -40,6 +42,8 @@ public class Start {
 				GameLoop game = new GameLoop(frame);
 				game.init();
 				ThreadPool.execute(game);
+				new LoopSoundPlayer("Resources/Sounds/motor1.wav");
+				new LoopSoundPlayer("Resources/Sounds/gameSound1.wav");
 				// and the game starts ...
 			}
 		});

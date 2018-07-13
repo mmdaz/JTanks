@@ -19,7 +19,7 @@ public class KhengEnemy implements Drawable {
     private BufferedImage khengEnemyImage;
     private Graphics2D g2d;
     private boolean isRendered;
-    private int speed = 8;
+    private int speed = 4;
     private int health = 50;
 
     public KhengEnemy(int activationDistance, int locX, int locY) throws IOException {
@@ -44,7 +44,6 @@ public class KhengEnemy implements Drawable {
     @Override
     public void render() throws IOException {
         if((Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance) || isRendered) {
-            forward();
             AffineTransform khEnemyAT = new AffineTransform();
             khEnemyAT.setToTranslation(locX + 50 + Map.xOffset, locY + 50 + Map.yOffset);
             double angle = Math.atan2(targetY - (locY + 50 + Map.yOffset * 2), targetX - (locX + 50 + Map.yOffset * 2));
@@ -53,6 +52,7 @@ public class KhengEnemy implements Drawable {
             //paint the tank
             isRendered = true;
             g2d.drawImage(khengEnemyImage, khEnemyAT, null);
+            forward();
         }
     }
 
@@ -92,7 +92,7 @@ public class KhengEnemy implements Drawable {
     public void checkIntersect(Drawable drawable) {
 
             if (drawable.getRect().intersects(getRect())) {
-                drawable.damage(50);
+                drawable.damage(250);
                 health = 0;
             //System.out.println("Shit");
             }

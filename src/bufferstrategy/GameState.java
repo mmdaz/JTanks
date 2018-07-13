@@ -1,6 +1,9 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 import Map.Map;
+import battleObject.UserTank;
+
+import javax.swing.*;
 import java.awt.event.*;
 
 
@@ -14,6 +17,7 @@ public class GameState {
 
 	public int locX, locY, diam , preLocX , preLocY;
 	public boolean gameOver;
+	public boolean gameWon;
 	public int mouseX, mouseY;
 	public double angle;
 	public double tankAngle;
@@ -161,7 +165,7 @@ public class GameState {
 			if (keyUP) {
                     locY -= 6;
                     Map.yOffset += 6;
-			if (	!Map.checkHitWithObjects() ) {
+			if (	!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy() ) {
 				locX = preLocX;
 				locY = preLocY;
 				Map.yOffset -= 6 ;
@@ -171,7 +175,7 @@ public class GameState {
 			if (keyDOWN) {
                     locY += 6;
                     Map.yOffset -= 6;
-				if (	!Map.checkHitWithObjects() ) {
+				if (	!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy() ) {
 					locX = preLocX;
 					locY = preLocY;
 					Map.yOffset += 6 ;
@@ -180,7 +184,7 @@ public class GameState {
 			if (keyLEFT) {
                     locX -= 6;
                     Map.xOffset += 6;
-				if (	!Map.checkHitWithObjects() ) {
+				if (	!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy() ) {
 					locX = preLocX;
 					locY = preLocY;
 					Map.xOffset -= 6 ;
@@ -189,7 +193,7 @@ public class GameState {
 			if (keyRIGHT) {
                     locX += 6;
                     Map.xOffset -= 6;
-				if (	!Map.checkHitWithObjects() ) {
+				if (	!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy() ) {
 					locX = preLocX;
 					locY = preLocY;
 					Map.xOffset += 6 ;
@@ -266,6 +270,17 @@ public class GameState {
 				case KeyEvent.VK_D:
 					keyRIGHT = true;
 					break;
+			}
+
+			if(e.getKeyCode() == KeyEvent.VK_ALT) {
+				String cheat = JOptionPane.showInputDialog("Input cheat here ");
+					if(cheat.equals("infa")) {
+						UserTank.numberOfLightBullet = 9999;
+						UserTank.numberOfHeavyBullet = 9999;
+					}else if(cheat.equals("infh")) {
+					UserTank.health = 9999;
+				}
+
 			}
 		}
 

@@ -1,9 +1,12 @@
 package Map;
 
-import battleObject.Bullet;
-import battleObject.UserTank;
+import battleObject.*;
+import bufferstrategy.GameFrame;
 import bufferstrategy.GameState;
 import utility.Images;
+
+import utility.SoundPlayer;
+
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.io.*;
@@ -197,7 +200,7 @@ public class Map {
         }
 
 
-
+        g2d.drawImage(Images.endFlag,null, 850 + Map.xOffset,1300 + Map.yOffset);
 
     }
 
@@ -321,8 +324,6 @@ public class Map {
     public  void intersectWithRepairObject() {
 
 
-        System.out.println(repairPackItems.get(0).getLocX());
-
         for (RepairPackItem repairPackItem : repairPackItems ) {
 
             if ( repairPackItem.getRectangle2D().intersects( state.locX , state.locY , 100 , 100 ) && repairPackItem.getStatus()  ) {
@@ -332,6 +333,8 @@ public class Map {
                 else
                     UserTank.health = 1000;
                 repairPackItem.setStatus(false) ;
+
+                new SoundPlayer("Resources/Sounds/repair.wav").run();
 
             }
 
@@ -394,6 +397,30 @@ public class Map {
         }
 
     }
+
+
+
+    public static boolean collisionUserTankAndEnemy () {
+
+        for (Drawable drawable : GameFrame.drawables) {
+
+            if ( drawable instanceof EnemyTank || drawable instanceof Turret) {
+
+                if ( drawable.getRect().intersects( state.locX , state.locY , 100 , 100  ) ) {
+
+                    intersectedLocx = state.locX ;
+                    intersectedLocY = state.locY ;
+                    return false ;
+
+                }
+            }
+
+        }
+
+        return true ;
+
+    }
+
 
     public static void setState(GameState state) {
         Map.state = state;
