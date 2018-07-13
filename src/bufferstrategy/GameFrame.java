@@ -34,7 +34,7 @@ public class GameFrame extends JFrame {
 
 	private BufferStrategy bufferStrategy;
 
-	private UserTank tank = new UserTank(1000);
+	private UserTank tank = new UserTank(500);
 	private boolean mouseHandlerAdded;
 
 

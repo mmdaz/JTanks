@@ -33,8 +33,8 @@ public class UserTank implements Drawable {
     private long lastShootTime;
     public boolean mousePressed;
     private BufferedImage ownTank;
-    public static int numberOfHeavyBullet = 50;
-    public static int numberOfLightBullet = 200;
+    public static int numberOfHeavyBullet = 20;
+    public static int numberOfLightBullet = 50;
     private BufferedImage numberOfHeavyBulletImage;
     private BufferedImage numberOfLightBulletImage;
     public static int health;
