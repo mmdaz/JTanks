@@ -371,23 +371,33 @@ public class GameFrame extends JFrame {
 			addMouseListener(tank.getTankMouseHandler());
 			mouseHandlerAdded = true;
 		}
+
 		for(Drawable drawable : drawables) {
 			if(!(drawable instanceof UserTank))
 				drawable.checkIntersect(tank);
 			if(drawable instanceof UserTank){
-				((UserTank) drawable).setState(state);
-				((UserTank) drawable).fireSecondGun();
+				if(Start.startState.equals("client"))
+					((UserTank) drawable).setState(player2State);
+				else
+					((UserTank) drawable).setState(state);
+					((UserTank) drawable).fireSecondGun();
 			}
 			drawable.render(g2d);
 			if(drawable instanceof KhengEnemy){
 				((KhengEnemy) drawable).setTarget(state.locX, state.locY);
 			}else if(drawable instanceof EnemyTank){
-				((EnemyTank) drawable).setTarget(state.locX,state.locY);
+				if(Start.startState.equals("client"))
+					((EnemyTank) drawable).setTarget(player2State.locX,player2State.locY);
+				else
+					((EnemyTank) drawable).setTarget(state.locX,state.locY);
 				((EnemyTank) drawable).fire(drawables);
 				for(Bullet bullet : ((EnemyTank) drawable).getGun().getBullets())
 					bullet.paint(g2d);
 			} else if(drawable instanceof Turret){
-				((Turret) drawable).setTarget(state.locX,state.locY);
+				if(Start.startState.equals("client"))
+					((Turret) drawable).setTarget(player2State.locX,player2State.locY);
+				else
+					((Turret) drawable).setTarget(state.locX,state.locY);
 				((Turret) drawable).fire();
 				for(Bullet bullet : ((Turret) drawable).getGun().getBullets())
 					bullet.paint(g2d);
