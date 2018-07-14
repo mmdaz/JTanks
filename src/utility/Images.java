@@ -1,6 +1,7 @@
 package utility;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +34,18 @@ public class Images {
     public static BufferedImage health2;
     public static BufferedImage health1;
     public static BufferedImage endFlag;
+    public static BufferedImage userTank ;
+    public static BufferedImage turret ;
+    public static BufferedImage mine ;
+    public static BufferedImage khengEnemy ;
+    public static BufferedImage enemyTank ;
+    public static BufferedImage bigEnemyGun ;
+    public static BufferedImage turretHeadGun ;
+    public static BufferedImage tankGun01 ;
+    public static BufferedImage tankGun1 ;
+    public static BufferedImage tankGun02 ;
+    public static BufferedImage tankGun2 ;
+
 
     public Images () {
         try {
@@ -53,8 +66,18 @@ public class Images {
             health3 = ImageIO.read( new File("Resources/Images/3health.png"));
             health2 = ImageIO.read( new File("Resources/Images/2health.png"));
             health1 = ImageIO.read( new File("Resources/Images/1health.png"));
-
            endFlag = ImageIO.read( new File("Resources/Images/EndFlag.png"));
+           userTank = ImageIO.read( new File("Resources/Images/EndFlag.png"));
+           khengEnemy = ImageIO.read( new File("Resources/Images/KhengEnemy.png"));
+           enemyTank = ImageIO.read( new File("Resources/Images/BigEnemy.png"));
+           mine = ImageIO.read( new File("Resources/Images/mine.png"));
+           turret = ImageIO.read( new File("Resources/Images/TurretBody.png"));
+           turretHeadGun = ImageIO.read( new File("Resources/Images/TurretGun.png"));
+           bigEnemyGun = ImageIO.read( new File("Resources/Images/BigEnemyGun.png"));
+           tankGun1 = ImageIO.read( new File("Resources/Images/tankGun1.png"));
+           tankGun01 = ImageIO.read( new File("Resources/Images/tankGun01.png"));
+           tankGun2 = ImageIO.read( new File("Resources/Images/tankGun2.png"));
+           tankGun02 = ImageIO.read( new File("Resources/Images/tankGun02.png"));
 
         } catch (IOException e) {
             e.printStackTrace();

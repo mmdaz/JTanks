@@ -119,7 +119,7 @@ public class GameFrame extends JFrame {
 			drawables.add(new Turret(500, 1700, 900));
 			drawables.add(new Turret(500, 1400, 900));
 			drawables.add(new Mine(900, 1600));
-			drawables.add(new EnemyTank(600, 1000, 800));
+			drawables.add(new EnemyTank(600, 1000,  800));
 			drawables.add(new EnemyTank(600, 900, 1000));
 			drawables.add(new EnemyTank(600, 800, 900));
 			drawables.add(new Mine(600, 1300));
@@ -128,7 +128,7 @@ public class GameFrame extends JFrame {
 			drawables.add(new Mine(700, 1400));
 		} else if(Start.startState.equals("server")){
 			try(final DatagramSocket socket = new DatagramSocket()){
-				socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+				socket.connect(InetAddress.getByName("8.8.8.8"), 7080);
 				String ip = socket.getLocalAddress().getHostAddress();
 				JOptionPane.showMessageDialog(null , "Try connecting to:" +
 						"" + ip +"\n" +
@@ -181,8 +181,8 @@ public class GameFrame extends JFrame {
 				System.exit(0);
 			}
 
-			OutputStream out = serverForClient.getOutputStream();
-			InputStream in = serverForClient.getInputStream();
+			out = serverForClient.getOutputStream();
+			in = serverForClient.getInputStream();
 
 			ObjectInputStream objectInputStream = new ObjectInputStream(in);
 
