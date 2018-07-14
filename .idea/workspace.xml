@@ -1,37 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="686f1513-8bf6-4598-8cd1-bb6a1deb2fd2" name="Default" comment="Intersect between bullets implemented (Need a fix).">
-      <change afterPath="$PROJECT_DIR$/Resources/Images/1health.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Images/2health.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Images/3health.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Images/4health.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Images/5health.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Images/EndFlag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Sounds/gameSound1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Sounds/motor1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Sounds/repair.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utility/LoopSoundPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Save/Map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Save/Map.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/GameState$KeyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/GameState$KeyHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/GameState$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/GameState$MouseHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/Start$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/Start$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/Start.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JTanks/bufferstrategy/Start.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JTanks/menu/StartMenu$MyActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JTanks/menu/StartMenu$MyActionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JTanks/menu/StartMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JTanks/menu/StartMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Map/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map/MapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/EnemyTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/EnemyTank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/KhengEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/KhengEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battleObject/UserTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/battleObject/UserTank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bufferstrategy/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bufferstrategy/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bufferstrategy/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bufferstrategy/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bufferstrategy/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bufferstrategy/Start.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menu/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/StartMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/Images.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/Images.java" afterDir="false" />
-    </list>
+    <list default="true" id="686f1513-8bf6-4598-8cd1-bb6a1deb2fd2" name="Default" comment="Intersect between bullets implemented (Need a fix)." />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -120,20 +90,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bufferstrategy/GameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="195" column="86" selection-start-line="195" selection-start-column="86" selection-end-line="195" selection-end-column="86" />
+            <state relative-caret-position="15">
+              <caret line="146" column="49" lean-forward="true" selection-start-line="146" selection-start-column="49" selection-end-line="146" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/battleObject/EnemyTank.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/battleObject/Mine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="118" column="85" selection-start-line="118" selection-start-column="85" selection-end-line="118" selection-end-column="85" />
+            <state relative-caret-position="203">
+              <caret line="55" column="69" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -428,7 +398,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3294702" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.85235435" weight="0.21192053" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.85235435" visible="true" weight="0.15562914" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5019952" side_tool="true" weight="0.0397351" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.029801324" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49960095" weight="0.32781458" />
@@ -477,7 +447,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Intersect between bullets implemented (Need a fix)." />
     <MESSAGE value="Additional objects added ." />
-    <option name="LAST_COMMIT_MESSAGE" value="Additional objects added ." />
+    <MESSAGE value="Map  Editor added and collision with enemy tank and user tank added ." />
+    <MESSAGE value="Map Editor added and collision with enemy and user tanks handled ." />
+    <option name="LAST_COMMIT_MESSAGE" value="Map Editor added and collision with enemy and user tanks handled ." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -536,13 +508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="415">
           <caret line="102" selection-start-line="102" selection-end-line="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/battleObject/Mine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="55" column="69" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
         </state>
       </provider>
     </entry>
@@ -699,8 +664,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/bufferstrategy/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="195" column="86" selection-start-line="195" selection-start-column="86" selection-end-line="195" selection-end-column="86" />
+        <state relative-caret-position="15">
+          <caret line="146" column="49" lean-forward="true" selection-start-line="146" selection-start-column="49" selection-end-line="146" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battleObject/Mine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="55" column="69" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
         </state>
       </provider>
     </entry>
