@@ -28,12 +28,10 @@ public class UserTank implements Drawable {
     private UserTankGun secondGun;
     private static UserTankGun currentGun;
     private boolean isMainGun;
-    private Graphics2D g2d;
     private MouseHandler tankMouseHandler;
     private AffineTransform gunAT;
     private long lastShootTime;
     public boolean mousePressed;
-    private BufferedImage ownTank;
     public static int numberOfHeavyBullet = 20;
     public static int numberOfLightBullet = 50;
     private BufferedImage numberOfHeavyBulletImage;
@@ -57,7 +55,6 @@ public class UserTank implements Drawable {
 
         tankMouseHandler = new MouseHandler();
 
-        ownTank = ImageIO.read(new File("Resources/Images/tank.png"));
 
         numberOfHeavyBulletImage = ImageIO.read(new File("Resources/Images/NumberOfHeavyBullet.png"));
 
@@ -70,20 +67,20 @@ public class UserTank implements Drawable {
      * Paint Thank body every moment
      * @throws IOException
      */
-    public void paintTank() throws IOException {
+    public void paintTank(Graphics2D g2d) throws IOException {
         AffineTransform tankAt = new AffineTransform();
         tankAt.setToTranslation(state.locX + 50, state.locY + 50);
         tankAt.rotate(state.tankAngle);
         tankAt.translate(-50, -50);
         //paint the tank
-        g2d.drawImage(ownTank,tankAt,null);
+        g2d.drawImage(Images.userTank,tankAt,null);
 
     }
 
     /**
      * Paint current gun
      */
-    public void paintCurrentGun() {
+    public void paintCurrentGun(Graphics2D g2d) {
         gunAT = new AffineTransform();
         gunAT.setToTranslation(state.locX + 50, state.locY + 50);
         gunAT.rotate(state.angle);
@@ -144,9 +141,6 @@ public class UserTank implements Drawable {
         this.state = state;
     }
 
-    public void setG2d(Graphics2D g2d){
-        this.g2d = g2d;
-    }
 
     @Override
     public boolean isAlive() {
@@ -208,11 +202,11 @@ public class UserTank implements Drawable {
 
 
 
-    public void render() throws IOException {
+    public void render(Graphics2D g2d) throws IOException {
 
-        paintTank();
+        paintTank(g2d);
 
-        paintCurrentGun();
+        paintCurrentGun(g2d);
 
 
         g2d.setColor(Color.ORANGE);

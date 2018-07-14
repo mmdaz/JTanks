@@ -5,6 +5,7 @@ package battleObject;
  * @author Mohamad Chaman-Motlagh
  */
 import Map.Map;
+import utility.Images;
 import utility.SoundPlayer;
 
 import javax.imageio.ImageIO;
@@ -19,20 +20,17 @@ import java.util.Iterator;
 
 public class EnemyTank implements Drawable {
     public EnemyGun gun;
-    private Graphics2D g2d;
     private AffineTransform gunAT;
     private int locX;
     private int locY;
     private int targetX;
     private int targetY;
-    private BufferedImage tankBody;
     private long lastShootTime;
     private int activationDistance;
     private int health = 80;
 
     public EnemyTank(int activationDistance,int locX, int locY) throws IOException {
         gun = new EnemyGun(ImageIO.read(new File("Resources/Images/BigEnemyGun.png")) , ImageIO.read(new File("Resources/Images/Enemy2Bullet.png")),30);
-        tankBody = ImageIO.read(new File("Resources/Images/BigEnemy.png"));
 
         this.locX = locX;
         this.locY = locY;
@@ -42,19 +40,14 @@ public class EnemyTank implements Drawable {
     /*
      * Paint gun
      */
-    private void paintCurrentGun() {
+    private void paintCurrentGun(Graphics2D g2d) {
         gunAT = new AffineTransform();
         gunAT.setToTranslation(locX + 50 + Map.xOffset, locY + 50 + Map.yOffset);
         double angle = Math.atan2(targetY - (locY + 50 + Map.yOffset), targetX - (locX + Map.xOffset + 50));
         gunAT.rotate(angle);
         gunAT.translate(-20, -20);
-        g2d.drawImage(gun.getGunImage(), gunAT,null);
+        g2d.drawImage(Images.bigEnemyGun, gunAT,null);
 
-    }
-
-    @Override
-    public void setG2d(Graphics2D g2d){
-        this.g2d = g2d;
     }
 
     public void setTarget(int X, int Y){
@@ -66,15 +59,15 @@ public class EnemyTank implements Drawable {
      * Paint Thank body every moment
      * @throws IOException
      */
-    private void paintTank() throws IOException {
+    private void paintTank(Graphics2D g2d) throws IOException {
         //paint the tank
-        g2d.drawImage(tankBody,null,locX + Map.xOffset, locY + Map.yOffset);
+        g2d.drawImage(Images.enemyTank,null,locX + Map.xOffset, locY + Map.yOffset);
     }
 
     @Override
-    public void render() throws IOException {
-        paintTank();
-        paintCurrentGun();
+    public void render(Graphics2D g2d) throws IOException {
+        paintTank(g2d);
+        paintCurrentGun(g2d);
         forward();
     }
 

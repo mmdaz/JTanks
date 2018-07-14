@@ -67,7 +67,7 @@ public class Images {
             health2 = ImageIO.read( new File("Resources/Images/2health.png"));
             health1 = ImageIO.read( new File("Resources/Images/1health.png"));
            endFlag = ImageIO.read( new File("Resources/Images/EndFlag.png"));
-           userTank = ImageIO.read( new File("Resources/Images/EndFlag.png"));
+           userTank = ImageIO.read( new File("Resources/Images/tank.png"));
            khengEnemy = ImageIO.read( new File("Resources/Images/KhengEnemy.png"));
            enemyTank = ImageIO.read( new File("Resources/Images/BigEnemy.png"));
            mine = ImageIO.read( new File("Resources/Images/mine.png"));

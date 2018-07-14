@@ -6,6 +6,7 @@ package battleObject;
  * @author Mohamad Chaman-Motlagh
  */
 import Map.Map;
+import utility.Images;
 import utility.SoundPlayer;
 
 import javax.imageio.ImageIO;
@@ -25,7 +26,6 @@ public class Turret implements Drawable{
     private int targetX;
     private int targetY;
     private AffineTransform gunAT;
-    private Graphics2D g2d;
     public EnemyGun gun;
     private long lastShootTime;
     private int activationDistance;
@@ -47,14 +47,9 @@ public class Turret implements Drawable{
 
 
     @Override
-    public void render() throws IOException {
-        paintTurret();
-        paintCurrentGun();
-    }
-
-    @Override
-    public void setG2d(Graphics2D g2d) {
-        this.g2d = g2d;
+    public void render(Graphics2D g2d) throws IOException {
+        paintTurret(g2d);
+        paintCurrentGun(g2d);
     }
 
     @Override
@@ -81,17 +76,17 @@ public class Turret implements Drawable{
         targetY = Y;
     }
 
-    private void paintCurrentGun() {
+    private void paintCurrentGun(Graphics2D g2d) {
         gunAT = new AffineTransform();
         gunAT.setToTranslation(locX + 50 + Map.xOffset, locY + 50 + Map.yOffset);
         double angle = Math.atan2(targetY - (locY + 50 + Map.yOffset), targetX - (locX + Map.xOffset + 50));
         gunAT.rotate(angle);
         gunAT.translate(-20, -20);
-        g2d.drawImage(gun.getGunImage(), gunAT,null);
+        g2d.drawImage(Images.turretHeadGun, gunAT,null);
 
     }
 
-    private void paintTurret() throws IOException {
+    private void paintTurret(Graphics2D g2d) throws IOException {
         //paint the turret
         g2d.drawImage(turretBody,null,locX + Map.xOffset, locY + Map.yOffset);
     }

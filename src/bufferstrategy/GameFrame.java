@@ -287,8 +287,7 @@ public class GameFrame extends JFrame {
 				((UserTank) drawable).setState(state);
 				((UserTank) drawable).fireSecondGun();
 			}
-			drawable.setG2d(g2d);
-			drawable.render();
+			drawable.render(g2d);
 			if(drawable instanceof KhengEnemy){
 				((KhengEnemy) drawable).setTarget(state.locX, state.locY);
 			}else if(drawable instanceof EnemyTank){

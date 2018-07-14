@@ -11,8 +11,7 @@ import java.io.Serializable;
  * @author Mohamad Chaman-Motlagh
  */
 public interface Drawable extends Serializable {
-    public void render() throws IOException;
-    public void setG2d(Graphics2D g2d);
+    public void render(Graphics2D g2d) throws IOException;
     public boolean isAlive();
     public void damage(int damage);
     public Rectangle2D getRect () ;

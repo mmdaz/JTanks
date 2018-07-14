@@ -1,6 +1,7 @@
 package battleObject;
 
 import Map.Map;
+import utility.Images;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,8 +17,6 @@ public class KhengEnemy implements Drawable {
     private int locY;
     private int targetX;
     private int targetY;
-    private BufferedImage khengEnemyImage;
-    private Graphics2D g2d;
     private boolean isRendered;
     private int speed = 4;
     private int health = 50;
@@ -27,7 +26,6 @@ public class KhengEnemy implements Drawable {
         this.locX = locX;
         this.locY = locY;
 
-        khengEnemyImage = ImageIO.read(new File("Resources/Images/KhengEnemy.png"));
 
     }
 
@@ -42,7 +40,7 @@ public class KhengEnemy implements Drawable {
     }
 
     @Override
-    public void render() throws IOException {
+    public void render(Graphics2D g2d) throws IOException {
         if((Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance) || isRendered) {
             AffineTransform khEnemyAT = new AffineTransform();
             khEnemyAT.setToTranslation(locX + 50 + Map.xOffset, locY + 50 + Map.yOffset);
@@ -51,7 +49,7 @@ public class KhengEnemy implements Drawable {
             khEnemyAT.translate(-50, -50);
             //paint the tank
             isRendered = true;
-            g2d.drawImage(khengEnemyImage, khEnemyAT, null);
+            g2d.drawImage(Images.khengEnemy, khEnemyAT, null);
             forward();
         }
     }
@@ -64,13 +62,6 @@ public class KhengEnemy implements Drawable {
         }
     }
 
-    /**
-     * Sets G2D
-     * @param g2d is given G2D
-     */
-    public void setG2d(Graphics2D g2d) {
-        this.g2d = g2d;
-    }
 
     @Override
     public boolean isAlive() {
