@@ -15,7 +15,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.* ;
-import Map.Map ;
+import Map.* ;
 
 /**
  * The window on which the rendering is performed.
@@ -30,7 +30,7 @@ import Map.Map ;
 public class GameFrame extends JFrame {
 	//TODO: Fix
 	public static final int GAME_HEIGHT = 800;                  // 600p game resolution
-	public static final int GAME_WIDTH = 1600;  // 2:1 aspect ratio
+	public static final int GAME_WIDTH = 1400;  // 2:1 aspect ratio
 
 	//uncomment all /*...*/ in the class for using UserTank icon instead of a simple circle
 	/*private BufferedImage image;*/
@@ -48,6 +48,7 @@ public class GameFrame extends JFrame {
 
 
 	private Map map;
+
 
 	private ServerSocket server;
 	private Socket client;
@@ -69,7 +70,7 @@ public class GameFrame extends JFrame {
 		drawables = new ArrayList<>();
 		drawables.add(tank);
 		if(Start.startState.equals("easy")) {
-			map = new Map();
+			map = new MapLevel2();
 
 			drawables.add(new Mine(400, 100));
 			drawables.add(new Mine(400, 200));

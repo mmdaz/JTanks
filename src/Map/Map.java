@@ -101,7 +101,7 @@ public class Map implements Serializable{
                 if (xOffset > 0) xOffset = 0;
                 if (yOffset > 0) yOffset = 0;
                 if (yOffset + 1500 < 800) yOffset = -700;
-                if (xOffset + 3000 < 1600) xOffset = -1400;
+                if (xOffset + 3000 < 1400) xOffset = -1600;
 
                 // draw map :
 
@@ -208,7 +208,7 @@ public class Map implements Serializable{
      * The Method that read map data from file and initialize mapResource array .
      *
      */
-    private void initializeMap() {
+    protected void initializeMap() {
 
         try {
             File map = new File("Resources/Save/Map.txt");
