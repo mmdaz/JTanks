@@ -28,29 +28,21 @@ public class StartMenu extends JFrame{
     private JButton hardButton;
     private JPanel mainPanel;
 
+    private JButton beServer;
+    private JButton connectToServer;
+
     public StartMenu()
     {
         super("JTANKS");
         setSize(979,606);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);
 
         mainPanel = new JPanel(null);
         setContentPane(mainPanel);
         mainPanel.setBackground(Color.BLACK);
-
-        mapEditor = new JButton("Map editor");
-        mapEditor.setFont(new Font("Arial",Font.BOLD,25));
-        mapEditor.setHorizontalAlignment(SwingConstants.LEFT);
-        mapEditor.setOpaque(false);
-        mapEditor.setContentAreaFilled(false);
-        mapEditor.setBorderPainted(false);
-        mapEditor.setForeground(Color.WHITE);
-        mapEditor.addActionListener(new MyActionListener());
-        mapEditor.addMouseListener(new MyMouseListener());
-        mapEditor.addFocusListener(new MyFocusListener());
 
         easyButton = new JButton("New Easy game");
         easyButton.setFont(new Font("Arial",Font.BOLD,25));
@@ -85,8 +77,41 @@ public class StartMenu extends JFrame{
         hardButton.addMouseListener(new MyMouseListener());
         hardButton.addFocusListener(new MyFocusListener());
 
-        mapEditor.setSize(310,30);
-        mapEditor.setLocation(10,370);
+        mapEditor = new JButton("Map editor");
+        mapEditor.setFont(new Font("Arial",Font.BOLD,25));
+        mapEditor.setHorizontalAlignment(SwingConstants.LEFT);
+        mapEditor.setOpaque(false);
+        mapEditor.setContentAreaFilled(false);
+        mapEditor.setBorderPainted(false);
+        mapEditor.setForeground(Color.WHITE);
+        mapEditor.addActionListener(new MyActionListener());
+        mapEditor.addMouseListener(new MyMouseListener());
+        mapEditor.addFocusListener(new MyFocusListener());
+
+
+        beServer = new JButton("Start 2 Player Game (As a server)");
+        beServer.setFont(new Font("Arial",Font.BOLD,20));
+        beServer.setHorizontalAlignment(SwingConstants.LEFT);
+        beServer.setOpaque(false);
+        beServer.setContentAreaFilled(false);
+        beServer.setBorderPainted(false);
+        beServer.setForeground(Color.WHITE);
+        beServer.addActionListener(new MyActionListener());
+        beServer.addMouseListener(new MyMouseListener());
+        beServer.addFocusListener(new MyFocusListener());
+
+        connectToServer = new JButton("Start 2 Player Game (Connect to a server)");
+        connectToServer.setFont(new Font("Arial",Font.BOLD,20));
+        connectToServer.setHorizontalAlignment(SwingConstants.LEFT);
+        connectToServer.setOpaque(false);
+        connectToServer.setContentAreaFilled(false);
+        connectToServer.setBorderPainted(false);
+        connectToServer.setForeground(Color.WHITE);
+        connectToServer.addActionListener(new MyActionListener());
+        connectToServer.addMouseListener(new MyMouseListener());
+        connectToServer.addFocusListener(new MyFocusListener());
+
+
 
         easyButton.setSize(240,30);
         easyButton.setLocation(10,220);
@@ -97,10 +122,21 @@ public class StartMenu extends JFrame{
         hardButton.setSize(240,30);
         hardButton.setLocation(10,320);
 
+        mapEditor.setSize(240,30);
+        mapEditor.setLocation(10,370);
+
+        beServer.setSize(400,30);
+        beServer.setLocation(10,420);
+
+        connectToServer.setSize(500,30);
+        connectToServer.setLocation(10,470);
+
         mainPanel.add(mapEditor);
         mainPanel.add(easyButton);
         mainPanel.add(mediumButton);
         mainPanel.add(hardButton);
+        mainPanel.add(beServer);
+        mainPanel.add(connectToServer);
 
         JLabel jLabel = new JLabel(new ImageIcon(String.valueOf(new File("Resources/Images/Startup.png"))));
         jLabel.setSize(979,606);
@@ -133,6 +169,12 @@ public class StartMenu extends JFrame{
 
             else if (actionEvent.getActionCommand().equals(hardButton.getText())){
                 new Start("hard");
+                dispose();
+            } else if(actionEvent.getActionCommand().equals(beServer.getText())){
+                new Start("server");
+                dispose();
+            }else if(actionEvent.getActionCommand().equals(connectToServer.getText())){
+                new Start("client");
                 dispose();
             }
         }

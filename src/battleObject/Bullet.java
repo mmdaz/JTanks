@@ -12,8 +12,9 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class Bullet{
+public class Bullet implements Serializable{
 
     private double angle;
     private BufferedImage bulletImage;

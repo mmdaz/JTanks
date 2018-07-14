@@ -7,7 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
-import java.io.IOException;
+import java.io.*;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.* ;
@@ -45,15 +49,28 @@ public class GameFrame extends JFrame {
 
 	private Map map;
 
+	private ServerSocket server;
+	private Socket client;
+	private OutputStream out;
+	private InputStream in;
+
+	private Socket serverForClient;
+
+	private GameState player2State;
+
 	public GameFrame(String title) throws IOException {
 		super(title);
 		setResizable(false);
 		setSize(GAME_WIDTH, GAME_HEIGHT);
 		lastRender = -1;
+
+
 		fpsHistory = new ArrayList<>(100);
 		drawables = new ArrayList<>();
 		drawables.add(tank);
 		if(Start.startState.equals("easy")) {
+			map = new Map();
+
 			drawables.add(new Mine(400, 100));
 			drawables.add(new Mine(400, 200));
 			drawables.add(new Mine(500, 200));
@@ -69,6 +86,8 @@ public class GameFrame extends JFrame {
 			drawables.add(new Mine(600, 1400));
 			drawables.add(new Mine(700, 1400));
 		} else if(Start.startState.equals("medium")){
+			map = new Map();
+
 			drawables.add(new Mine(400, 100));
 			drawables.add(new Mine(400, 200));
 			drawables.add(new Mine(500, 200));
@@ -86,6 +105,9 @@ public class GameFrame extends JFrame {
 			drawables.add(new Mine(600, 1400));
 			drawables.add(new Mine(700, 1400));
 		} else if(Start.startState.equals("hard")){
+
+			map = new Map();
+
 			drawables.add(new Mine(400, 100));
 			drawables.add(new Mine(400, 200));
 			drawables.add(new Mine(500, 200));
@@ -104,9 +126,78 @@ public class GameFrame extends JFrame {
 			drawables.add(new Mine(700, 1300));
 			drawables.add(new Mine(600, 1400));
 			drawables.add(new Mine(700, 1400));
+		} else if(Start.startState.equals("server")){
+			try(final DatagramSocket socket = new DatagramSocket()){
+				socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+				String ip = socket.getLocalAddress().getHostAddress();
+				JOptionPane.showMessageDialog(null , "Try connecting to:" +
+						"" + ip +"\n" +
+						"On port: 7080");
+			}
+
+			map = new Map();
+
+			drawables.add(new Mine(400, 100));
+			drawables.add(new Mine(400, 200));
+			drawables.add(new Mine(500, 200));
+			drawables.add(new Turret(500, 1400, 200));
+			drawables.add(new Turret(500, 1300, 400));
+			drawables.add(new KhengEnemy(300, 2100, 200));
+			drawables.add(new EnemyTank(500, 2700, 100));
+			drawables.add(new Turret(500, 1700, 900));
+			drawables.add(new Turret(500, 1400, 900));
+			drawables.add(new Mine(900, 1600));
+			drawables.add(new EnemyTank(600, 1000, 800));
+			drawables.add(new EnemyTank(600, 900, 950));
+			drawables.add(new Mine(600, 1300));
+			drawables.add(new Mine(700, 1300));
+			drawables.add(new Mine(600, 1400));
+			drawables.add(new Mine(700, 1400));
+
+			server = new ServerSocket(7080);
+			client = server.accept();
+			out = client.getOutputStream();
+			in = client.getInputStream();
+
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+
+			objectOutputStream.writeObject(map);
+			//Send drawables and gameState here and update in do render
+
+
+
+		} else if(Start.startState.equals("client")){
+			String ip = JOptionPane.showInputDialog("Enter IP here:");
+
+			try {
+				serverForClient = new Socket(ip, Integer.valueOf(7080));
+			} catch (Exception e){
+				JOptionPane.showMessageDialog(null,"Invalid input");
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				System.exit(0);
+			}
+
+			OutputStream out = serverForClient.getOutputStream();
+			InputStream in = serverForClient.getInputStream();
+
+			ObjectInputStream objectInputStream = new ObjectInputStream(in);
+
+			try {
+				map = (Map) objectInputStream.readObject();
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+
+			//Get drawables and gamesState here
+
+			//Update drawables and gameState in doRender
 		}
 
-		map = new Map();
 	/*	try{
 			image = ImageIO.read(new File("Icon.png"));
 		}
@@ -172,9 +263,12 @@ public class GameFrame extends JFrame {
 	 */
 	private void doRendering(Graphics2D g2d, GameState state) throws IOException {
 		// Draw background
-		map.setG2d(g2d);
-		Map.setState(state);
-		map.paintMap();
+
+		System.out.println(map);
+
+		map.setState(state);
+		map.paintMap(g2d);
+
 
 		// draw additional objects :
 		map.intersectWithRepairObject();
@@ -246,6 +340,20 @@ public class GameFrame extends JFrame {
 					System.exit(0);
 				}
 			}).start();
+		}
+
+		if(Start.startState.equals("server")) {
+			out = client.getOutputStream();
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+			objectOutputStream.writeObject(map);
+		}else if(Start.startState.equals("client")){
+			in = serverForClient.getInputStream();
+			ObjectInputStream objectInputStream = new ObjectInputStream(in);
+			try {
+				map = (Map) objectInputStream.readObject();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 
 		// Print FPS info

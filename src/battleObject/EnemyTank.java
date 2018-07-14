@@ -92,7 +92,7 @@ public class EnemyTank implements Drawable {
         if((Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance)) {
             if(targetX > (locX + Map.xOffset))
                 locX += 2;
-            else
+            else if (targetX < (locX + Map.xOffset))
                 locX -= 2;
         }
     }

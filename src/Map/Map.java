@@ -21,11 +21,10 @@ import java.util.ArrayList;
  *
  */
 
-public class Map {
+public class Map implements Serializable{
 
     public static int[][] mapResource;
     public static GameState state;
-    private Graphics2D g2d;
     public static ArrayList<HardWall> hardWalls;
     public static ArrayList<SoftWall> softWalls ;
     public static ArrayList<Plant> plants ;
@@ -79,7 +78,8 @@ public class Map {
      * The Method the paint the map from resource array .
      */
 
-    public void paintMap() {
+    public void paintMap(Graphics2D g2d) {
+
 
         hardWalls.clear();
 //        softWalls.clear();
@@ -118,13 +118,13 @@ public class Map {
 
 
                     if (softWalls.get(softWallindex).getMode() == 1)
-                        g2d.drawImage(softWalls.get(softWallindex).getImageMode1(), softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY() , null);
+                        g2d.drawImage(Images.softWall1, softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY() , null);
                     else if (softWalls.get(softWallindex).getMode() == 2 )
-                        g2d.drawImage(softWalls.get(softWallindex).getImageMode2() , softWalls.get(softWallindex).getLocX() , softWalls.get(softWallindex).getLocY() , null);
+                        g2d.drawImage(Images.softWall2, softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY() , null);
                     else if (softWalls.get(softWallindex).getMode() == 3)
-                        g2d.drawImage(softWalls.get(softWallindex).getImageMode3() , softWalls.get(softWallindex).getLocX() , softWalls.get(softWallindex).getLocY() , null);
+                        g2d.drawImage(Images.softWall3, softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY() , null);
                     else if (softWalls.get(softWallindex).getMode() == 4)
-                        g2d.drawImage(softWalls.get(softWallindex).getImageMode4() , softWalls.get(softWallindex).getLocX() , softWalls.get(softWallindex).getLocY() , null);
+                        g2d.drawImage(Images.softWall4, softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY() , null);
                     else
                         g2d.drawImage(Images.area, softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY(), null);
 
@@ -426,8 +426,5 @@ public class Map {
         Map.state = state;
     }
 
-    public void setG2d(Graphics2D g2d) {
-        this.g2d = g2d;
-    }
 }
 

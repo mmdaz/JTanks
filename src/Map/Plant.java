@@ -21,24 +21,16 @@ public class Plant {
 
     private int locX ;
     private int locY ;
-    private BufferedImage image ;
-    private Rectangle2D rectangle2D ;
 
     public Plant(int locx , int locY ) {
 
         this.locX = locx ;
         this.locY = locY ;
-        try {
-            image = ImageIO.read(new File("Resources/Images/plant.png")) ;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        rectangle2D = new Rectangle(locx , locY , 100 , 100 ) ;
     }
 
     public Rectangle2D getRectangle2D() {
-        return rectangle2D;
+        return new Rectangle(locX , locY , 100 , 100 ) ;
     }
 
     public int getLocY() {

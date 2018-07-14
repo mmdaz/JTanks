@@ -57,8 +57,9 @@ public class Mine implements Drawable{
     }
 
     public void checkIntersect(Drawable drawable) {
+        Rectangle2D tankRect = new Rectangle((int)drawable.getRect().getX(), (int)drawable.getRect().getY(), 60, 60);
 
-        if (drawable.getRect().intersects(getRect())) {
+        if (tankRect.intersects(getRect())) {
             drawable.damage(50);
             health = 0;
         }

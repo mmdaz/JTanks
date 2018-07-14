@@ -21,20 +21,12 @@ public class Teazel {
 
     private int locX ;
     private int locY ;
-    private BufferedImage image ;
-    private Rectangle2D rectangle2D ;
 
 
     public Teazel(int locX , int locY)  {
 
-        try {
-            image = ImageIO.read(new File("Resources/Images/teazel.png")) ;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         this.locX = locX ;
         this.locY = locY ;
-        rectangle2D = new Rectangle(locX , locY , 100 , 100 ) ;
 
     }
 
@@ -55,7 +47,7 @@ public class Teazel {
     }
 
     public Rectangle2D getRectangle2D() {
-        return rectangle2D;
+        return new Rectangle(locX , locY , 100 , 100 );
     }
 
 
