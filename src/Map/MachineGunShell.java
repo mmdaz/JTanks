@@ -5,6 +5,7 @@ import utility.Images;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  * The class that keep MachineGunShell information on the map .
@@ -15,12 +16,10 @@ import java.awt.image.BufferedImage;
  */
 
 
-public class MachineGunShell {
+public class MachineGunShell implements Serializable{
 
         private int locX ;
         private int locY ;
-        private BufferedImage image ;
-        private Rectangle2D rectangle2D ;
         private boolean status  ;
 
 
@@ -29,8 +28,6 @@ public class MachineGunShell {
 
         this.locX = locx ;
         this.locY = locY ;
-        image = Images.machineGunShell;
-        rectangle2D = new Rectangle(locx , locY , 100 , 100 ) ;
         status = true ;
 
     }
@@ -43,23 +40,11 @@ public class MachineGunShell {
         this.locY = locY;
     }
 
-        public void setImage(BufferedImage image) {
-        this.image = image;
-    }
-
-        public void setRectangle2D(Rectangle2D rectangle2D) {
-        this.rectangle2D = rectangle2D;
-    }
-
-        public BufferedImage getImage() {
-        return image;
-    }
 
         public Rectangle2D getRectangle2D() {
 
 
-        rectangle2D = new Rectangle(locX , locY , 80 , 80) ;
-        return rectangle2D;
+        return new Rectangle(locX , locY , 80 , 80) ;
     }
 
         public void setStatus(boolean status) {

@@ -5,6 +5,7 @@ import utility.Images;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 
 /**
@@ -15,12 +16,10 @@ import java.awt.image.BufferedImage;
  * @version 1.0
  */
 
-public class RepairPackItem {
+public class RepairPackItem implements Serializable{
 
     private int locX ;
     private int locY ;
-    private BufferedImage image ;
-    private Rectangle2D rectangle2D ;
     private boolean status  ;
 
 
@@ -29,8 +28,6 @@ public class RepairPackItem {
 
         this.locX = locx ;
         this.locY = locY ;
-        image = Images.repairItem ;
-        rectangle2D = new Rectangle(locx , locY , 80 , 80 ) ;
         status = true ;
 
     }
@@ -43,23 +40,10 @@ public class RepairPackItem {
         this.locY = locY;
     }
 
-    public void setImage(BufferedImage image) {
-        this.image = image;
-    }
-
-    public void setRectangle2D(Rectangle2D rectangle2D) {
-        this.rectangle2D = rectangle2D;
-    }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
     public Rectangle2D getRectangle2D() {
 
 
-        rectangle2D = new Rectangle(locX , locY , 100 , 100) ;
-        return rectangle2D;
+        return new Rectangle(locX , locY , 80 , 80 );
     }
 
     public void setStatus(boolean status) {

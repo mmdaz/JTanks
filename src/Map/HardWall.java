@@ -8,6 +8,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * The class that keep a Hard Wall information for draw it on the Map .
@@ -18,7 +19,7 @@ import java.io.IOException;
  *
  *
  */
-public class HardWall {
+public class HardWall implements Serializable{
 
     private int locX ;
     private int locY ;

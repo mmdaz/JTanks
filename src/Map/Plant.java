@@ -6,6 +6,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * The class that keep a Plant information for draw it on the Map .
@@ -17,7 +18,7 @@ import java.io.IOException;
  *
  */
 
-public class Plant {
+public class Plant implements Serializable{
 
     private int locX ;
     private int locY ;

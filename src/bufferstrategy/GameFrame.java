@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.* ;
 import Map.Map ;
+import Map.*;
 
 /**
  * The window on which the rendering is performed.
@@ -54,9 +55,12 @@ public class GameFrame extends JFrame {
 	private OutputStream out;
 	private InputStream in;
 
+
 	private Socket serverForClient;
 
-	private GameState player2State;
+	private GameState player2State = new GameState();
+
+	UserTank tank2 = new UserTank(1000);
 
 	public GameFrame(String title) throws IOException {
 		super(title);
@@ -162,6 +166,15 @@ public class GameFrame extends JFrame {
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
 
 			objectOutputStream.writeObject(map);
+			objectOutputStream.writeObject(map.hardWalls);
+			objectOutputStream.writeObject(map.softWalls);
+
+			objectOutputStream.writeObject(map.plants);
+			objectOutputStream.writeObject(map.teazels);
+			objectOutputStream.writeObject(map.upgradeWeapons);
+			objectOutputStream.writeObject(map.repairPackItems);
+			objectOutputStream.writeObject(map.cannonShells);
+			objectOutputStream.writeObject(map.machineGunShells);
 			//Send drawables and gameState here and update in do render
 
 
@@ -170,6 +183,25 @@ public class GameFrame extends JFrame {
 			String ip = JOptionPane.showInputDialog("Enter IP here:");
 
 			try {
+
+				drawables.add(new Mine(400, 100));
+				drawables.add(new Mine(400, 200));
+				drawables.add(new Mine(500, 200));
+				drawables.add(new Turret(500, 1400, 200));
+				drawables.add(new Turret(500, 1300, 400));
+				drawables.add(new KhengEnemy(300, 2100, 200));
+				drawables.add(new EnemyTank(500, 2700, 100));
+				drawables.add(new Turret(500, 1700, 900));
+				drawables.add(new Turret(500, 1400, 900));
+				drawables.add(new Mine(900, 1600));
+				drawables.add(new EnemyTank(600, 1000, 800));
+				drawables.add(new EnemyTank(600, 900, 950));
+				drawables.add(new Mine(600, 1300));
+				drawables.add(new Mine(700, 1300));
+				drawables.add(new Mine(600, 1400));
+				drawables.add(new Mine(700, 1400));
+
+
 				serverForClient = new Socket(ip, Integer.valueOf(7080));
 			} catch (Exception e){
 				JOptionPane.showMessageDialog(null,"Invalid input");
@@ -188,10 +220,20 @@ public class GameFrame extends JFrame {
 
 			try {
 				map = (Map) objectInputStream.readObject();
+				map.hardWalls = (ArrayList<HardWall>) objectInputStream.readObject();
+				map.softWalls = (ArrayList<SoftWall>) objectInputStream.readObject();
+				map.plants = (ArrayList<Plant>) objectInputStream.readObject();
+				map.teazels = (ArrayList<Teazel>) objectInputStream.readObject();
+				map.upgradeWeapons = (ArrayList<UpgradeWeapon>) objectInputStream.readObject();
+				map.repairPackItems = (ArrayList<RepairPackItem>) objectInputStream.readObject();
+				map.cannonShells = (ArrayList<CannonShell>) objectInputStream.readObject();
+				map.machineGunShells = (ArrayList<MachineGunShell>) objectInputStream.readObject();
+
 
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
+
 
 			//Get drawables and gamesState here
 
@@ -264,7 +306,6 @@ public class GameFrame extends JFrame {
 	private void doRendering(Graphics2D g2d, GameState state) throws IOException {
 		// Draw background
 
-		System.out.println(map);
 
 		map.setState(state);
 		map.paintMap(g2d);
@@ -317,6 +358,48 @@ public class GameFrame extends JFrame {
 					bullet.paint(g2d);
 			}
 
+
+
+
+
+
+		if(Start.startState.equals("server")) {
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+
+			objectOutputStream.writeObject(map);
+			objectOutputStream.writeObject(map.hardWalls);
+			objectOutputStream.writeObject(map.softWalls);
+
+			objectOutputStream.writeObject(map.plants);
+			objectOutputStream.writeObject(map.teazels);
+			objectOutputStream.writeObject(map.upgradeWeapons);
+			objectOutputStream.writeObject(map.repairPackItems);
+			objectOutputStream.writeObject(map.cannonShells);
+			objectOutputStream.writeObject(map.machineGunShells);
+
+
+
+		}else if(Start.startState.equals("client")){
+			ObjectInputStream objectInputStream = new ObjectInputStream(in);
+
+
+			try {
+				map = (Map) objectInputStream.readObject();
+				map.hardWalls = (ArrayList<HardWall>) objectInputStream.readObject();
+				map.softWalls = (ArrayList<SoftWall>) objectInputStream.readObject();
+				map.plants = (ArrayList<Plant>) objectInputStream.readObject();
+				map.teazels = (ArrayList<Teazel>) objectInputStream.readObject();
+				map.upgradeWeapons = (ArrayList<UpgradeWeapon>) objectInputStream.readObject();
+				map.repairPackItems = (ArrayList<RepairPackItem>) objectInputStream.readObject();
+				map.cannonShells = (ArrayList<CannonShell>) objectInputStream.readObject();
+				map.machineGunShells = (ArrayList<MachineGunShell>) objectInputStream.readObject();
+
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+
 		for (Drawable drawable : drawables)
 			if(!(drawable instanceof UserTank))
 				tank.checkIntersect(drawable);
@@ -341,19 +424,32 @@ public class GameFrame extends JFrame {
 			}).start();
 		}
 
-		if(Start.startState.equals("server")) {
-			out = client.getOutputStream();
+
+		if(Start.startState.equals("client")){
+			out.write(state.locX);
+			out.write(state.locY);
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
-			objectOutputStream.writeObject(map);
-		}else if(Start.startState.equals("client")){
-			in = serverForClient.getInputStream();
+
+			objectOutputStream.writeObject(state.angle);
+			objectOutputStream.writeObject(state.tankAngle);
+
+		} else if (Start.startState.equals("server")){
+			player2State.locX = in.read() + Map.xOffset;
+			player2State.locY = in.read() + Map.yOffset;
+
 			ObjectInputStream objectInputStream = new ObjectInputStream(in);
+
 			try {
-				map = (Map) objectInputStream.readObject();
+				player2State.angle = (double) objectInputStream.readObject();
+				player2State.tankAngle = (double) objectInputStream.readObject();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
+			tank2.setState(player2State);
+			tank2.render(g2d);
+
 		}
+
 
 		// Print FPS info
 //		long currentRender = System.currentTimeMillis();

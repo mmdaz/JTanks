@@ -10,6 +10,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * The class that keep a Soft Wall information for draw it on the Map .
@@ -21,7 +22,7 @@ import java.io.IOException;
  *
  */
 
-public class SoftWall {
+public class SoftWall implements Serializable {
 
     private int locX ;
     private int locY ;
