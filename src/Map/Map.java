@@ -21,11 +21,10 @@ import java.util.ArrayList;
  *
  */
 
-public class Map {
+public class Map implements Serializable{
 
     public static int[][] mapResource;
     public static GameState state;
-    private Graphics2D g2d;
     public static ArrayList<HardWall> hardWalls;
     public static ArrayList<SoftWall> softWalls ;
     public static ArrayList<Plant> plants ;
@@ -79,7 +78,8 @@ public class Map {
      * The Method the paint the map from resource array .
      */
 
-    public void paintMap() {
+    public void paintMap(Graphics2D g2d) {
+
 
         hardWalls.clear();
 //        softWalls.clear();
@@ -426,8 +426,5 @@ public class Map {
         Map.state = state;
     }
 
-    public void setG2d(Graphics2D g2d) {
-        this.g2d = g2d;
-    }
 }
 

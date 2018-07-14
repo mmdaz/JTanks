@@ -7,11 +7,12 @@ package battleObject;
  */
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import Map.* ;
 
-public class Gun {
+public class Gun implements Serializable{
     protected BufferedImage level1Image;
     protected BufferedImage bulletImage;
     public BufferedImage currentModImage;
