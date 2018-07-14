@@ -18,6 +18,7 @@ public class GameState implements Serializable {
 
 	public int locX, locY, diam , preLocX , preLocY;
 	public boolean gameOver;
+	public boolean level1Won;
 	public boolean gameWon;
 	public int mouseX, mouseY;
 	public double angle;

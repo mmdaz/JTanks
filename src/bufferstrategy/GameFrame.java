@@ -62,6 +62,8 @@ public class GameFrame extends JFrame {
 
 	UserTank tank2 = new UserTank(1000);
 
+	private boolean firstTime = true;
+
 	public GameFrame(String title) throws IOException {
 		super(title);
 		setResizable(false);
@@ -304,202 +306,203 @@ public class GameFrame extends JFrame {
 	 * Rendering all game elements based on the game state.
 	 */
 	private void doRendering(Graphics2D g2d, GameState state) throws IOException {
-		// Draw background
 
-		if(Start.startState.equals("server")) {
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+		if(!state.level1Won) {
+			// Draw background
 
-			objectOutputStream.writeObject(map);
-			objectOutputStream.writeObject(map.hardWalls);
-			objectOutputStream.writeObject(map.softWalls);
+			if (Start.startState.equals("server")) {
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
 
-			objectOutputStream.writeObject(map.plants);
-			objectOutputStream.writeObject(map.teazels);
-			objectOutputStream.writeObject(map.upgradeWeapons);
-			objectOutputStream.writeObject(map.repairPackItems);
-			objectOutputStream.writeObject(map.cannonShells);
-			objectOutputStream.writeObject(map.machineGunShells);
+				objectOutputStream.writeObject(map);
+				objectOutputStream.writeObject(map.hardWalls);
+				objectOutputStream.writeObject(map.softWalls);
 
-
-			boolean flag = false;
-			for(Drawable drawable : drawables)
-				if(!drawable.isAlive()) {
-					objectOutputStream.writeObject(drawables.indexOf(drawable));
-					flag = true;
-					break;
-				}
-			if(!flag)
-				objectOutputStream.writeObject(-1);
+				objectOutputStream.writeObject(map.plants);
+				objectOutputStream.writeObject(map.teazels);
+				objectOutputStream.writeObject(map.upgradeWeapons);
+				objectOutputStream.writeObject(map.repairPackItems);
+				objectOutputStream.writeObject(map.cannonShells);
+				objectOutputStream.writeObject(map.machineGunShells);
 
 
-		}else if(Start.startState.equals("client")){
-			ObjectInputStream objectInputStream = new ObjectInputStream(in);
-
-
-			try {
-				map = (Map) objectInputStream.readObject();
-				map.hardWalls = (ArrayList<HardWall>) objectInputStream.readObject();
-				map.softWalls = (ArrayList<SoftWall>) objectInputStream.readObject();
-				map.plants = (ArrayList<Plant>) objectInputStream.readObject();
-				map.teazels = (ArrayList<Teazel>) objectInputStream.readObject();
-				map.upgradeWeapons = (ArrayList<UpgradeWeapon>) objectInputStream.readObject();
-				map.repairPackItems = (ArrayList<RepairPackItem>) objectInputStream.readObject();
-				map.cannonShells = (ArrayList<CannonShell>) objectInputStream.readObject();
-				map.machineGunShells = (ArrayList<MachineGunShell>) objectInputStream.readObject();
-
-				Integer i = (Integer) objectInputStream.readObject();
-				if(!i.equals(-1))
-					drawables.get(i).damage(1000);
-
-
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-
-		map.setState(state);
-		map.paintMap(g2d);
-
-
-		// draw additional objects :
-		map.intersectWithRepairObject();
-		map.intersectWithCannonShell();
-		map.intersectWithMachineGunShell();
-		map.intersectWithUpgrader();
-
-		if(!mouseHandlerAdded) {
-			addMouseListener(tank.getTankMouseHandler());
-			mouseHandlerAdded = true;
-		}
-
-		for(Drawable drawable : drawables) {
-			if(!(drawable instanceof UserTank))
-				drawable.checkIntersect(tank);
-			if(drawable instanceof UserTank){
-				if(Start.startState.equals("client"))
-					((UserTank) drawable).setState(player2State);
-				else
-					((UserTank) drawable).setState(state);
-					((UserTank) drawable).fireSecondGun();
-			}
-			drawable.render(g2d);
-			if(drawable instanceof KhengEnemy){
-				((KhengEnemy) drawable).setTarget(state.locX, state.locY);
-			}else if(drawable instanceof EnemyTank){
-				if(Start.startState.equals("client"))
-					((EnemyTank) drawable).setTarget(player2State.locX,player2State.locY);
-				else
-					((EnemyTank) drawable).setTarget(state.locX,state.locY);
-				((EnemyTank) drawable).fire(drawables);
-				for(Bullet bullet : ((EnemyTank) drawable).getGun().getBullets())
-					bullet.paint(g2d);
-			} else if(drawable instanceof Turret){
-				if(Start.startState.equals("client"))
-					((Turret) drawable).setTarget(player2State.locX,player2State.locY);
-				else
-					((Turret) drawable).setTarget(state.locX,state.locY);
-				((Turret) drawable).fire();
-				for(Bullet bullet : ((Turret) drawable).getGun().getBullets())
-					bullet.paint(g2d);
-			}
-		}
-
-
-		if(Start.startState.equals("client")){
-			out.write(state.locX);
-			out.write(state.locY);
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
-
-			objectOutputStream.writeObject(state.angle);
-			objectOutputStream.writeObject(state.tankAngle);
-			boolean flag = false;
-			for(Drawable drawable : drawables)
-				if(!drawable.isAlive()) {
-					objectOutputStream.writeObject(drawables.indexOf(drawable));
-					flag = true;
-					break;
-				}
-				if(!flag)
+				boolean flag = false;
+				for (Drawable drawable : drawables)
+					if (!drawable.isAlive()) {
+						objectOutputStream.writeObject(drawables.indexOf(drawable));
+						flag = true;
+						break;
+					}
+				if (!flag)
 					objectOutputStream.writeObject(-1);
 
-		} else if (Start.startState.equals("server")){
-			player2State.locX = in.read() + Map.xOffset;
-			player2State.locY = in.read() + Map.yOffset;
 
-			ObjectInputStream objectInputStream = new ObjectInputStream(in);
-
-			try {
-				player2State.angle = (double) objectInputStream.readObject();
-				player2State.tankAngle = (double) objectInputStream.readObject();
-				Integer i = (Integer) objectInputStream.readObject();
-				if(!i.equals(-1))
-					drawables.get(i).damage(1000);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			tank2.setState(player2State);
-			tank2.render(g2d);
-		}
+			} else if (Start.startState.equals("client")) {
+				ObjectInputStream objectInputStream = new ObjectInputStream(in);
 
 
+				try {
+					map = (Map) objectInputStream.readObject();
+					map.hardWalls = (ArrayList<HardWall>) objectInputStream.readObject();
+					map.softWalls = (ArrayList<SoftWall>) objectInputStream.readObject();
+					map.plants = (ArrayList<Plant>) objectInputStream.readObject();
+					map.teazels = (ArrayList<Teazel>) objectInputStream.readObject();
+					map.upgradeWeapons = (ArrayList<UpgradeWeapon>) objectInputStream.readObject();
+					map.repairPackItems = (ArrayList<RepairPackItem>) objectInputStream.readObject();
+					map.cannonShells = (ArrayList<CannonShell>) objectInputStream.readObject();
+					map.machineGunShells = (ArrayList<MachineGunShell>) objectInputStream.readObject();
+
+					Integer i = (Integer) objectInputStream.readObject();
+					if (!i.equals(-1))
+						drawables.get(i).damage(1000);
 
 
-		Iterator<Drawable> drawableIterator = drawables.iterator();
-		while (drawableIterator.hasNext())
-			if(!drawableIterator.next().isAlive()) {
-				drawableIterator.remove();
-			}
-
-		for(Drawable drawable: drawables)
-			if(drawable instanceof  UserTank) {
-				for (Bullet bullet : tank.getMainGun().getBullets())
-					bullet.paint(g2d);
-				for (Bullet bullet : tank.getSecondGun().getBullets())
-					bullet.paint(g2d);
-			}
-
-
-
-
-
-
-
-		for (Drawable drawable : drawables)
-			if(!(drawable instanceof UserTank))
-				tank.checkIntersect(drawable);
-
-
-		if(!(drawables.get(0) instanceof UserTank))
-			state.gameOver = true;
-
-
-		if(state.locX - Map.xOffset >= 800 && state.locY - Map.yOffset >= 1200){
-			state.gameWon = true;
-			String str = "You Won!";
-			g2d.setColor(Color.RED);
-			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
-			int strWidth = g2d.getFontMetrics().stringWidth(str);
-			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
-			new Timer(2000, new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					System.exit(0);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
 				}
-			}).start();
-		}
+			}
+
+			map.setState(state);
+			map.paintMap(g2d);
 
 
-		if(Start.startState.equals("server")) {
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
-			out.write(state.locX);
-			out.write(state.locY);
-
-			objectOutputStream.writeObject(state.angle);
-			objectOutputStream.writeObject(state.tankAngle);
+			// draw additional objects :
+			map.intersectWithRepairObject();
+			map.intersectWithCannonShell();
+			map.intersectWithMachineGunShell();
+			map.intersectWithUpgrader();
 
 
-		}else if(Start.startState.equals("client")){
-			ObjectInputStream objectInputStream = new ObjectInputStream(in);
+			if (!mouseHandlerAdded) {
+				addMouseListener(tank.getTankMouseHandler());
+				mouseHandlerAdded = true;
+			}
+
+			for (Drawable drawable : drawables) {
+				if (!(drawable instanceof UserTank))
+					drawable.checkIntersect(tank);
+				if (drawable instanceof UserTank) {
+					if (Start.startState.equals("client"))
+						((UserTank) drawable).setState(player2State);
+					else
+						((UserTank) drawable).setState(state);
+					((UserTank) drawable).fireSecondGun();
+				}
+				drawable.render(g2d);
+				if (drawable instanceof KhengEnemy) {
+					((KhengEnemy) drawable).setTarget(state.locX, state.locY);
+				} else if (drawable instanceof EnemyTank) {
+					if (Start.startState.equals("client"))
+						((EnemyTank) drawable).setTarget(player2State.locX, player2State.locY);
+					else
+						((EnemyTank) drawable).setTarget(state.locX, state.locY);
+					((EnemyTank) drawable).fire(drawables);
+					for (Bullet bullet : ((EnemyTank) drawable).getGun().getBullets())
+						bullet.paint(g2d);
+				} else if (drawable instanceof Turret) {
+					if (Start.startState.equals("client"))
+						((Turret) drawable).setTarget(player2State.locX, player2State.locY);
+					else
+						((Turret) drawable).setTarget(state.locX, state.locY);
+					((Turret) drawable).fire();
+					for (Bullet bullet : ((Turret) drawable).getGun().getBullets())
+						bullet.paint(g2d);
+				}
+			}
+
+
+			if (Start.startState.equals("client")) {
+				out.write(state.locX);
+				out.write(state.locY);
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+
+				objectOutputStream.writeObject(state.angle);
+				objectOutputStream.writeObject(state.tankAngle);
+				boolean flag = false;
+				for (Drawable drawable : drawables)
+					if (!drawable.isAlive()) {
+						objectOutputStream.writeObject(drawables.indexOf(drawable));
+						flag = true;
+						break;
+					}
+				if (!flag)
+					objectOutputStream.writeObject(-1);
+
+			} else if (Start.startState.equals("server")) {
+				player2State.locX = in.read() + Map.xOffset;
+				player2State.locY = in.read() + Map.yOffset;
+
+				ObjectInputStream objectInputStream = new ObjectInputStream(in);
+
+				try {
+					player2State.angle = (double) objectInputStream.readObject();
+					player2State.tankAngle = (double) objectInputStream.readObject();
+					Integer i = (Integer) objectInputStream.readObject();
+					if (!i.equals(-1))
+						drawables.get(i).damage(1000);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				tank2.setState(player2State);
+				tank2.render(g2d);
+			}
+
+
+			Iterator<Drawable> drawableIterator = drawables.iterator();
+			while (drawableIterator.hasNext())
+				if (!drawableIterator.next().isAlive()) {
+					drawableIterator.remove();
+				}
+
+			for (Drawable drawable : drawables)
+				if (drawable instanceof UserTank) {
+					for (Bullet bullet : tank.getMainGun().getBullets())
+						bullet.paint(g2d);
+					for (Bullet bullet : tank.getSecondGun().getBullets())
+						bullet.paint(g2d);
+				}
+
+
+			for (Drawable drawable : drawables)
+				if (!(drawable instanceof UserTank))
+					tank.checkIntersect(drawable);
+
+
+			if (!(drawables.get(0) instanceof UserTank))
+				state.gameOver = true;
+
+			if (state.locX - Map.xOffset >= 800 && state.locY - Map.yOffset >= 1200) {
+				state.level1Won = true;
+				new Timer(2000, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						String str = "You Won the first level!";
+						g2d.setColor(Color.RED);
+						g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+						int strWidth = g2d.getFontMetrics().stringWidth(str);
+						g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
+					}
+				}).start();
+
+			}
+
+
+
+			if (Start.startState.equals("server")) {
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+				out.write(state.locX);
+				out.write(state.locY);
+
+				objectOutputStream.writeObject(state.angle);
+				objectOutputStream.writeObject(state.tankAngle);
+
+
+			} else if (Start.startState.equals("client")) {
+				ObjectInputStream objectInputStream = new ObjectInputStream(in);
 
 
 				player2State.locX = in.read() + Map.xOffset;
@@ -515,6 +518,258 @@ public class GameFrame extends JFrame {
 				tank2.render(g2d);
 			}
 
+		}
+
+
+
+
+
+
+
+
+		//Level 2 start
+		else {
+			MapLevel2 mapLevel2 = new MapLevel2();
+			//First time location init
+			if(firstTime) {
+				state.locX = 10;
+				state.locY = 110;
+				Map.xOffset = 0;
+				Map.yOffset = 0;
+
+				drawables.clear();
+				drawables.add(tank);
+				drawables.add(new Mine(400, 100));
+				drawables.add(new Mine(400, 200));
+				drawables.add(new Mine(500, 200));
+				drawables.add(new Turret(500, 1300, 400));
+				drawables.add(new KhengEnemy(300, 2100, 200));
+				drawables.add(new EnemyTank(500, 2700, 100));
+				drawables.add(new Turret(500, 1700, 900));
+				drawables.add(new Mine(900, 1600));
+				drawables.add(new EnemyTank(600, 1000, 800));
+				drawables.add(new EnemyTank(600, 900, 950));
+				drawables.add(new Mine(600, 1300));
+				drawables.add(new Mine(700, 1300));
+				drawables.add(new Mine(600, 1400));
+				drawables.add(new Mine(700, 1400));
+
+
+				firstTime = false;
+			}
+			// Draw background
+
+			if (Start.startState.equals("server")) {
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+
+				objectOutputStream.writeObject(mapLevel2);
+				objectOutputStream.writeObject(mapLevel2.hardWalls);
+				objectOutputStream.writeObject(mapLevel2.softWalls);
+
+				objectOutputStream.writeObject(mapLevel2.plants);
+				objectOutputStream.writeObject(mapLevel2.teazels);
+				objectOutputStream.writeObject(mapLevel2.upgradeWeapons);
+				objectOutputStream.writeObject(mapLevel2.repairPackItems);
+				objectOutputStream.writeObject(mapLevel2.cannonShells);
+				objectOutputStream.writeObject(mapLevel2.machineGunShells);
+
+
+				boolean flag = false;
+				for (Drawable drawable : drawables)
+					if (!drawable.isAlive()) {
+						objectOutputStream.writeObject(drawables.indexOf(drawable));
+						flag = true;
+						break;
+					}
+				if (!flag)
+					objectOutputStream.writeObject(-1);
+
+
+			} else if (Start.startState.equals("client")) {
+				ObjectInputStream objectInputStream = new ObjectInputStream(in);
+
+
+				try {
+					mapLevel2 = (MapLevel2) objectInputStream.readObject();
+					mapLevel2.hardWalls = (ArrayList<HardWall>) objectInputStream.readObject();
+					mapLevel2.softWalls = (ArrayList<SoftWall>) objectInputStream.readObject();
+					mapLevel2.plants = (ArrayList<Plant>) objectInputStream.readObject();
+					mapLevel2.teazels = (ArrayList<Teazel>) objectInputStream.readObject();
+					mapLevel2.upgradeWeapons = (ArrayList<UpgradeWeapon>) objectInputStream.readObject();
+					mapLevel2.repairPackItems = (ArrayList<RepairPackItem>) objectInputStream.readObject();
+					mapLevel2.cannonShells = (ArrayList<CannonShell>) objectInputStream.readObject();
+					mapLevel2.machineGunShells = (ArrayList<MachineGunShell>) objectInputStream.readObject();
+
+					Integer i = (Integer) objectInputStream.readObject();
+					if (!i.equals(-1))
+						drawables.get(i).damage(1000);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+
+			mapLevel2.setState(state);
+			mapLevel2.paintMap(g2d);
+
+
+			// draw additional objects :
+			mapLevel2.intersectWithRepairObject();
+			mapLevel2.intersectWithCannonShell();
+			mapLevel2.intersectWithMachineGunShell();
+			mapLevel2.intersectWithUpgrader();
+
+			if (!mouseHandlerAdded) {
+				addMouseListener(tank.getTankMouseHandler());
+				mouseHandlerAdded = true;
+			}
+
+			for (Drawable drawable : drawables) {
+				if (!(drawable instanceof UserTank))
+					drawable.checkIntersect(tank);
+				if (drawable instanceof UserTank) {
+					if (Start.startState.equals("client"))
+						((UserTank) drawable).setState(player2State);
+					else
+						((UserTank) drawable).setState(state);
+					((UserTank) drawable).fireSecondGun();
+				}
+				drawable.render(g2d);
+				if (drawable instanceof KhengEnemy) {
+					((KhengEnemy) drawable).setTarget(state.locX, state.locY);
+				} else if (drawable instanceof EnemyTank) {
+					if (Start.startState.equals("client"))
+						((EnemyTank) drawable).setTarget(player2State.locX, player2State.locY);
+					else
+						((EnemyTank) drawable).setTarget(state.locX, state.locY);
+					((EnemyTank) drawable).fire(drawables);
+					for (Bullet bullet : ((EnemyTank) drawable).getGun().getBullets())
+						bullet.paint(g2d);
+				} else if (drawable instanceof Turret) {
+					if (Start.startState.equals("client"))
+						((Turret) drawable).setTarget(player2State.locX, player2State.locY);
+					else
+						((Turret) drawable).setTarget(state.locX, state.locY);
+					((Turret) drawable).fire();
+					for (Bullet bullet : ((Turret) drawable).getGun().getBullets())
+						bullet.paint(g2d);
+				}
+			}
+
+
+			if (Start.startState.equals("client")) {
+				out.write(state.locX);
+				out.write(state.locY);
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+
+				objectOutputStream.writeObject(state.angle);
+				objectOutputStream.writeObject(state.tankAngle);
+				boolean flag = false;
+				for (Drawable drawable : drawables)
+					if (!drawable.isAlive()) {
+						objectOutputStream.writeObject(drawables.indexOf(drawable));
+						flag = true;
+						break;
+					}
+				if (!flag)
+					objectOutputStream.writeObject(-1);
+
+			} else if (Start.startState.equals("server")) {
+				player2State.locX = in.read() + Map.xOffset;
+				player2State.locY = in.read() + Map.yOffset;
+
+				ObjectInputStream objectInputStream = new ObjectInputStream(in);
+
+				try {
+					player2State.angle = (double) objectInputStream.readObject();
+					player2State.tankAngle = (double) objectInputStream.readObject();
+					Integer i = (Integer) objectInputStream.readObject();
+					if (!i.equals(-1))
+						drawables.get(i).damage(1000);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				tank2.setState(player2State);
+				tank2.render(g2d);
+			}
+
+
+			Iterator<Drawable> drawableIterator = drawables.iterator();
+			while (drawableIterator.hasNext())
+				if (!drawableIterator.next().isAlive()) {
+					drawableIterator.remove();
+				}
+
+			for (Drawable drawable : drawables)
+				if (drawable instanceof UserTank) {
+					for (Bullet bullet : tank.getMainGun().getBullets())
+						bullet.paint(g2d);
+					for (Bullet bullet : tank.getSecondGun().getBullets())
+						bullet.paint(g2d);
+				}
+
+
+			for (Drawable drawable : drawables)
+				if (!(drawable instanceof UserTank))
+					tank.checkIntersect(drawable);
+
+
+			if (!(drawables.get(0) instanceof UserTank))
+				state.gameOver = true;
+
+			if (state.locX - Map.xOffset >= 800 && state.locY - Map.yOffset >= 1200) {
+				state.level1Won = true;
+				String str = "You Won!";
+				g2d.setColor(Color.RED);
+				g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+				int strWidth = g2d.getFontMetrics().stringWidth(str);
+				g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+
+			}
+
+
+
+			if (Start.startState.equals("server")) {
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+				out.write(state.locX);
+				out.write(state.locY);
+
+				objectOutputStream.writeObject(state.angle);
+				objectOutputStream.writeObject(state.tankAngle);
+
+
+			} else if (Start.startState.equals("client")) {
+				ObjectInputStream objectInputStream = new ObjectInputStream(in);
+
+
+				player2State.locX = in.read() + Map.xOffset;
+				player2State.locY = in.read() + Map.yOffset;
+
+				try {
+					player2State.angle = (double) objectInputStream.readObject();
+					player2State.tankAngle = (double) objectInputStream.readObject();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				tank2.setState(player2State);
+				tank2.render(g2d);
+			}
+
+
+
+
+			if (state.locX - Map.xOffset >= 800 && state.locY - Map.yOffset >= 1200) {
+				new Timer(2000, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						String str = "You Won!";
+						g2d.setColor(Color.RED);
+						g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+						int strWidth = g2d.getFontMetrics().stringWidth(str);
+						g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+					}
+				}).start();
+			}
+		}
 
 
 		// Print FPS info

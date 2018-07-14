@@ -64,7 +64,7 @@ public class Map implements Serializable{
         for (int i = 0; i < 2 ; i++) {
             cannonShells.add( new CannonShell(0 , 0 )) ;
         }
-        for (int i = 0; i < 2 ; i++) {
+        for (int i = 0; i < 5 ; i++) {
             machineGunShells.add( new MachineGunShell(0 , 0 )) ;
         }
         for (int i = 0; i < 2 ; i++) {
