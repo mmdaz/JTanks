@@ -344,6 +344,96 @@ public class GameFrame extends JFrame {
 			}
 		}
 
+
+		if(Start.startState.equals("client")){
+			out.write(state.locX);
+			out.write(state.locY);
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+
+			objectOutputStream.writeObject(state.angle);
+			objectOutputStream.writeObject(state.tankAngle);
+			boolean flag = false;
+			for(Drawable drawable : drawables)
+				if(!drawable.isAlive()) {
+					objectOutputStream.writeObject(drawables.indexOf(drawable));
+					flag = true;
+					break;
+				}
+				if(!flag)
+					objectOutputStream.writeObject(-1);
+
+		} else if (Start.startState.equals("server")){
+			player2State.locX = in.read() + Map.xOffset;
+			player2State.locY = in.read() + Map.yOffset;
+
+			ObjectInputStream objectInputStream = new ObjectInputStream(in);
+
+			try {
+				player2State.angle = (double) objectInputStream.readObject();
+				player2State.tankAngle = (double) objectInputStream.readObject();
+				Integer i = (Integer) objectInputStream.readObject();
+				if(!i.equals(-1))
+					drawables.get(i).damage(1000);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			tank2.setState(player2State);
+			tank2.render(g2d);
+		}
+
+
+		if(Start.startState.equals("server")) {
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+
+			objectOutputStream.writeObject(map);
+			objectOutputStream.writeObject(map.hardWalls);
+			objectOutputStream.writeObject(map.softWalls);
+
+			objectOutputStream.writeObject(map.plants);
+			objectOutputStream.writeObject(map.teazels);
+			objectOutputStream.writeObject(map.upgradeWeapons);
+			objectOutputStream.writeObject(map.repairPackItems);
+			objectOutputStream.writeObject(map.cannonShells);
+			objectOutputStream.writeObject(map.machineGunShells);
+
+
+			boolean flag = false;
+			for(Drawable drawable : drawables)
+				if(!drawable.isAlive()) {
+					objectOutputStream.writeObject(drawables.indexOf(drawable));
+					flag = true;
+					break;
+				}
+			if(!flag)
+				objectOutputStream.writeObject(-1);
+
+
+		}else if(Start.startState.equals("client")){
+			ObjectInputStream objectInputStream = new ObjectInputStream(in);
+
+
+			try {
+				map = (Map) objectInputStream.readObject();
+				map.hardWalls = (ArrayList<HardWall>) objectInputStream.readObject();
+				map.softWalls = (ArrayList<SoftWall>) objectInputStream.readObject();
+				map.plants = (ArrayList<Plant>) objectInputStream.readObject();
+				map.teazels = (ArrayList<Teazel>) objectInputStream.readObject();
+				map.upgradeWeapons = (ArrayList<UpgradeWeapon>) objectInputStream.readObject();
+				map.repairPackItems = (ArrayList<RepairPackItem>) objectInputStream.readObject();
+				map.cannonShells = (ArrayList<CannonShell>) objectInputStream.readObject();
+				map.machineGunShells = (ArrayList<MachineGunShell>) objectInputStream.readObject();
+
+				Integer i = (Integer) objectInputStream.readObject();
+				if(!i.equals(-1))
+					drawables.get(i).damage(1000);
+
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+
+
 		Iterator<Drawable> drawableIterator = drawables.iterator();
 		while (drawableIterator.hasNext())
 			if(!drawableIterator.next().isAlive()) {
@@ -363,42 +453,6 @@ public class GameFrame extends JFrame {
 
 
 
-		if(Start.startState.equals("server")) {
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
-
-			objectOutputStream.writeObject(map);
-			objectOutputStream.writeObject(map.hardWalls);
-			objectOutputStream.writeObject(map.softWalls);
-
-			objectOutputStream.writeObject(map.plants);
-			objectOutputStream.writeObject(map.teazels);
-			objectOutputStream.writeObject(map.upgradeWeapons);
-			objectOutputStream.writeObject(map.repairPackItems);
-			objectOutputStream.writeObject(map.cannonShells);
-			objectOutputStream.writeObject(map.machineGunShells);
-
-
-
-		}else if(Start.startState.equals("client")){
-			ObjectInputStream objectInputStream = new ObjectInputStream(in);
-
-
-			try {
-				map = (Map) objectInputStream.readObject();
-				map.hardWalls = (ArrayList<HardWall>) objectInputStream.readObject();
-				map.softWalls = (ArrayList<SoftWall>) objectInputStream.readObject();
-				map.plants = (ArrayList<Plant>) objectInputStream.readObject();
-				map.teazels = (ArrayList<Teazel>) objectInputStream.readObject();
-				map.upgradeWeapons = (ArrayList<UpgradeWeapon>) objectInputStream.readObject();
-				map.repairPackItems = (ArrayList<RepairPackItem>) objectInputStream.readObject();
-				map.cannonShells = (ArrayList<CannonShell>) objectInputStream.readObject();
-				map.machineGunShells = (ArrayList<MachineGunShell>) objectInputStream.readObject();
-
-
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
 
 		for (Drawable drawable : drawables)
 			if(!(drawable instanceof UserTank))
@@ -425,30 +479,7 @@ public class GameFrame extends JFrame {
 		}
 
 
-		if(Start.startState.equals("client")){
-			out.write(state.locX);
-			out.write(state.locY);
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
 
-			objectOutputStream.writeObject(state.angle);
-			objectOutputStream.writeObject(state.tankAngle);
-
-		} else if (Start.startState.equals("server")){
-			player2State.locX = in.read() + Map.xOffset;
-			player2State.locY = in.read() + Map.yOffset;
-
-			ObjectInputStream objectInputStream = new ObjectInputStream(in);
-
-			try {
-				player2State.angle = (double) objectInputStream.readObject();
-				player2State.tankAngle = (double) objectInputStream.readObject();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			tank2.setState(player2State);
-			tank2.render(g2d);
-
-		}
 
 
 		// Print FPS info
