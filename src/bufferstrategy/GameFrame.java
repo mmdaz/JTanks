@@ -134,7 +134,7 @@ public class GameFrame extends JFrame {
 						"" + ip +"\n" +
 						"On port: 7080");
 			}
-			
+
 			map = new Map();
 
 			drawables.add(new Mine(400, 100));
