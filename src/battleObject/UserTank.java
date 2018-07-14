@@ -142,7 +142,9 @@ public class UserTank implements Drawable {
         this.state = state;
     }
 
-
+    /**
+     * @return {@code true} if enemy is alive, {@code false} otherwise
+     */
     @Override
     public boolean isAlive() {
         if(health > 0)
@@ -150,18 +152,28 @@ public class UserTank implements Drawable {
         return false;
     }
 
-
+    /**
+     * Damage user thank by given value
+     * @param damage is the given value
+     */
     @Override
     public void damage(int damage) {
         health -= damage;
     }
 
+    /**
+     * @return rectangle of userTank
+     */
     @Override
     public Rectangle2D getRect() {
         Rectangle2D tankRect = new Rectangle( state.locX , state.locY , 100 , 100 ) ;
         return tankRect ;
     }
 
+    /**
+     * Checks bullets intersect with drawables and damages them
+     * @param drawable is given drawables
+     */
     @Override
     public void checkIntersect(Drawable drawable) {
 
@@ -177,18 +189,30 @@ public class UserTank implements Drawable {
 
     }
 
+    /**
+     * @return current selected gun of tank
+     */
     public static UserTankGun getCurrentGun() {
         return currentGun;
     }
 
+    /**
+     * @return main gun of tank
+     */
     public UserTankGun getMainGun() {
         return mainGun;
     }
 
+    /**
+     * @return second gun of tank
+     */
     public UserTankGun getSecondGun() {
         return secondGun;
     }
 
+    /**
+     * Fires second gun of tank (If mouse is pressed)
+     */
     public void fireSecondGun(){
         if(System.currentTimeMillis() - lastShootTime > 200)
                 if(mousePressed && getCurrentGun() == getSecondGun() && numberOfLightBullet > 0) {
@@ -201,8 +225,11 @@ public class UserTank implements Drawable {
             }
 
 
-
-
+    /**
+     * Paint tank and health and bullet stats of tank using G2D
+     * @param g2d is given G2D
+     * @throws IOException
+     */
     public void render(Graphics2D g2d) throws IOException {
 
         paintTank(g2d);

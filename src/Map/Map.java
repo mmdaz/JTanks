@@ -410,7 +410,10 @@ public class Map implements Serializable{
     }
 
 
-
+    /**
+     * Checks intersect between user tank and enemy tanks
+     * @return {@code true} in case of collision, {@code false} otherwise
+     */
     public static boolean collisionUserTankAndEnemy () {
 
         for (Drawable drawable : GameFrame.drawables) {
@@ -432,72 +435,13 @@ public class Map implements Serializable{
 
     }
 
+    /**
+     * gives state to map object
+     * @param state
+     */
     public static void setState(GameState state) {
         Map.state = state;
     }
 
-    public static ArrayList<HardWall> getHardWalls() {
-        return hardWalls;
-    }
-
-    public static void setHardWalls(ArrayList<HardWall> hardWalls) {
-        Map.hardWalls = hardWalls;
-    }
-
-    public static ArrayList<SoftWall> getSoftWalls() {
-        return softWalls;
-    }
-
-    public static void setSoftWalls(ArrayList<SoftWall> softWalls) {
-        Map.softWalls = softWalls;
-    }
-
-    public static ArrayList<Plant> getPlants() {
-        return plants;
-    }
-
-    public static void setPlants(ArrayList<Plant> plants) {
-        Map.plants = plants;
-    }
-
-    public static ArrayList<Teazel> getTeazels() {
-        return teazels;
-    }
-
-    public static void setTeazels(ArrayList<Teazel> teazels) {
-        Map.teazels = teazels;
-    }
-
-    public static ArrayList<RepairPackItem> getRepairPackItems() {
-        return repairPackItems;
-    }
-
-    public static void setRepairPackItems(ArrayList<RepairPackItem> repairPackItems) {
-        Map.repairPackItems = repairPackItems;
-    }
-
-    public static ArrayList<CannonShell> getCannonShells() {
-        return cannonShells;
-    }
-
-    public static void setCannonShells(ArrayList<CannonShell> cannonShells) {
-        Map.cannonShells = cannonShells;
-    }
-
-    public static ArrayList<MachineGunShell> getMachineGunShells() {
-        return machineGunShells;
-    }
-
-    public static void setMachineGunShells(ArrayList<MachineGunShell> machineGunShells) {
-        Map.machineGunShells = machineGunShells;
-    }
-
-    public static ArrayList<UpgradeWeapon> getUpgradeWeapons() {
-        return upgradeWeapons;
-    }
-
-    public static void setUpgradeWeapons(ArrayList<UpgradeWeapon> upgradeWeapons) {
-        Map.upgradeWeapons = upgradeWeapons;
-    }
 }
 

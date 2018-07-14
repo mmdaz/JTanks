@@ -45,13 +45,19 @@ public class Turret implements Drawable{
 
     }
 
-
+    /**
+     * Paint each Turret using G2D
+     * @param g2d is given G2D
+     * @throws IOException
+     */
     @Override
     public void render(Graphics2D g2d) throws IOException {
         paintTurret(g2d);
         paintCurrentGun(g2d);
     }
-
+    /**
+     * @return {@code true} if enemy is alive, {@code false} otherwise
+     */
     @Override
     public boolean isAlive() {
         if(health > 0)
@@ -59,18 +65,28 @@ public class Turret implements Drawable{
         return false;
     }
 
-
+    /**
+     * Damage turret by given value
+     * @param damage is the given value
+     */
     @Override
     public void damage(int damage) {
         health -= damage;
     }
 
+    /**
+     * @return rectangle for current turret
+     */
     @Override
     public Rectangle2D getRect() {
         Rectangle2D turrectRect = new Rectangle( locX + Map.xOffset, locY + Map.yOffset , 100 ,100 ) ;
         return turrectRect ;
     }
-
+    /**
+     * Sets target for an enemy Tank
+     * @param X is given X position of target
+     * @param Y is given Y position of target
+     */
     public void setTarget(int X, int Y){
         targetX = X;
         targetY = Y;
@@ -91,6 +107,9 @@ public class Turret implements Drawable{
         g2d.drawImage(turretBody,null,locX + Map.xOffset, locY + Map.yOffset);
     }
 
+    /**
+     * Fires a shot from enemy tank
+     */
     public void fire() {
         if(Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance)
         {
@@ -102,6 +121,10 @@ public class Turret implements Drawable{
         }
     }
 
+    /**
+     * Checks bullets intersect with drawables and damages them
+     * @param drawable is given drawables
+     */
     public void checkIntersect(Drawable drawable) {
 
         Iterator<Bullet> bulletIterator = gun.getBullets().iterator();
@@ -115,6 +138,9 @@ public class Turret implements Drawable{
 
     }
 
+    /**
+     * @return gun of enemy
+     */
     public EnemyGun getGun() {
         return gun;
     }

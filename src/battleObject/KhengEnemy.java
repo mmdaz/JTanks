@@ -1,4 +1,9 @@
 package battleObject;
+/**
+ * This class is used to create a KhengEnemy
+ *
+ * @author Mohamad Chaman-Motlagh
+ */
 
 import Map.Map;
 import utility.Images;
@@ -39,6 +44,11 @@ public class KhengEnemy implements Drawable {
         this.targetY = targetY;
     }
 
+    /**
+     * Paint each khengEnemy using G2D
+     * @param g2d is given G2D
+     * @throws IOException
+     */
     @Override
     public void render(Graphics2D g2d) throws IOException {
         if((Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance) || isRendered) {
@@ -54,6 +64,9 @@ public class KhengEnemy implements Drawable {
         }
     }
 
+    /**
+     * Moves KhengEnemy in given direction
+     */
     private void forward(){
         if(isRendered) {
             double angle = Math.atan2(targetY - (locY + 50 + Map.yOffset * 2), targetX - (locX + 50 + Map.yOffset * 2));
@@ -62,7 +75,9 @@ public class KhengEnemy implements Drawable {
         }
     }
 
-
+    /**
+     * @return {@code true} if enemy is alive, {@code false} otherwise
+     */
     @Override
     public boolean isAlive() {
         if(health > 0)
@@ -70,16 +85,28 @@ public class KhengEnemy implements Drawable {
         return false;
     }
 
+    /**
+     * Damage khengEnemy by given value
+     * @param damage is the given value
+     */
     @Override
     public void damage(int damage) {
         health -= damage;
     }
 
+    /**
+     * @return Rectangle for each KhengEnemy
+     */
     @Override
     public Rectangle2D getRect() {
         return new Rectangle( locX + Map.xOffset, locY + Map.yOffset , 100 , 100 ) ;
     }
 
+
+    /**
+     * Checks bullets intersect with drawables and damages them
+     * @param drawable is given drawables
+     */
     public void checkIntersect(Drawable drawable) {
 
             if (drawable.getRect().intersects(getRect())) {

@@ -30,14 +30,16 @@ public class Plant implements Serializable{
 
     }
 
-    public Rectangle2D getRectangle2D() {
-        return new Rectangle(locX , locY , 100 , 100 ) ;
-    }
-
+    /**
+     * @return LocY
+     */
     public int getLocY() {
         return locY;
     }
 
+    /**
+     * @return LocX
+     */
     public int getLocX() {
         return locX;
     }

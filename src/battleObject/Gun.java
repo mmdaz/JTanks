@@ -27,6 +27,9 @@ public class Gun implements Serializable{
         this.damage = damage;
     }
 
+    /**
+     * @return bullets for each gun and removes the in case of intersect with walls
+     */
     public ArrayList<Bullet> getBullets() {
         Iterator<Bullet> bulletIterator = bullets.iterator();
         while(bulletIterator.hasNext()){
@@ -36,6 +39,13 @@ public class Gun implements Serializable{
         return bullets;
     }
 
+    /**
+     * Add a bullet to guns bullets
+     * @param targetX is X position of bullet
+     * @param targetY is Y position of bullets
+     * @param locX is current X location of bullet
+     * @param locY is current Y location of bullet
+     */
     public void addBullets(int targetX, int targetY, int locX, int locY) {
         bullets.add(new Bullet(targetX,targetY,locX,locY,bulletImage,damage));
     }

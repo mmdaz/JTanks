@@ -32,26 +32,46 @@ public class HardWall implements Serializable{
 
     }
 
+    /**
+     * Sets LocX
+     * @param locX
+     */
     public void setLocX(int locX) {
         this.locX = locX;
     }
 
+    /**
+     * Sets LocY
+     * @param locY
+     */
     public void setLocY(int locY) {
         this.locY = locY;
     }
 
+    /**
+     * @return LocX
+     */
     public int getLocX() {
         return locX;
     }
 
+    /**
+     * @return Y
+     */
     public int getLocY() {
         return locY;
     }
 
+    /**
+     * @return rectangle of current object
+     */
     public Rectangle2D getRectangle2D() {
         return new Rectangle(locX , locY , 100 , 100 );
     }
 
+    /**
+     * @return Image of hardWall
+     */
     public BufferedImage getImage() {
         return Images.hardWall;
     }

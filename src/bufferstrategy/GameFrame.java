@@ -398,7 +398,7 @@ public class GameFrame extends JFrame {
 						((EnemyTank) drawable).setTarget(player2State.locX, player2State.locY);
 					else
 						((EnemyTank) drawable).setTarget(state.locX, state.locY);
-					((EnemyTank) drawable).fire(drawables);
+					((EnemyTank) drawable).fire();
 					for (Bullet bullet : ((EnemyTank) drawable).getGun().getBullets())
 						bullet.paint(g2d);
 				} else if (drawable instanceof Turret) {
@@ -643,7 +643,7 @@ public class GameFrame extends JFrame {
 						((EnemyTank) drawable).setTarget(player2State.locX, player2State.locY);
 					else
 						((EnemyTank) drawable).setTarget(state.locX, state.locY);
-					((EnemyTank) drawable).fire(drawables);
+					((EnemyTank) drawable).fire();
 					for (Bullet bullet : ((EnemyTank) drawable).getGun().getBullets())
 						bullet.paint(g2d);
 				} else if (drawable instanceof Turret) {

@@ -18,7 +18,9 @@ public class MapLevel2 extends Map {
 
     }
 
-
+    /**
+     * Init the map from pre defined values
+     */
     @Override
 
     protected void initializeMap() {
@@ -48,6 +50,10 @@ public class MapLevel2 extends Map {
 
     }
 
+    /**
+     * Paint the map using G2D
+     * @param g2d is given G2D
+     */
     @Override
 
     public void paintMap ( Graphics2D g2d ) {

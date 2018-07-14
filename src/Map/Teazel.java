@@ -31,22 +31,39 @@ public class Teazel implements Serializable{
 
     }
 
+    /**
+     * set LocX of Teazel
+     * @param locX
+     */
     public void setLocX(int locX) {
         this.locX = locX;
     }
 
+    /**
+     * Set locY of
+     * @param locY
+     */
     public void setLocY(int locY) {
         this.locY = locY;
     }
 
+    /**
+     * @return LocX
+     */
     public int getLocX() {
         return locX;
     }
 
+    /**
+     * @return LocY
+     */
     public int getLocY() {
         return locY;
     }
 
+    /**
+     * @return rectangle of Teazel
+     */
     public Rectangle2D getRectangle2D() {
         return new Rectangle(locX , locY , 100 , 100 );
     }

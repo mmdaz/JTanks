@@ -50,6 +50,11 @@ public class EnemyTank implements Drawable {
 
     }
 
+    /**
+     * Sets target for an enemy Tank
+     * @param X is given X position of target
+     * @param Y is given Y position of target
+     */
     public void setTarget(int X, int Y){
         targetX = X;
         targetY = Y;
@@ -64,6 +69,11 @@ public class EnemyTank implements Drawable {
         g2d.drawImage(Images.enemyTank,null,locX + Map.xOffset, locY + Map.yOffset);
     }
 
+    /**
+     * Renders EnemyThank at each using G2D
+     * @param g2d is given G2D
+     * @throws IOException
+     */
     @Override
     public void render(Graphics2D g2d) throws IOException {
         paintTank(g2d);
@@ -71,7 +81,10 @@ public class EnemyTank implements Drawable {
         forward();
     }
 
-    public void fire(ArrayList<Drawable> drawables){
+    /**
+     * Fires a shot from enemy tank
+     */
+    public void fire(){
         if((Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance)) {
             if (System.currentTimeMillis() - lastShootTime > 500) {
                 gun.addBullets(targetX, targetY, locX + Map.xOffset, locY + Map.yOffset);
@@ -81,6 +94,9 @@ public class EnemyTank implements Drawable {
         }
     }
 
+    /**
+     * Moves the tank in needed direction
+     */
     private void forward(){
         if((Math.abs(targetX - (locX + Map.xOffset)) < activationDistance && Math.abs(targetY - (locY + Map.yOffset)) < activationDistance)) {
             if(targetX > (locX + Map.xOffset))
@@ -90,10 +106,16 @@ public class EnemyTank implements Drawable {
         }
     }
 
+    /**
+     * @return EnemyGun
+     */
     public EnemyGun getGun() {
         return gun;
     }
 
+    /**
+     * @return {@code true} if enemy is alive, {@code false} otherwise
+     */
     @Override
     public boolean isAlive() {
         if(health > 0)
@@ -101,18 +123,28 @@ public class EnemyTank implements Drawable {
         return false;
     }
 
-
+    /**
+     * Damages a tank by given value
+     * @param damge is the given value
+     */
     @Override
     public void damage(int damge) {
         health -= damge;
     }
 
+    /**
+     * @return rectangle of tank
+     */
     @Override
     public Rectangle2D getRect() {
         Rectangle2D tankRect = new Rectangle( locX + Map.xOffset , locY + Map.yOffset , 100 , 100 ) ;
         return tankRect ;
     }
 
+    /**
+     * Checks bullets intersect with drawables and damages them
+     * @param drawable is given drawables
+     */
     public void checkIntersect(Drawable drawable) {
 
         Iterator<Bullet> bulletIterator = gun.getBullets().iterator();

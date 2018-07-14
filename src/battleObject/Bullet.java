@@ -36,6 +36,10 @@ public class Bullet implements Serializable{
         }
     }
 
+    /**
+     * Paints each bullet using G2D
+     * @param g2d is given G2D
+     */
     public void paint(Graphics2D g2d) {
         forward();
         AffineTransform bulletAT = new AffineTransform();
@@ -44,6 +48,9 @@ public class Bullet implements Serializable{
         g2d.drawImage(bulletImage, bulletAT, null);
     }
 
+    /**
+     * Moves every bullet in each direction
+     */
     public void forward(){
         if (!Map.checkBulletCollision(this)) {
             X += Math.cos(angle) * speed;
@@ -65,10 +72,16 @@ public class Bullet implements Serializable{
         return Y;
     }
 
+    /**
+     * @return amount of each bullets damage
+     */
     public int getDamage() {
         return damage;
     }
 
+    /**
+     * @return rectangle of each bullet
+     */
     public Rectangle2D getRect() {
         Rectangle2D bulletRect = new Rectangle( X , Y , 23 , 9 ) ;
         return bulletRect;

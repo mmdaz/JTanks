@@ -28,17 +28,12 @@ public class UserTankGun extends Gun{
         this.bulletImage = bulletImage;
     }
 
-    public boolean upgradeWeapon() {
-        if(currentLevel >= 2)
-            return false;
+    /**
+     * upgrades this gun
+     */
+    public void upgradeWeapon() {
         currentLevel++;
         currentModImage = level2Image;
-        return true;
     }
-
-    public void setBulletDamage(int newDamge){
-        damage = newDamge;
-    }
-
 
 }

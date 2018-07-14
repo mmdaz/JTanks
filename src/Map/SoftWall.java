@@ -25,8 +25,8 @@ import java.io.Serializable;
 public class SoftWall implements Serializable {
 
     private int locX ;
-    private int locY ;
     private Rectangle2D rectangle2D ;
+    private int locY ;
     private int mode ;
 
     public SoftWall (int locx , int locY ) {
@@ -39,34 +39,56 @@ public class SoftWall implements Serializable {
     }
 
 
-
+    /**
+     * @return rectangle for this wall
+     */
     public Rectangle2D getRectangle2D() {
         return new Rectangle(locX , locY , 100 , 100 );
     }
 
+    /**
+     * @return LocY
+     */
     public int getLocY() {
         return locY;
     }
 
+    /**
+     * @return LocX
+     */
     public int getLocX() {
         return locX;
     }
 
-
+    /**
+     * @return Mod of softWall
+     */
     public int getMode() {
         return mode;
     }
 
+    /**
+     * Set mode for soft wall
+     * @param mode
+     */
     public void setMode(int mode) {
         this.mode = mode;
     }
 
+    /**
+     * sets LocX
+     * @param locX
+     */
     public void setLocX(int locX) {
         this.locX = locX;
 
         rectangle2D = new Rectangle(locX , locY , 100 , 100 ) ;
     }
 
+    /**
+     * sets LocY
+     * @param locY
+     */
     public void setLocY(int locY) {
         this.locY = locY;
 

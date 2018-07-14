@@ -27,11 +27,19 @@ public class Mine implements Drawable{
 
     }
 
+    /**
+     * Paint Mine using G2D
+     * @param g2d is given G2D
+     * @throws IOException
+     */
     @Override
     public void render(Graphics2D g2d) throws IOException {
         g2d.drawImage(Images.mine,null,locX +  Map.xOffset,locY + Map.yOffset);
     }
 
+    /**
+     * @return {@code true} if enemy is alive, {@code false} otherwise
+     */
     @Override
     public boolean isAlive() {
         if(health > 0)
@@ -39,17 +47,27 @@ public class Mine implements Drawable{
         return false;
     }
 
-
+    /**
+     * @param damage mine by given value
+     */
     @Override
     public void damage(int damage) {
         health -= damage;
     }
 
+    /**
+     * @return rectangle for each Mine
+     */
     @Override
     public Rectangle2D getRect() {
         return new Rectangle( locX  + Map.xOffset, locY + Map.yOffset, 50 , 50 ) ;
     }
 
+
+    /**
+     * Checks bullets intersect with drawables and damages them
+     * @param drawable is given drawables
+     */
     public void checkIntersect(Drawable drawable) {
         Rectangle2D tankRect = new Rectangle((int)drawable.getRect().getX(), (int)drawable.getRect().getY(), 60, 60);
 

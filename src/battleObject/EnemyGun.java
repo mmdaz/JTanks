@@ -1,4 +1,10 @@
 package battleObject;
+/**
+ * This class is used to create a gun for
+ * enemies that have gun
+ *
+ * @author Mohamad Chaman-Motlagh
+ */
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -12,7 +18,4 @@ public class EnemyGun extends Gun{
         this.gunImage = gunImage;
     }
 
-    public BufferedImage getGunImage() {
-        return gunImage;
-    }
 }
