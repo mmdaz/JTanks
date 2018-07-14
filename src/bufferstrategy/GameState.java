@@ -2,6 +2,7 @@
 package bufferstrategy;
 import Map.Map;
 import battleObject.UserTank;
+import Map.MapLevel2;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -19,7 +20,6 @@ public class GameState implements Serializable {
 	public int locX, locY, diam , preLocX , preLocY;
 	public boolean gameOver;
 	public boolean level1Won;
-	public boolean gameWon;
 	public int mouseX, mouseY;
 	public double angle;
 	public double tankAngle;
@@ -166,39 +166,76 @@ public class GameState implements Serializable {
 
 			if (keyUP) {
                     locY -= 6;
-                    Map.yOffset += 6;
-			if (	!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy() ) {
-				locX = preLocX;
-				locY = preLocY;
-				Map.yOffset -= 6 ;
-			}
+                    if(!level1Won) {
+						Map.yOffset += 6;
+						if (!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy()) {
+							locX = preLocX;
+							locY = preLocY;
+							Map.yOffset -= 6;
+						}
+					}else {
+						MapLevel2.yOffset += 6;
+						if (!MapLevel2.checkHitWithObjects() || !MapLevel2.collisionUserTankAndEnemy()) {
+							locX = preLocX;
+							locY = preLocY;
+							MapLevel2.yOffset -= 6;
+						}
+					}
 
 			}
 			if (keyDOWN) {
                     locY += 6;
-                    Map.yOffset -= 6;
-				if (	!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy() ) {
-					locX = preLocX;
-					locY = preLocY;
-					Map.yOffset += 6 ;
-				}
+                    if(!level1Won) {
+						Map.yOffset -= 6;
+						if (!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy()) {
+							locX = preLocX;
+							locY = preLocY;
+							Map.yOffset += 6;
+						}
+					} else {
+						MapLevel2.yOffset -= 6;
+						if (!MapLevel2.checkHitWithObjects() || !MapLevel2.collisionUserTankAndEnemy()) {
+							locX = preLocX;
+							locY = preLocY;
+							MapLevel2.yOffset += 6;
+						}
+					}
 			}
 			if (keyLEFT) {
                     locX -= 6;
-                    Map.xOffset += 6;
-				if (	!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy() ) {
-					locX = preLocX;
-					locY = preLocY;
-					Map.xOffset -= 6 ;
-				}
+                    if(!level1Won) {
+						Map.xOffset += 6;
+						if (!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy()) {
+							locX = preLocX;
+							locY = preLocY;
+							Map.xOffset -= 6;
+						}
+					} else {
+						MapLevel2.xOffset += 6;
+						if (	!MapLevel2.checkHitWithObjects() || !MapLevel2.collisionUserTankAndEnemy() ) {
+							locX = preLocX;
+							locY = preLocY;
+							MapLevel2.xOffset -= 6;
+						}
+					}
 			}
 			if (keyRIGHT) {
                     locX += 6;
-                    Map.xOffset -= 6;
-				if (	!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy() ) {
-					locX = preLocX;
-					locY = preLocY;
-					Map.xOffset += 6 ;
+                    if(!level1Won) {
+						Map.xOffset -= 6;
+						if (!Map.checkHitWithObjects() || !Map.collisionUserTankAndEnemy()) {
+							locX = preLocX;
+							locY = preLocY;
+							Map.xOffset += 6;
+						}
+					}
+					else {
+					MapLevel2.xOffset -= 6;
+					if (	!MapLevel2.checkHitWithObjects() || !MapLevel2.collisionUserTankAndEnemy() ) {
+						locX = preLocX;
+						locY = preLocY;
+						MapLevel2.xOffset += 6 ;}
+
 				}
 			}
 		}
@@ -275,13 +312,17 @@ public class GameState implements Serializable {
 			}
 
 			if(e.getKeyCode() == KeyEvent.VK_ALT) {
-				String cheat = JOptionPane.showInputDialog("Input cheat here ");
-					if(cheat.equals("infa")) {
+				try {
+
+					String cheat = JOptionPane.showInputDialog("Input cheat here ");
+					if (cheat.equals("infa")) {
 						UserTank.numberOfLightBullet = 9999;
 						UserTank.numberOfHeavyBullet = 9999;
-					}else if(cheat.equals("infh")) {
-					UserTank.health = 9999;
-				}
+					} else if (cheat.equals("infh")) {
+						UserTank.health = 9999;
+					}
+				} catch (Exception ex){
+					}
 
 			}
 		}

@@ -52,7 +52,7 @@ public class Map implements Serializable{
         machineGunShells = new ArrayList<MachineGunShell>();
         upgradeWeapons = new ArrayList<UpgradeWeapon>();
 
-
+        softWalls.clear();
 
         for (int i = 0; i < 16 ; i++)
             softWalls.add(new SoftWall(0, 0));

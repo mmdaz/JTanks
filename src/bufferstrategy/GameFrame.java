@@ -31,7 +31,7 @@ import Map.*;
 public class GameFrame extends JFrame {
 	//TODO: Fix
 	public static final int GAME_HEIGHT = 800;                  // 600p game resolution
-	public static final int GAME_WIDTH = 1600;  // 2:1 aspect ratio
+	public static final int GAME_WIDTH = 1400;  // 2:1 aspect ratio
 
 	//uncomment all /*...*/ in the class for using UserTank icon instead of a simple circle
 	/*private BufferedImage image;*/
@@ -49,6 +49,8 @@ public class GameFrame extends JFrame {
 
 
 	private Map map;
+
+	private MapLevel2 mapLevel2 = new MapLevel2();
 
 	private ServerSocket server;
 	private Socket client;
@@ -138,7 +140,8 @@ public class GameFrame extends JFrame {
 				String ip = socket.getLocalAddress().getHostAddress();
 				JOptionPane.showMessageDialog(null , "Try connecting to:" +
 						"" + ip +"\n" +
-						"On port: 7080");
+						"On port: 7080" +
+						"\n" + "Press OK to start the connection");
 			}
 
 			map = new Map();
@@ -381,7 +384,7 @@ public class GameFrame extends JFrame {
 				if (!(drawable instanceof UserTank))
 					drawable.checkIntersect(tank);
 				if (drawable instanceof UserTank) {
-					if (Start.startState.equals("client"))
+					if (Start.startState.equals("client") && drawables.indexOf(drawable) != 0)
 						((UserTank) drawable).setState(player2State);
 					else
 						((UserTank) drawable).setState(state);
@@ -472,19 +475,16 @@ public class GameFrame extends JFrame {
 
 			if (state.locX - Map.xOffset >= 800 && state.locY - Map.yOffset >= 1200) {
 				state.level1Won = true;
+				String str = "You Won the first level!";
+				g2d.setColor(Color.RED);
+				g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+				int strWidth = g2d.getFontMetrics().stringWidth(str);
+				g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
 				new Timer(2000, new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						String str = "You Won the first level!";
-						g2d.setColor(Color.RED);
-						g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
-						int strWidth = g2d.getFontMetrics().stringWidth(str);
+
 						g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e1) {
-							e1.printStackTrace();
-						}
 					}
 				}).start();
 
@@ -529,13 +529,15 @@ public class GameFrame extends JFrame {
 
 		//Level 2 start
 		else {
-			MapLevel2 mapLevel2 = new MapLevel2();
 			//First time location init
 			if(firstTime) {
 				state.locX = 10;
 				state.locY = 110;
-				Map.xOffset = 0;
-				Map.yOffset = 0;
+				state.angle = 0;
+				state.tankAngle = 0;
+				state.update();
+				MapLevel2.xOffset = 0;
+				MapLevel2.yOffset = 0;
 
 				drawables.clear();
 				drawables.add(tank);
@@ -544,11 +546,11 @@ public class GameFrame extends JFrame {
 				drawables.add(new Mine(500, 200));
 				drawables.add(new Turret(500, 1300, 400));
 				drawables.add(new KhengEnemy(300, 2100, 200));
-				drawables.add(new EnemyTank(500, 2700, 100));
+				drawables.add(new EnemyTank(500, 2200, 100));
 				drawables.add(new Turret(500, 1700, 900));
 				drawables.add(new Mine(900, 1600));
 				drawables.add(new EnemyTank(600, 1000, 800));
-				drawables.add(new EnemyTank(600, 900, 950));
+				drawables.add(new EnemyTank(600, 900, 1100));
 				drawables.add(new Mine(600, 1300));
 				drawables.add(new Mine(700, 1300));
 				drawables.add(new Mine(600, 1400));
@@ -723,6 +725,12 @@ public class GameFrame extends JFrame {
 				g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
 				int strWidth = g2d.getFontMetrics().stringWidth(str);
 				g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+				new Timer(2000, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						System.exit(0);
+					}
+				}).start();
 
 			}
 
@@ -756,19 +764,6 @@ public class GameFrame extends JFrame {
 
 
 
-
-			if (state.locX - Map.xOffset >= 800 && state.locY - Map.yOffset >= 1200) {
-				new Timer(2000, new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						String str = "You Won!";
-						g2d.setColor(Color.RED);
-						g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
-						int strWidth = g2d.getFontMetrics().stringWidth(str);
-						g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
-					}
-				}).start();
-			}
 		}
 
 
