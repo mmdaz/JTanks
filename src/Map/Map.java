@@ -125,9 +125,20 @@ public class Map implements Serializable{
                         g2d.drawImage(Images.softWall3, softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY() , null);
                     else if (softWalls.get(softWallindex).getMode() == 4)
                         g2d.drawImage(Images.softWall4, softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY() , null);
-                    else
-                        g2d.drawImage(Images.area, softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY(), null);
+                    else {
+                        if(machineGunIndex <= 1) {
+                            machineGunShells.get(machineGunIndex).setLocX(i * 100 + xOffset);
+                            machineGunShells.get(machineGunIndex).setLocY(j * 100 + yOffset);
 
+                            if (machineGunShells.get(machineGunIndex).getStatus())
+                                g2d.drawImage(Images.machineGunShell, null, i * 100 + xOffset, j * 100 + yOffset);
+                            else
+                                g2d.drawImage(Images.area, null, i * 100 + xOffset, j * 100 + yOffset);
+
+                            machineGunIndex++;
+                        } else
+                            g2d.drawImage(Images.area, softWalls.get(softWallindex).getLocX(), softWalls.get(softWallindex).getLocY() , null);
+                    }
                     softWallindex ++ ;
                 }
 
@@ -420,7 +431,6 @@ public class Map implements Serializable{
         return true ;
 
     }
-
 
     public static void setState(GameState state) {
         Map.state = state;
