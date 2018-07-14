@@ -25,10 +25,6 @@ public class SoftWall {
 
     private int locX ;
     private int locY ;
-    private BufferedImage imageMode1 ;
-    private BufferedImage imageMode2 ;
-    private BufferedImage imageMode3 ;
-    private BufferedImage imageMode4 ;
     private Rectangle2D rectangle2D ;
     private int mode ;
 
@@ -39,18 +35,12 @@ public class SoftWall {
 
         mode = 1 ;
 
-        imageMode1 = Images.softWall1 ;
-        imageMode2 = Images.softWall2 ;
-        imageMode3 = Images.softWall3 ;
-        imageMode4 = Images.softWall4 ;
-
-        rectangle2D = new Rectangle(locx , locY , 100 , 100 ) ;
     }
 
 
 
     public Rectangle2D getRectangle2D() {
-        return rectangle2D;
+        return new Rectangle(locX , locY , 100 , 100 );
     }
 
     public int getLocY() {
@@ -61,21 +51,6 @@ public class SoftWall {
         return locX;
     }
 
-    public BufferedImage getImageMode1() {
-        return imageMode1;
-    }
-
-    public BufferedImage getImageMode2() {
-        return imageMode2;
-    }
-
-    public BufferedImage getImageMode3() {
-        return imageMode3;
-    }
-
-    public BufferedImage getImageMode4() {
-        return imageMode4;
-    }
 
     public int getMode() {
         return mode;
